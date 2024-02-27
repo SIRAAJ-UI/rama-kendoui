@@ -5,14 +5,15 @@ import { DataService } from '../Services/data.service';
 import { QueryParamsService } from '../Services/query-params.service';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
-
+import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-default',
   standalone: true,
-  imports: [ ButtonsModule, DetailsPageComponent,LoadingOverlayComponent ],
+  imports: [ HttpClientModule, ButtonsModule, DetailsPageComponent,LoadingOverlayComponent, ],
   templateUrl: './default.component.html',
-  styleUrl: './default.component.css'
+  styleUrl: './default.component.css',
+  providers: [ DataService ]
 })
 export class DefaultComponent {
   loadingText: string = 'Loading...';

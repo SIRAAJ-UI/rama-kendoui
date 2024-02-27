@@ -40,6 +40,7 @@
     "@progress/kendo-theme-default": "^7.2.0",
     "@progress/kendo-theme-material": "^7.2.0",
     "assr-csa-web": "file:",
+    "bootstrap": "^5.3.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
