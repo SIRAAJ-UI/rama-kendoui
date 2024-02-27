@@ -1,0 +1,53 @@
+<!-- Include FormsModule in your module to use ngModel -->
+<!-- app.module.ts -->
+<!-- import { FormsModule } from '@angular/forms'; -->
+<!-- imports: [ FormsModule ] -->
+
+<!-- Your component HTML file -->
+<div class="StandardFont">
+  <label class="FormLabelText" for="txtCSAType">CSA Type (Types: CI=933 VL=934 Lease=863 Worksheet=WKS)</label>
+  <input id="txtCSAType" class="TextBoxInput" [(ngModel)]="csaType" (ngModelChange)="hideShowItems()" />
+
+  <br />
+  <br />
+
+  <label *ngIf="showCSAID" class="FormLabelText" for="txtCSAID">CSA ID:</label>
+  <input *ngIf="showCSAID" id="txtCSAID" class="TextBoxInput" [(ngModel)]="csaID" />
+
+  <label *ngIf="showActTrackID" class="FormLabelText" for="txtActTrackID">ActTrackID:</label>
+  <input *ngIf="showActTrackID" id="txtActTrackID" class="TextBoxInput" [(ngModel)]="actTrackID" />
+  
+  <label *ngIf="showDocPrefix" class="FormLabelText" for="txtDocPrefix">DocPrefix:</label>
+  <input *ngIf="showDocPrefix" id="txtDocPrefix" class="TextBoxInput" [(ngModel)]="docPrefix" />
+  
+  <label *ngIf="showDocSeries" class="FormLabelText" for="txtDocSeries">DocSeries:</label>
+  <input *ngIf="showDocSeries" id="txtDocSeries" class="TextBoxInput" [(ngModel)]="docSeries" />
+
+  <label *ngIf="showEventTs" class="FormLabelText" for="txteventTs">EventTs:</label>
+  <input *ngIf="showEventTs" id="txteventTs" class="TextBoxInput" [(ngModel)]="eventTs" />
+
+  <br />
+
+  <label *ngIf="showPID" class="FormLabelText" for="txtPID">Property Id:</label>
+  <input *ngIf="showPID" id="txtPID" class="TextBoxInput" [(ngModel)]="propertyId" />
+
+  <br />
+
+  <label *ngIf="showCSAWks" class="FormLabelText" for="txtCSAWks">CSA Wks Num:</label>
+  <input *ngIf="showCSAWks" id="txtCSAWks" class="TextBoxInput" [(ngModel)]="csaWksNum" />
+
+  <br />
+
+  <label class="FormLabelText" for="txtMode">Mode:</label>
+  <input id="txtMode" class="TextBoxInput" style="text-transform:uppercase;" [(ngModel)]="mode" />
+
+  <br />
+
+  <label class="FormLabelText" for="txtWorkerID">Worker ID:</label>
+  <input id="txtWorkerID" class="TextBoxInput" style="text-transform:uppercase;" [(ngModel)]="workerID" />
+
+  <br />
+
+  <button (click)="btnDefault_Click()">Default Page</button>
+  
+</div>

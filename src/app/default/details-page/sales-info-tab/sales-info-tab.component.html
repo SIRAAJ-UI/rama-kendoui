@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <button class="btn btn-sm btn-primary me-2" kendoButton>Save</button>
+        <button class="btn btn-sm btn-secondary" kendoButton>Clear</button>
+    </div>
+</div>
+
+<form>
+    <div class="form-group row">
+      <label for="anticipatedUse" class="col-sm-2 col-form-label">% Owner Occupied:</label>
+      <div class="col-sm-4">
+        <kendo-dropdownlist [data]="data"></kendo-dropdownlist>
+      </div>
+
+      <label for="anticipatedUse" class="col-sm-2 col-form-label">Benchmark Rating:</label>
+      <div class="col-sm-4">
+        <input type="text">
+      </div>
+
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="anticipatedUse" class="col-sm-2 col-form-label">Details:</label>
+        <div class="col-sm-4">
+            <input type="text" class="w-100">
+        </div>
+
+        <label  class="col-sm-2 col-form-label">Supervisor Approved:</label>
+        <div class="col-sm-4">
+            <label class="col-form-label">Yes</label>
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="anticipatedUse" class="col-sm-2 col-form-label">Details:</label>
+        <div class="col-sm-4">
+            <input type="text" style="width:100px">
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="anticipatedUse" class="col-sm-2 col-form-label">Broker Involved:</label>
+        <div class="col-sm-4">
+            <kendo-dropdownlist [data]="brokerInvolved" style="width:100px"></kendo-dropdownlist>
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label class="col-sm-2 col-form-label">Buyer/Seller Relationship:</label>
+        <div class="col-sm-2">
+            <kendo-dropdownlist [data]="brokerInvolved" style="width:100px"></kendo-dropdownlist>
+        </div>
+        <div class="col-sm-8">
+            If so, specify <input style="width:400px" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label  class="col-sm-2 col-form-label">Purchase Predicted By:</label>
+        <div class="col-sm-4">
+            <div class="d-flex">
+                <div class="form-group form-check ms-2">
+                    <label class="form-check-label" for="exampleCheck1">Options</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                </div>
+                <div class="form-group form-check ms-2">
+                    <label class="form-check-label" for="exampleCheck2">Contract by sale</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="anticipatedUse" class="col-sm-2 col-form-label">Contract Date:</label>
+        <div class="col-sm-4">
+            <kendo-datepicker placeholder="Choose a date ..."></kendo-datepicker>
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="anticipatedUse" class="col-sm-2 col-form-label">Condition at sales:</label>
+        <div class="col-sm-4">
+            <kendo-dropdownlist [data]="conditionAtSales" style="width:100px"></kendo-dropdownlist>
+        </div>
+    </div>
+
+        
+        <!-- <label for="purchase" class="col-sm-2 col-form-label">Purchase Prediction Date:</label>
+        <div class="col-sm-4">
+            <input type="checkbox" id="purchase" style="width:100px">
+        </div> -->
+  
+  </form>
