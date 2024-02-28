@@ -7,7 +7,7 @@ import { SelectEvent } from '@progress/kendo-angular-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { FormsModule } from '@angular/forms';
-import { IconsModule } from '@progress/kendo-angular-icons';
+import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
@@ -31,41 +31,30 @@ import { PBPageComponent } from './pbpage/pbpage.component';
         PBPageComponent
       ],
   templateUrl: './app.component.html',
-  styles: [`
-        .wrapper {
-            display: flex;
-            justify-content: center;
-        }
-        kendo-tabstrip {
-            width: 380px;
-        }
-        .content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        img {
-            width: 120px;
-            height: 120px;
-        }
-        h2 {
-            font-size: 4em;
-            font-weight: lighter;
-        }
-        h2>span {
-            padding-left: 5px;
-            font-size: .3em;
-            vertical-align: top;
-        }
-    `]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'assr_csa_web';
+  public statusColor: IconThemeColor = "success";
+
   public genders: Array<{ text: string, value: number }> = [
     { text: "Male", value: 1 },
     { text: "Female", value: 2 }
 ];
 
-//public gender: { text: string, value: number };
+public buttons: any[] = [
+    { text: "Save", color: "primary", selected: true },
+    { text: "Edit Primary APN",color: "primary" },
+    { text: "Refresh Characteristic",  color: "primary" },
+    { text: "Sales Analysis Report",  color: "error" },
+    { text: "Edit CSA",  color: "error" },
+
+  ];
+
+
+
+public selectedChange(btn: any): void {
+    this.statusColor = btn.color;
+  }
+
 }

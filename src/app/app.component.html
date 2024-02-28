@@ -1,2 +1,70 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-10">IMPROVE CSA</div>
+    <div class="col-sm-6 col-md-2">Development User id</div>
+  </div>
+
+  <div class="col-sm-12 bg-blue p-2">C/I Improved Property</div>
+
+  <div class="col-sm-12 mt-2">
+    <kendo-buttongroup  selection="single">
+        <button
+          *ngFor="let button of buttons"
+          kendoButton
+          [toggleable]="true"
+          [selected]="button.selected"
+          (click)="selectedChange(button)"
+        >
+          <span>
+            {{ button.text }}
+          </span>
+        </button>
+      </kendo-buttongroup>
+  
+  </div>
+
+<!-- <div class="row">
+      <div class="col-4">
+        <label style="min-width: 80px;width: 80px;">Document:</label> 8989323
+      </div>
+      <div class="col-8">
+        <label style="min-width: 45px;width: 45px;">Buyer:</label> Corlislie Rolph & Kotherine J & John W & Jeon E
+      </div>
+      <div class="col-4">
+        <label style="min-width: 80px;width: 80px;">Event Date:</label> 12/10/1970 23:01
+      </div>
+      <div class="col-8">
+        <label style="min-width: 45px;width: 45px;">Seller:</label> Glipen Mory H
+      </div>
+</div> -->
+
+
+<!-- <div class="row">
+    <label >APN:</label>8989323
+    <label >Use Cd:</label>4200
+    <label >Use:</label> George-Repair
+</div> -->
+
+<table class="table table-borderless">
+  <tbody>
+    <tr>
+      <td style="min-width: 90px;width: 90px;">Document:</td>
+      <td>8983</td>
+      <td style="min-width: 80px;width: 80px;">Buyer:</td>
+      <td>Corlislie Rolph & Kotherine J & John W & Jeon E</td>
+    </tr>
+    <tr>
+      <td style="min-width: 90px;width: 100px;">Event Date:</td>
+      <td>8983</td>
+      <td style="min-width: 80px;width: 100px;">Seller:</td>
+      <td>Jeon E</td>
+    </tr>
+  </tbody>
+
+</table>
+
+</div>
+
 
 <router-outlet />
