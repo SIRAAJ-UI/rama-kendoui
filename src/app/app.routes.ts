@@ -3,6 +3,7 @@ import { DefaultComponent } from './default/default.component';
 import { PBPageComponent } from './pbpage/pbpage.component';
 
 export const routes: Routes = [
-  { path: '', component: DefaultComponent },
+  { path: '', redirectTo:'default', pathMatch: 'full'},
+  { path: 'default', component: DefaultComponent },
   { path: 'pbpage', component: PBPageComponent },
 ];
