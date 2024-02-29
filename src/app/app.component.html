@@ -4,8 +4,8 @@
       <div class="col-sm-6 col-md-2">Development User id</div>
     </div>
   
-    <div class="col-sm-12 bg-blue p-0" style="color:#1B3758;font-weight: bold;">C/I Improved Property</div>
-    <div class="col-sm-12 p-2" style="background-color: #1B3758;">
+    <div class="col-sm-12 bg-blue p-2 text-black fw-bold">C/I Improved Property</div>
+    <div class="col-sm-12 p-2 bg-dark-strap">
       <ng-container *ngFor="let button of buttons; let i = index;">
           <button class="default-btn" [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
             {{ button.text }}
