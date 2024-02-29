@@ -1,14 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 .k-tabstrip-items-wrapper .k-item {
-    color: #000 !important;
-  }
-  
+  color: #000 !important;
+  font-size: 12px;
+}
+
 .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item:active, .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item.k-active {
-  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(215,200,78,1) 0%, rgba(251,250,243,1) 13%, rgba(228,234,237,1) 100%);
-  border: none;
+background: linear-gradient(180deg, rgba(255,255,255,1) 0%, #F2A934 0%, rgba(251,250,243,1) 13%, rgba(228,234,237,1) 100%);
+font-size: 12px;
+border: none;
+border-color: #003c74 !important;
+/* color: black !important;
+background-color: #ece9e4 !important;
+background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;
+background-image: -moz-linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;
+background-image: -ms-linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;
+background-image: -o-linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;
+background-image: linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#F5C971',GradientType=0 ) !important; */
 }
 
 .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item {
-  border: 0.15rem solid #4848b0;
-  border-bottom: 1px solid blue;
+border: 0.15rem solid #5f90cf;
+border-bottom: 1px solid #5f90cf;
+font-size: 12px;
+height: 22px;
+}
+.k-tabstrip-top{
+  height: 400px;
 }
