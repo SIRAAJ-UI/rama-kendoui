@@ -5,12 +5,13 @@ import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 
 import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
+import { AddRemarksComponent } from '../add-remarks/add-remarks.component';
 
 @Component({
   selector: 'app-sales-info-tab',
   standalone: true,
   imports: [DropDownsModule,CommonModule,
-    InputsModule,DateInputsModule,
+    InputsModule,DateInputsModule,AddRemarksComponent,
     LabelModule,
  ],
   templateUrl: './sales-info-tab.component.html',
