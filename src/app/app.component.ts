@@ -12,6 +12,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { PBPageComponent } from './pbpage/pbpage.component';
 import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
+import { FieldSetGroupComponent } from './default/field-set-group/field-set-group.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +22,7 @@ import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
         TextBoxModule,
         DropDownsModule,
         LayoutModule,
+        FieldSetGroupComponent,
         FormsModule,
         IconsModule,
         ButtonsModule,
@@ -28,7 +30,7 @@ import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
         LabelModule,
         PBPageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'assr_csa_web';
@@ -40,15 +42,20 @@ export class AppComponent {
 ];
 
 public buttons: any[] = [
-    { text: "Save", color: "primary", selected: true },
-    { text: "Edit Primary APN",color: "primary" },
-    { text: "Refresh Characteristic",  color: "primary" },
-    { text: "Sales Analysis Report",  color: "error" },
-    { text: "Edit CSA",  color: "error" },
-
+    { text: "Save", isSelected: true },
+    { text: "Edit Primary APN",isSelected: false},
+    { text: "Refresh Characteristic",isSelected: false },
+    { text: "Sales Analysis Report",  isSelected: false },
+    { text: "Edit CSA",  selected: false },
   ];
 
 
+  buttonClicked(selectedButton: any) {
+    this.buttons.forEach( btn => {
+      btn.isSelected = false;
+    });
+    selectedButton.isSelected = true;
+  }
 
 public selectedChange(btn: any): void {
     this.statusColor = btn.color;

@@ -1,92 +1,22 @@
 <div class="container-fluid">
-
     <div class="row">
       <div class="col-sm-6 col-md-10">IMPROVE CSA</div>
       <div class="col-sm-6 col-md-2">Development User id</div>
     </div>
   
     <div class="col-sm-12 bg-blue p-0" style="color:#1B3758;font-weight: bold;">C/I Improved Property</div>
-  
-   
-
-
-    <div class="col-sm-12 mt-2 k-button-solid-base">
-      <kendo-buttongroup class="k-button-solid-base" selection="single">
-          <button
-            *ngFor="let button of buttons"
-            kendoButton
-            [toggleable]="true"
-            [selected]="button.selected"
-            (click)="selectedChange(button)"
-          >
-            <span>
-              {{ button.text }}
-            </span>
-          </button>
-        </kendo-buttongroup>
-    
+    <div class="col-sm-12 p-2" style="background-color: #1B3758;">
+      <ng-container *ngFor="let button of buttons; let i = index;">
+          <button class="default-btn" [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
+            {{ button.text }}
+          </button> 
+          
+          <span *ngIf="i != (buttons.length - 1) " class="text-white"> | </span>
+        </ng-container>
     </div>
-   
-    <!-- Document -->
-    <fieldset class="hm-fieldset">
-        <legend  class="float-none w-auto p-0" style="font-size: 12px;font-weight: bold;">Document</legend>
-        <div class="hm-property">
-            <label style="font-weight: 500;" >Document:</label> 1970-136268
-        
-            <label style="font-weight: 500;margin-left: 200px;">Buyer:</label> Carlislie Ralph & Katherine J & John W & Jean E
-        </div>
-    <div class="hm-property">
-        <label style="font-weight: 500;">Event Date:</label> 12/10/1970 23:01
-        <label style="font-weight: 500;margin-left: 170px;">Seller :</label>Gilpin Mary H
-    </div>
-       
-     </fieldset>
-
-<!-- APN -->
-     <fieldset class="hm-fieldset-apn">
-        <legend  class="float-none w-auto" style="font-size: 12px;font-weight: bold;">APN</legend>
-        <div class="hm-property">
-            <label style="font-weight: 500;" >APN:</label> 49-1177-7-1
-            <label style="font-weight: 500;margin-left: 50px;">Use Cd:</label> 1 
-            <label style="font-weight: 500;margin-left: 50px;">Use:</label> Garbage-Repair              
-        </div>
-       <div class="hm-property">
-        <label style="font-weight: 500;">Address :</label> 4700 San pablo Ave, Emeryville , 94605-1307
-       </div>
-     </fieldset>
-
-     <!-- SALE -->
-     <fieldset class="hm-fieldset-sale">
-        <legend  class="float-none w-auto" style="font-size: 12px;font-weight: bold;">Sale</legend>
-            <div class="hm-property">
-                <label style="font-weight: 500;">APN Count:</label>
-                <label style="font-weight: 500;margin-left: 130px;">Ind Pur Price:</label>  
-            </div>  
-            <div class="hm-property">
-                <label style="font-weight: 500;">Adj Sales Price:</label> 25,000
-                <label style="font-weight: 500;margin-left: 50px;">Trans Tax Price:</label>
-            </div>  
-      
-     </fieldset>
-
-     <!-- Prop Char -->
-     <fieldset class="hm-fieldset-Prop">
-        <legend  class="float-none w-auto p-2" style="font-size: 12px;font-weight: bold;">Prop Char</legend>
-        <div class="hm-property">
-            <label style="font-weight: 500;">Gross SF:</label> 6200
-            <label style="font-weight: 500;margin-left: 50px;">Land Area:</label>   7,341      
-        </div>  
-        <div class="hm-property">
-            <label style="font-weight: 500;">PC NRA:</label> 6,138     
-        </div> 
-      
-     </fieldset>
-
-
-
-
   </div>
   
+  <app-field-set-group></app-field-set-group>
   
   <router-outlet />
   
