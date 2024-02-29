@@ -5,13 +5,12 @@
     </div>
   
     <div class="col-sm-12 bg-blue p-2 text-black fw-bold">C/I Improved Property</div>
-    <div class="col-sm-12 p-2 bg-dark-strap">
+    <div class="col-sm-12 bg-dark-strap d-flex">
       <ng-container *ngFor="let button of buttons; let i = index;">
-          <button class="default-btn" [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
-            {{ button.text }}
+          <button class="default-btn p-1" [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
+            {{ button.text }} 
           </button> 
-          
-          <span *ngIf="i != (buttons.length - 1) " class="text-white"> | </span>
+          <div *ngIf="i != (buttons.length - 1) " class="line-with-btn"> </div>
         </ng-container>
     </div>
   </div>
