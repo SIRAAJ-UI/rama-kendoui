@@ -28,3 +28,7 @@ height: 22px;
 .k-tabstrip-top{
   height: 400px;
 }
+
+body {
+  font-size: 14px;
+}

@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http'
   standalone: true,
   imports: [ HttpClientModule, ButtonsModule, DetailsPageComponent,LoadingOverlayComponent, ],
   templateUrl: './default.component.html',
-  styleUrl: './default.component.css',
+  styleUrl: './default.component.scss',
   providers: [ DataService ]
 })
 export class DefaultComponent {

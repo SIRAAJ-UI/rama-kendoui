@@ -1,0 +1,29 @@
+<div class="fw-bold mt-4">Comments &nbsp;&nbsp;&nbsp;
+    <button kendoButton *ngIf="!opened" (click)="open()">+</button>
+</div> 
+<div id="kendo-grid"> 
+  <kendo-dialog  *ngIf="opened" (close)="close()"   [minWidth]="450"
+  [width]="550">
+   
+    <div style="font-size: 18px; line-height: 1.3em;">
+      <span class="k-icon k-button-icon k-i-form-element"></span> Comment
+  </div>
+    <form>
+        <div class="form-group row">
+            <label for="anticipatedUse" class="col-sm-2 col-form-label">Comment</label>
+            <div class="col-sm-4">
+                <textarea id="textAreaExample" name="textAreaExample" rows="4" cols="50">
+                </textarea><br>
+            </div>
+      
+           
+      
+          </div>
+    </form>
+    
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close()">No</button>
+      <button kendoButton (click)="close()" themeColor="primary">Save</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+</div>
