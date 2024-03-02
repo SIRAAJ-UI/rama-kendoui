@@ -1,5 +1,7 @@
-:host ::ng-deep .k-window-content { background-color: 'red'; }
+.k-dialog-titlebar {
+    background-color: green;
+  }
 
-#kendo-grid .kendo-grid{
-    background-color: 'red';
-   }
+  .k-dialog-content {
+    background-color: pink;
+  }

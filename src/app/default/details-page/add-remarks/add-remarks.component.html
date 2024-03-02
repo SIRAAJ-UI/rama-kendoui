@@ -1,16 +1,20 @@
 <div class="fw-bold mt-4">Comments &nbsp;&nbsp;&nbsp;
     <button kendoButton *ngIf="!opened" (click)="open()">+</button>
 </div> 
-<div id="kendo-grid"> 
-  <kendo-dialog  *ngIf="opened" (close)="close()"   [minWidth]="450"
+<kendo-grid [data]="gridData"    width="40" >
+  <kendo-grid-column field="comment" title="Comment"  [headerStyle]="{'padding':'3px 3px','white-space': 'normal'}"> </kendo-grid-column>  
+</kendo-grid>   
+
+  <kendo-dialog  *ngIf="opened" (close)="close()" [minWidth]="450" [themeColor]="dialogThemeColor"
   [width]="550">
-   
-    <div style="font-size: 18px; line-height: 1.3em;">
-      <span class="k-icon k-button-icon k-i-form-element"></span> Comment
-  </div>
+  <h5 style="margin: 10px; text-align: center;">Comment </h5>
+
     <form>
         <div class="form-group row">
-            <label for="anticipatedUse" class="col-sm-2 col-form-label">Comment</label>
+          <div style="font-size: 18px; line-height: 1.3em;">
+            <span class="k-icon k-i-warning"></span> Are you sure you want to delete?
+          </div>
+            <label for="anticipatedUse" class="col-sm-2 col-form-label">Comment:*</label>
             <div class="col-sm-4">
                 <textarea id="textAreaExample" name="textAreaExample" rows="4" cols="50">
                 </textarea><br>
@@ -20,10 +24,10 @@
       
           </div>
     </form>
-    
+   
     <kendo-dialog-actions>
-      <button kendoButton (click)="close()">No</button>
-      <button kendoButton (click)="close()" themeColor="primary">Save</button>
+     
+      <button kendoButton (click)="close()" themeColor="success">Save</button>
+       <button kendoButton (click)="close()" themeColor="primary">Cancel</button>
     </kendo-dialog-actions>
   </kendo-dialog>
-</div>
