@@ -1,4 +1,75 @@
 <form>
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Anticipated Use:</label>
+                <kendo-dropdownlist class="col-6" [data]="data"></kendo-dropdownlist>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Benchmark Rating:</label>
+                <input class="col-6" type="text">
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Details:</label>
+                <input class="col-6" type="text">
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Supervisor Approved:</label>
+                <label class="col-form-label col-6">Yes</label>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">% Owner Occupied:</label>
+                <input class="col-6" type="text">
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Broker Involved:</label>
+                <kendo-dropdownlist class="col-6" [data]="brokerInvolved" style="width:100px"></kendo-dropdownlist>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Buyer/Seller Relationship:</label>
+                <kendo-dropdownlist class="col-6" [data]="brokerInvolved" ></kendo-dropdownlist>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">If so, specify</label>
+                <input class="col-6" type="text"/>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Contract Date:</label>
+                 <kendo-datepicker placeholder="Choose a date ..."></kendo-datepicker>
+            </div>
+        </div>
+      
+        <div class="col-sm-6 col-md-3">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-6">Condition at sales:</label>
+                <kendo-dropdownlist class="col-6" [data]="conditionAtSales"></kendo-dropdownlist>
+            </div>
+        </div>
+    </div>
+    <app-add-remarks></app-add-remarks>  
+</form>
+<!-- <form>
     <div class="form-group row">
         <label for="anticipatedUse" class="col-sm-2 col-form-label">Anticipated Use:</label>
         <div class="col-sm-4">
@@ -80,4 +151,4 @@
     </div>
     <app-add-remarks></app-add-remarks>      
          
-  </form>
+</form> -->

@@ -35,29 +35,42 @@ body {
 
 kendo-grid{
  .k-toolbar {
-  background: rgb(244,247,251);
-  background: linear-gradient(180deg, rgba(244,247,251,1) 0%, rgba(174,201,210,1) 100%);
+  background: rgb(233,240,247);
+  background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+  border-color:#AABBCD;
+}
+.k-header{
+  background: rgb(233,240,247);
+  background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+  border-color:#AABBCD;
+}
+
+ 
+.k-master-row:nth-child(even){
+  td{
+    background-color:#d1dded;
+  }
 }
 }
 
 kendo-dialog-titlebar{
-  background: rgb(244,247,251);
-  background: linear-gradient(180deg, rgba(244,247,251,1) 0%, rgba(174,201,210,1) 100%);
+  background: rgb(233,240,247);
+  background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+  border-color:#AABBCD;  
   
 }
 
 .primary-btn {
-  background: rgb(244,247,251);
-  background: linear-gradient(180deg, rgba(244,247,251,1) 0%, rgba(174,201,210,1) 100%);
-  
+  background: rgb(233,240,247);
+  background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+  border-color:#AABBCD;  
 }
 
 .k-button-solid-primary {
-  background: rgb(244,247,251);
-  background: linear-gradient(180deg, rgba(244,247,251,1) 0%, rgba(174,201,210,1) 100%);
-  
+  background: rgb(233,240,247);
+  background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+  border-color:#AABBCD; 
   color: #000;
-  border-color: #000;
 }
 
 .k-button-solid-primary:active, .k-button-solid-primary.k-active {
