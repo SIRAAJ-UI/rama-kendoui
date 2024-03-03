@@ -1,10 +1,18 @@
 .form-group{
-    font-size: 12px; 
+    font-size: 10px; 
     height: 25px;
+}
+.form-group label{
+  text-align: right;
+  display: inline-block;
+  font-weight: bold;
+  width: 200px;
+  font-size: 11px; 
 }
 .k-dropdownlist {
     height: 25px;
   }
   .k-datepicker {
     height: 25px;
+    font-size: 12px;
   }

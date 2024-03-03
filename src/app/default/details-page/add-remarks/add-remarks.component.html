@@ -1,3 +1,33 @@
-<div class="fw-bold mt-4">Comments &nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-  </svg></div>
+<div class="fw-bold mt-4">Comments &nbsp;&nbsp;&nbsp;
+    <button kendoButton *ngIf="!opened" (click)="open()">+</button>
+</div> 
+<kendo-grid [data]="gridData"    width="40" >
+  <kendo-grid-column field="comment" title="Comment"  [headerStyle]="{'padding':'3px 3px','white-space': 'normal'}"> </kendo-grid-column>  
+</kendo-grid>   
+
+  <kendo-dialog  *ngIf="opened" (close)="close()" [minWidth]="450" [themeColor]="dialogThemeColor"
+  [width]="550">
+  <h5 style="margin: 10px; text-align: center;">Comment </h5>
+
+    <form>
+        <div class="form-group row">
+          <div style="font-size: 18px; line-height: 1.3em;">
+            <span class="k-icon k-i-warning"></span> Are you sure you want to delete?
+          </div>
+            <label for="anticipatedUse" class="col-sm-2 col-form-label">Comment:*</label>
+            <div class="col-sm-4">
+                <textarea id="textAreaExample" name="textAreaExample" rows="4" cols="50">
+                </textarea><br>
+            </div>
+      
+           
+      
+          </div>
+    </form>
+   
+    <kendo-dialog-actions>
+     
+      <button kendoButton (click)="close()" themeColor="success">Save</button>
+       <button kendoButton (click)="close()" themeColor="primary">Cancel</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>

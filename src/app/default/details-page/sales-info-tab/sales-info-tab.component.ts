@@ -11,8 +11,8 @@ import { AddRemarksComponent } from '../add-remarks/add-remarks.component';
   selector: 'app-sales-info-tab',
   standalone: true,
   imports: [DropDownsModule,CommonModule,
-    InputsModule,DateInputsModule,AddRemarksComponent,
-    LabelModule,
+    InputsModule,DateInputsModule,
+    LabelModule,AddRemarksComponent
  ],
   templateUrl: './sales-info-tab.component.html',
   styleUrl: './sales-info-tab.component.scss'
@@ -82,5 +82,7 @@ export class SalesInfoTabComponent {
   private log(event: string, arg?: any): void {
     this.events.unshift(`${event} ${arg || ""}`);
   }
+public btnComment_Click():void{
 
+}
 }

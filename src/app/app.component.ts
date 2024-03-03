@@ -44,7 +44,7 @@ export class AppComponent {
 public buttons: any[] = [
     { text: "Save", isSelected: true },
     { text: "Edit Primary APN",isSelected: false},
-    { text: "Refresh Characteristic",isSelected: false },
+    { text: "Refresh Characteristics",isSelected: false },
     { text: "Sales Analysis Report",  isSelected: false },
     { text: "Edit CSA",  selected: false },
   ];
