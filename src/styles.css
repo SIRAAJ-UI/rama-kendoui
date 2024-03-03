@@ -32,3 +32,44 @@ height: 22px;
 body {
   font-size: 12px;
 }
+
+kendo-grid{
+ .k-toolbar {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,251,254,1) 0%, rgba(230,239,244,1) 2%, rgba(174,201,210,1) 100%);
+    
+  }
+}
+
+kendo-dialog-titlebar{
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,251,254,1) 0%, rgba(230,239,244,1) 2%, rgba(174,201,210,1) 100%);
+}
+
+.primary-btn {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,251,254,1) 0%, rgba(230,239,244,1) 2%, rgba(174,201,210,1) 100%);
+}
+
+.k-button-solid-primary {
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,251,254,1) 0%, rgba(230,239,244,1) 2%, rgba(174,201,210,1) 100%);
+  color: #000;
+  border-color: #000;
+}
+
+.k-button-solid-primary:active, .k-button-solid-primary.k-active {
+  border-color: #000;
+  background-color: #000;
+}
+
+.k-button-solid-primary:focus, .k-button-solid-primary.k-focus {
+  box-shadow: 0 0 0px 2px rgba(101, 97, 97, 0.3);
+}
+.k-button-solid-primary:focus, .k-button-solid-primary.k-focus {
+  box-shadow: 0 0 0px 2px rgba(101, 97, 97, 0.3);
+}
+.k-button-solid-primary:hover, .k-button-solid-primary.k-hover {
+  border-color: rgb(101, 97, 97);
+  background-color: rgb(101, 97, 97);
+}

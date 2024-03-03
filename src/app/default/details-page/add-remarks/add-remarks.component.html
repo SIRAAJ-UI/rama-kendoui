@@ -1,33 +1,26 @@
-<div class="fw-bold mt-4">Comments &nbsp;&nbsp;&nbsp;
-    <button kendoButton *ngIf="!opened" (click)="open()">+</button>
-</div> 
-<kendo-grid [data]="gridData"    width="40" >
-  <kendo-grid-column field="comment" title="Comment"  [headerStyle]="{'padding':'3px 3px','white-space': 'normal'}"> </kendo-grid-column>  
-</kendo-grid>   
+<kendo-grid [data]="gridData">
+  <ng-template kendoGridToolbarTemplate>
+    <b role="button" *ngIf="!opened" (click)="open()">Comments +</b>
+  </ng-template>
+  <kendo-grid-column field="ProductName" title="Name"> </kendo-grid-column>
+  <kendo-grid-column field="Category.CategoryName" title="Category">
+  </kendo-grid-column>
+</kendo-grid>
 
-  <kendo-dialog  *ngIf="opened" (close)="close()" [minWidth]="450" [themeColor]="dialogThemeColor"
-  [width]="550">
-  <h5 style="margin: 10px; text-align: center;">Comment </h5>
-
-    <form>
-        <div class="form-group row">
-          <div style="font-size: 18px; line-height: 1.3em;">
-            <span class="k-icon k-i-warning"></span> Are you sure you want to delete?
-          </div>
-            <label for="anticipatedUse" class="col-sm-2 col-form-label">Comment:*</label>
-            <div class="col-sm-4">
-                <textarea id="textAreaExample" name="textAreaExample" rows="4" cols="50">
-                </textarea><br>
-            </div>
-      
-           
-      
-          </div>
-    </form>
-   
-    <kendo-dialog-actions>
-     
-      <button kendoButton (click)="close()" themeColor="success">Save</button>
-       <button kendoButton (click)="close()" themeColor="primary">Cancel</button>
-    </kendo-dialog-actions>
-  </kendo-dialog>
+<kendo-dialog title="Comments" *ngIf="opened" [minWidth]="250" [width]="450" (close)="close()">
+  <form>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <kendo-label text="*Comment">
+          <kendo-textarea placeholder="Enter the comments..." [rows]="3" resizable="vertical"></kendo-textarea>
+        </kendo-label>
+      </div>
+    </div>
+  </form>
+  <kendo-dialog-actions>
+    <button kendoButton themeColor="primary" (click)="close()">Cancel</button>
+    <button kendoButton themeColor="primary" (click)="close()">
+      Save
+    </button>
+  </kendo-dialog-actions>
+</kendo-dialog>
