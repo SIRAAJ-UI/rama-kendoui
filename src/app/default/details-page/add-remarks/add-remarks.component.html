@@ -1,6 +1,6 @@
 <kendo-grid [data]="gridData">
   <ng-template kendoGridToolbarTemplate>
-    <b role="button" *ngIf="!opened" (click)="open()">Comments +</b>
+    <b role="button" (click)="open()">Comments +</b>
   </ng-template>
   <kendo-grid-column [width]="40">
     <ng-template kendoGridCellTemplate let-isNew="isNew">
