@@ -1,73 +1,104 @@
-<form>
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
+<form >
+    <div class="row" >
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Anticipated Use:</label>
+                <label class="col-form-label col-4">Anticipated Use:</label>
                 <kendo-dropdownlist class="col-6" [data]="data"></kendo-dropdownlist>
             </div>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Benchmark Rating:</label>
+                <label class="col-form-label col-4" >Benchmark Rating:</label>
                 <input class="col-6" type="text">
             </div>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Details:</label>
-                <input class="col-6" type="text">
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Supervisor Approved:</label>
-                <label class="col-form-label col-6">Yes</label>
-            </div>
-        </div>
-
-        <div class="col-sm-6 col-md-3">
-            <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">% Owner Occupied:</label>
+                <label class="col-form-label col-4" >Details:</label>
                 <input class="col-6" type="text">
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Broker Involved:</label>
+                <label class="col-form-label col-4" >Supervisor Approved:</label>
+                <label class="col-6" >Yes</label>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-4" >% Owner Occupied:</label>
+                <input class="col-6" type="text">
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-md-4">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-4" >Broker Involved:</label>
                 <kendo-dropdownlist class="col-6" [data]="brokerInvolved" style="width:100px"></kendo-dropdownlist>
             </div>
         </div>
-
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Buyer/Seller Relationship:</label>
+                <label class="col-form-label col-4" >Buyer/Seller Relationship:</label>
                 <kendo-dropdownlist class="col-6" [data]="brokerInvolved" ></kendo-dropdownlist>
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">If so, specify</label>
+                <label class="col-form-label col-4" >If so, specify:</label>
                 <input class="col-6" type="text"/>
             </div>
         </div>
-
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Contract Date:</label>
-                 <kendo-datepicker placeholder="Choose a date ..."></kendo-datepicker>
+                <label class="col-form-label col-4" >Purchase Predated By:</label>
+                <div class="col-4 wrap">
+                    <input type="checkbox"  id="terms" kendoCheckBox style="border:1px black solid"/>
+                    <label class="text-label"  for="terms"
+                      >Option</label>
+                     
+              
+                  </div>
+                  <div class="col-4 wrap">
+                    <input type="checkbox"  id="terms" kendoCheckBox style="border:1px black solid"/>
+                    <label class="text-label" for="terms" 
+                      >Contract of Sale</label>
+                   
+                  </div>
+<!--             
+                <input class="col-6" type="checkbox" name="option" kendoCheckBox/>
+                <input class="col-6" type="checkbox" name="option" kendoCheckBox/> -->
+
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4"></div>
+        <div class="col-sm-8 col-md-4">
+            <div class="d-flex align-items-center">
+                <label class="col-form-label col-4" >Contract Date:</label>
+                 <kendo-datepicker class="col-6" placeholder="Choose a date ..."></kendo-datepicker>
             </div>
         </div>
       
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-8 col-md-4">
             <div class="d-flex align-items-center">
-                <label class="col-form-label col-6">Condition at sales:</label>
+                <label class="col-form-label col-4" >Condition at sales:</label>
                 <kendo-dropdownlist class="col-6" [data]="conditionAtSales"></kendo-dropdownlist>
             </div>
         </div>
+        <div class="col-sm-8 col-md-4"></div>
+
+        <div class="col-sm-14 col-md-7" style="width: 743px;margin-top:10px;">
+            <app-add-remarks></app-add-remarks>  
+        </div>
     </div>
-    <app-add-remarks></app-add-remarks>  
+   
 </form>
 <!-- <form>
     <div class="form-group row">

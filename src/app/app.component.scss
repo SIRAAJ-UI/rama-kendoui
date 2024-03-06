@@ -5,7 +5,8 @@
     background-color: #D7E6F7;
 }
 .bg-dark-strap {
-    background-color: #1B3758;
+   background-color: #1B3758;
+
 }
 
 .aspbutton{
@@ -17,8 +18,9 @@
 
 .default-btn{
     background-color: transparent;
+   // background-color: #1B3758;
     color:#fff;
-    border:.01em solid #fff;
+    border: 0px solid #fff;
     &:hover {
         background: #fff;
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(215,200,78,1) 0%, rgba(251,231,161,1) 0%, rgba(252,237,183,1) 0%, rgba(250,225,133,1) 47%, rgba(252,240,194,1) 100%);
@@ -28,6 +30,7 @@
 }
 .line-with-btn{
     width: 1px;
-          height: 27px;
+          height: 27px;          
           background: white;
+          border: 1px white solid;
 }

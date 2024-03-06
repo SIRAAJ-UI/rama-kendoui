@@ -1,6 +1,15 @@
-<kendo-grid [data]="gridData">
-  <ng-template kendoGridToolbarTemplate>
-    <b role="button" (click)="open()">Comments +</b>
+
+
+<kendo-grid [data]="gridData" scrollable="virtual"
+[pageSize]="3" style="height: 150px; "
+[style.maxHeight.px]="390"
+[size]="smallSize"
+>
+<!-- style="margin-left: 5px;margin-top: 10px; width: 885px;"  > -->
+  <ng-template kendoGridToolbarTemplate >
+
+    <b  role="button" (click)="open()">Comments +</b>
+   
   </ng-template>
   <kendo-grid-column [width]="40">
     <ng-template kendoGridCellTemplate let-isNew="isNew">
@@ -9,23 +18,30 @@
       </svg>
     </ng-template>
     </kendo-grid-column>
-  <kendo-grid-column field="comments" title="comments"> </kendo-grid-column>
+  <kendo-grid-column field="comments" title="Comments"> </kendo-grid-column>
 </kendo-grid>
 
-<kendo-dialog title="Comments" *ngIf="opened" [minWidth]="250" [width]="450" (close)="close()">
+<kendo-dialog title="Add Comments" *ngIf="opened" [minWidth]="250" [width]="450" (close)="close()">
   <form>
     <div class="form-group row">
       <div class="col-sm-12">
-        <kendo-label text="*Comment">
-          <kendo-textarea placeholder="Enter the comments..." [rows]="3" resizable="vertical"></kendo-textarea>
+        <kendo-label text="*Comment :">
+          <kendo-textarea placeholder="Enter the comments..." [rows]="5" resizable="vertical"></kendo-textarea>
         </kendo-label>
       </div>
     </div>
   </form>
+  <kendo-dialog-actions >
+    <kendo-button size="small" themeColor="primary"  (click)="close()" >Save</kendo-button>
+    <kendo-button size="small" themeColor="primary" (click)="close()">Cancel</kendo-button>
+  </kendo-dialog-actions>
+<!--   
   <kendo-dialog-actions>
-    <button kendoButton themeColor="primary" (click)="close()">Cancel</button>
-    <button kendoButton themeColor="primary" (click)="close()">
+
+    <button kendoButton themeColor="primary"  size="small" (click)="close()"  class="my-custom-button">
       Save
     </button>
+    <button kendoButton themeColor="primary"  (click)="close()" class="my-custom-button">Cancel</button>
+
   </kendo-dialog-actions>
-</kendo-dialog>
+</kendo-dialog> -->

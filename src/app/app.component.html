@@ -4,15 +4,18 @@
       <div class="col-sm-6 col-md-2">Development User id</div>
     </div>
     <div class="row">
-    <div class="col-sm-12 bg-blue p-2 text-black fw-bold">C/I Improved Property</div>
-    <div class="col-sm-12 bg-dark-strap d-flex">
+    <div class="col-sm-12 bg-blue p-1 text-black fw-bold" >C/I Improved Property</div>
+    <div class="col-sm-12 bg-dark-strap d-flex" style="border:3px #fff solid">
       <ng-container *ngFor="let button of buttons; let i = index;">
+
           <button class="default-btn p-1" [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
             {{ button.text }} 
           </button> 
-          <div *ngIf="i != (buttons.length - 1) " class="line-with-btn"> </div>
+          <div *ngIf="i != (buttons.length +1) " class="line-with-btn"> </div>
+
         </ng-container>
     </div>
+    <app-field-set-group></app-field-set-group>
   <router-outlet />
 </div>
   
