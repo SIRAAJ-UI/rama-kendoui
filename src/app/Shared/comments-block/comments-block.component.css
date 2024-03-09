@@ -1,0 +1,21 @@
+.k-grid {
+    width: 50%;
+}
+
+.grid-top {
+    height: 30px;
+    width: 700px;
+    font-size: 12px;
+    
+    text-align: left; 
+    background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
+}
+
+.add-button {
+    height: 20px;
+    width: 700px;
+    border: none;
+    text-align: end !important;
+    background-color: transparent;
+    color: black;
+}

@@ -1,21 +1,2 @@
-<div class="container-fluid">
-    <div class="row d-flex align-items-center">
-     <div class="col-sm-6 col-md-10"> <img class="img-responsive" src="assets/Images/improveNewLogo.png"></div>
-      <div class="col-sm-6 col-md-2">Development User id</div>
-    </div>
-    <div class="row">
-    <div class="col-sm-12 bg-blue p-1 text-black fw-bold" >C/I Improved Property</div>
-    <div class="col-sm-12 bg-dark-strap d-flex p-0" style="border:3px #fff solid">
-      <ng-container *ngFor="let button of buttons; let i = index;">
-
-          <button class="default-btn " [ngClass]="button.isSelected === true ? 'aspbutton' : ''" (click)="buttonClicked(button)">
-            {{ button.text }} 
-          </button> 
-          <div *ngIf="i != (buttons.length +1) " class="line-with-btn"> </div>
-
-        </ng-container>
-    </div>
-    <app-field-set-group></app-field-set-group>
-  <router-outlet />
-</div>
+<router-outlet />
   

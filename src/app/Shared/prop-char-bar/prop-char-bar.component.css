@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row,
+.bottom-row {
+    display: grid;
+    grid-template-columns: 425px 1px;
+    grid-column-gap: 2px;
+    column-width: 2px; 
+    
+}
+.k-d-grid{
+  /* width: 800px; */
+}
+.row label {
+    font-family: sans-serif;
+  }
+
+  .hm-fieldset {   
+    /* height: 80px; */
+    width: 620px;
+  } 
+  
+  .col-form-label-left {
+    margin-left: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align:right;
+
+}
+.col-form-label-right {
+    margin-left: 185px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align:right;
+
+}
+
+@media (max-width: 768px) {
+
+    .top-row,
+    .bottom-row {
+        grid-template-columns: 1fr;
+    }
+}

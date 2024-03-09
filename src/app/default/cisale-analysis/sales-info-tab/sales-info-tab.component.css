@@ -1,0 +1,65 @@
+.form-group {
+    font-size: 10px;
+    height: 25px;
+}
+
+.form-group label {
+    text-align: right;
+    display: inline-block;
+    font-weight: bold;
+    width: 200px;
+    font-size: 11px;
+}
+
+.text-label {
+    font-size: 11px;
+}
+
+.form-label {
+    margin-right: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: right;
+    font-family: sans-serif;
+}
+
+.k-dropdownlist {
+    height: 25px;
+    width: 200px;
+}
+
+.k-datepicker {
+    height: 25px;
+    font-size: 12px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.flex-item {
+    /* margin-right: 20px; */
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.flex-item label {
+    flex: 0 0 40%;
+    margin-right: 10px;
+}
+
+.flex-item:last-child {
+    margin-right: 0;
+}
+
+label {
+    margin-right: 10px;
+}

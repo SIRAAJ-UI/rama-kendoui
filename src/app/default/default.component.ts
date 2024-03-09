@@ -3,16 +3,15 @@ import { LoadingOverlayComponent } from '../Shared/loading-overlay/loading-overl
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../Services/data.service';
 import { QueryParamsService } from '../Services/query-params.service';
-import { DetailsPageComponent } from './details-page/details-page.component';
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-default',
   standalone: true,
-  imports: [ HttpClientModule, ButtonsModule, DetailsPageComponent,LoadingOverlayComponent, ],
+  imports: [ HttpClientModule, ButtonsModule, LoadingOverlayComponent, ],
   templateUrl: './default.component.html',
-  styleUrl: './default.component.scss',
+  styleUrl: './default.component.css',
   providers: [ DataService ]
 })
 export class DefaultComponent {

@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+.toolbar {
+  display: flex; /* Arrange buttons horizontally */
+  background-color: #1B3758;
+  height: 28px;
+}
+
+.title-bar {
+  display: flex;
+  align-items: center;
+  background-color: #5f90cf;
+  height: 28px;
+  color: white;
+  padding: 0px 0 0px 5px;
+}
+
 .k-tabstrip-items-wrapper .k-item {
   color: #000 !important;
   font-size: 12px;

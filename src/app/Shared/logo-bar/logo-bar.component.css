@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.title-bar {
+    font-family: sans-serif;
+    background-color: #d1dded;
+    color: black;
+}

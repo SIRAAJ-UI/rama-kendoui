@@ -28,7 +28,6 @@
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
-              "src/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
