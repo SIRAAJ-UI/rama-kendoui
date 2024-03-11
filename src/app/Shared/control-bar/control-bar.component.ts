@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { InputsModule, TextBoxModule } from '@progress/kendo-angular-inputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-import { FormsModule } from '@angular/forms';
 import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { LabelModule } from '@progress/kendo-angular-label';
@@ -21,7 +19,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
     LabelModule,
   ],
   templateUrl: './control-bar.component.html',
-  styleUrl: './control-bar.component.css',
+  styleUrl: './control-bar.component.scss',
 })
 export class ControlBarComponent {
   public statusColor: IconThemeColor = 'success';

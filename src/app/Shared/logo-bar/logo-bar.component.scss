@@ -1,14 +1,11 @@
-.container {
+.header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.logo {
-    margin-right: auto;
-}
-
-.title-bar {
-    font-family: sans-serif;
+.title-bar{
     background-color: #d1dded;
     color: black;
+    padding: 10px;
 }

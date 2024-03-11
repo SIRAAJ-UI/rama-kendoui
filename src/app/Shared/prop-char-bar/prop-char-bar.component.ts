@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './prop-char-bar.component.html',
-  styleUrl: './prop-char-bar.component.css'
+  styleUrl: './prop-char-bar.component.scss'
 })
 export class PropCharBarComponent {
 

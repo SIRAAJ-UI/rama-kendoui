@@ -1,0 +1,9 @@
+.grid {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(620px, 1fr));
+}
+
+.legand-header {
+  font-size: 12px; font-weight: bold
+}

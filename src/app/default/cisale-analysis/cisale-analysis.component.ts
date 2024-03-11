@@ -20,7 +20,7 @@ import { TabAlignment } from "@progress/kendo-angular-layout";
     SalesInfoTabComponent,
   ],
   templateUrl: './cisale-analysis.component.html',
-  styleUrl: './cisale-analysis.component.css',
+  styleUrl: './cisale-analysis.component.scss',
 })
 export class CISaleAnalysisComponent {
   public alignment: TabAlignment = 'start';
