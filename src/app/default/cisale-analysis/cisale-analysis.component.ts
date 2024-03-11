@@ -6,7 +6,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SalesInfoTabComponent } from './sales-info-tab/sales-info-tab.component';
 import { TabAlignment } from "@progress/kendo-angular-layout";
-
+import { CiExpensiveComponent } from './ci-expensive/ci-expensive.component'
 @Component({
   selector: 'app-cisale-analysis',
   standalone: true,
@@ -18,6 +18,7 @@ import { TabAlignment } from "@progress/kendo-angular-layout";
     ReactiveFormsModule,
     FormsModule,
     SalesInfoTabComponent,
+    CiExpensiveComponent
   ],
   templateUrl: './cisale-analysis.component.html',
   styleUrl: './cisale-analysis.component.scss',
