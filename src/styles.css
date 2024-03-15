@@ -66,20 +66,20 @@ kendo-grid{
 kendo-dialog-titlebar{
   background: rgb(233,240,247);
   background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
-  border-color:#AABBCD;  
+  /* border-color:#AABBCD;   */
   
 }
 
 .primary-btn {
   background: rgb(233,240,247);
   background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
-  border-color:#AABBCD;  
+  /* border-color:#AABBCD;   */
 }
 
 .k-button-solid-primary {
   background: rgb(233,240,247);
   background: linear-gradient(180deg, rgba(233,240,247,1) 0%, rgba(185,202,227,1) 100%);
-  border-color:#AABBCD; 
+  /* border-color:#AABBCD;  */
   color: #000;
 }
 
@@ -95,6 +95,6 @@ kendo-dialog-titlebar{
   box-shadow: 0 0 0px 2px rgba(101, 97, 97, 0.3);
 }
 .k-button-solid-primary:hover, .k-button-solid-primary.k-hover {
-  border-color: rgb(101, 97, 97);
+  /* border-color: rgb(101, 97, 97); */
   background-color: rgb(101, 97, 97);
 }

@@ -1,97 +1,101 @@
-<div class="container">
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">Anticipated Use:</label>
-      <kendo-dropdownlist class="col-6" [data]="data"></kendo-dropdownlist>
-    </div>
-    <div class="flex-item">
-      <label class="form-label">Benchmark Rating:</label>
-      <input class="col-6" type="text" />
-    </div>
-  </div>
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">Details:</label>
-      <input class="col-6" type="text" />
-    </div>
-
-    <div class="flex-item">
-      <label class="form-label">Supervisor Approved:</label>
-      <label class="col-6">Yes</label>
-    </div>
-  </div>
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">% Owner Occupied:</label>
-      <input class="col-6" type="text" />
-    </div>
-
-    <div class="flex-item">
-      <label class="form-label">Broker Involved:</label>
-      <kendo-dropdownlist
-        class="col-6"
-        [data]="brokerInvolved"
-        style="width: 100px"
-      ></kendo-dropdownlist>
-    </div>
-  </div>
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">Buyer/Seller Relationship:</label>
-      <kendo-dropdownlist
-        class="col-6"
-        [data]="brokerInvolved"
-      ></kendo-dropdownlist>
-    </div>
-
-    <div class="flex-item">
-      <label class="form-label">If so, specify:</label>
-      <input class="col-6" type="text" />
-    </div>
-  </div>
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">Purchase Predated By:</label>
-      <div class="col-4 wrap">
-        <input
-          type="checkbox"
-          id="terms"
-          kendoCheckBox
-          style="border: 1px black solid"
-        />
-        <label class="text-label" for="terms">Option</label>
+<form [formGroup]="salesInfoForm" >
+  <div class="container">
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">Anticipated Use:</label>
+        <kendo-dropdownlist class="col-6 text-label" [data]="data" formControlName="anticipatedUse"></kendo-dropdownlist>
       </div>
-      <div class="col-4 wrap">
-        <input
-          type="checkbox"
-          id="terms"
-          kendoCheckBox
-          style="border: 1px black solid"
-        />
-        <label class="text-label" for="terms">Contract of Sale</label>
+      <div class="flex-item">
+        <label class="form-label">Benchmark Rating:</label>
+        <input class="col-6 text-label" type="text" />
       </div>
     </div>
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">Details:</label>
+        <input class="col-6 text-label" type="text" formControlName="details" />
+      </div>
+
+      <div class="flex-item">
+        <label class="form-label">Supervisor Approved:</label>
+        <label class="col-6 ">Yes</label>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">% Owner Occupied:</label>
+        <input class="col-6 text-label" type="text" formControlName="ownerOccupied"
+        />
+      </div>
+
+      <div class="flex-item">
+        <label class="form-label">Broker Involved:</label>
+        <kendo-dropdownlist
+          class="col-6 text-label"
+          [data]="brokerInvolved"
+          style="width: 70px" formControlName="brokerInvolved"
+
+        ></kendo-dropdownlist>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">Buyer/Seller Relationship:</label>
+        <kendo-dropdownlist
+          class="col-6 text-label"
+          [data]="brokerInvolved" formControlName="buyerSellerRelationship"
+        ></kendo-dropdownlist>
+      </div>
+
+      <div class="flex-item">
+        <label class="form-label">If so, specify:</label>
+        <input class="col-6 text-label" type="text" formControlName="ifBuyerSellerRelationship"/>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">Purchase Predated By:</label>
+
+        <div class="col-4 wrap">
+          <input
+            type="checkbox"
+            id="terms"
+            kendoCheckBox
+            style="border: 1px black solid"
+          />
+          <label class="text-label-checkbox" for="terms">Option</label>
+        </div>
+        <div class="col-4 wrap">
+          <input
+            type="checkbox"
+            id="terms"
+            kendoCheckBox
+            style="border: 1px black solid"
+          />
+          <label class="text-label-checkbox" for="terms">Contract of Sale</label>
+        </div>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="form-label">Contract Date:</label>
+        <kendo-datepicker
+          class="col-6 text-label"
+          placeholder="Choose a date ..." formControlName="contractDate"
+        ></kendo-datepicker>
+      </div>
+
+      <div class="flex-item">
+        <label class="form-label">Condition at sales:</label>
+        <kendo-dropdownlist
+          class="col-6 text-label"
+          [data]="conditionAtSales" formControlName="conditionAtSales"
+        ></kendo-dropdownlist>
+      </div>
+
+      <div class="flex-item" style="width: 2043px; margin-top: 10px">
+        <!-- For add remark component --><app-comments-block />
+      </div>
+    </div>
   </div>
-  <div class="flex-row">
-    <div class="flex-item">
-      <label class="form-label">Contract Date:</label>
-      <kendo-datepicker
-        class="col-6"
-        placeholder="Choose a date ..."
-      ></kendo-datepicker>
-    </div>
-
-    <div class="flex-item">
-      <label class="form-label">Condition at sales:</label>
-      <kendo-dropdownlist
-        class="col-6"
-        [data]="conditionAtSales"
-      ></kendo-dropdownlist>
-    </div>
-
-    <div class="flex-item" style="width: 2043px; margin-top: 10px">
-      ><app-comments-block />
-    </div>
-  </div>
-</div> 
-
+</form>

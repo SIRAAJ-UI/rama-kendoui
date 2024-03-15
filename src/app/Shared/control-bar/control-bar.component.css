@@ -20,16 +20,21 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 11px;
-    font-weight: 300;
-    margin: 4px 6px;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 1px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
     background-color: #1B3758;
+
 }
 
-.custom-button:hover {
-    background-image: linear-gradient(#F5C971, white);
+.custom-button:hover  {
+    background-image: linear-gradient(#F5C971, white); 
+    color: black; 
+    text-align: center;
+
+
 }
 
 .spacer {
@@ -40,7 +45,7 @@
 }
 
 .k-button-solid-base.k-hover:focus {
-    border-color: #003c74 !important;
+    /* border-color: #003c74 !important; */
     color: black !important;
     background-color: #ece9e4 !important;
     background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #F5C971 100%) !important;

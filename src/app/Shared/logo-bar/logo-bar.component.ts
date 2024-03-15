@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './logo-bar.component.html',
-  styleUrl: './logo-bar.component.scss'
+  styleUrl: './logo-bar.component.css'
 })
 export class LogoBarComponent {
   

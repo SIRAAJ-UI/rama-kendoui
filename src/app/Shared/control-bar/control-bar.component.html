@@ -1,4 +1,4 @@
-<div class="toolbar">
+<div class="toolbar" style="border: 3px #fff solid">
   <ng-container *ngFor="let button of buttons; let i = index">
     <button
       class="custom-button"
@@ -7,6 +7,6 @@
     >
       {{ button.text }}
     </button>
-    <div *ngIf="i != buttons.length + 1" class="spacer"></div>
+    <div *ngIf="i != buttons.length +1" class="spacer"></div>
   </ng-container>
 </div>

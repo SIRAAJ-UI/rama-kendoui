@@ -1,5 +1,5 @@
 .form-group {
-    font-size: 10px;
+    font-size: 12px;
     height: 25px;
 }
 
@@ -8,19 +8,28 @@
     display: inline-block;
     font-weight: bold;
     width: 200px;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .text-label {
+    font-size: 12px;
+    text-transform:uppercase;
+    width: 190px;
+}
+
+.text-label-checkbox {
     font-size: 11px;
+    text-transform:uppercase;
+    /* font-weight: bold; */
+    /* width: 190px; */
 }
 
 .form-label {
     margin-right: 10px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     text-align: right;
-    font-family: sans-serif;
+    font-family: Arial, Verdana;
 }
 
 .k-dropdownlist {
@@ -46,7 +55,7 @@
 
 .flex-item {
     /* margin-right: 20px; */
-    width: 30%;
+    width: 40%;
     display: flex;
     align-items: center;
 }

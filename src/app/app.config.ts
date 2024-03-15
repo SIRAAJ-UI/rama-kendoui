@@ -1,18 +1,17 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
-import { provideAnimations } from '@angular/platform-browser/animations';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { JwtInterceptorService } from './Services/jwt-interceptor.service';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './Services/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideAnimations(),
-    provideRouter(routes), 
-              provideHttpClient(),
+  providers: [provideRouter(routes), 
+              provideHttpClient(withInterceptors([authInterceptor])),
               Location, 
               {provide: LocationStrategy, useClass: HashLocationStrategy},
-              {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }
-            ]
+              importProvidersFrom(BrowserAnimationsModule)
+              
+  ]
 };
