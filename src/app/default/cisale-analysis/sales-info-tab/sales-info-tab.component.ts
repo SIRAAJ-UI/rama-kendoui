@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit,ViewChild } from '@angular/core';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
@@ -8,7 +8,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { CommentsBlockComponent } from '../../../Shared/comments-block/comments-block.component';
 import { DataService } from '../../../Services/data.service';
 import { ApiService } from '../../../Services/api.service'
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 export class AnticipatedUseCodes{
@@ -34,83 +34,53 @@ export class ConditionAtsales{
   templateUrl: './sales-info-tab.component.html',
   styleUrl: './sales-info-tab.component.css',
 })
-export class SalesInfoTabComponent implements AfterViewInit {
-  @Input() salesInfoForm!: FormGroup;
-  @Output() tabChange = new EventEmitter<any>();
-
-  validateAllFormFields() {
-    Object.keys(this.salesInfoForm.controls).forEach(field => {
-      const control = this.salesInfoForm.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      }
-      if (control instanceof FormGroup) {
-        control.markAsTouched({ onlySelf: true });
-        this.validateAllFormFields();
-      }
-    });
-  }
-
-
+export class SalesInfoTabComponent  {
+  @Input() salesInfoForm!: FormGroup; 
+  submitted = false;
+  
  // public form: FormGroup = new FormGroup({});
   public events: string[] = [];
-  public brokerInvolved: Array<string> = ['Yes', 'No'];
-  public buyerSellerRelationship:Array<string> = ['Yes', 'No'];
+  public brokerInvolved: Array<{ text: string, id: number }> = [ { text: 'Yes', id: 1 },
+  { text: 'No', id: 2 }];
+  public buyerSellerRelationship:Array<{ text: string, id: number }> = [ { text: 'Yes', id: 1 },
+  { text: 'No', id: 2 }];
   benchMarkRating :any;
 
   public conditionAtSales: ConditionAtsales[] = [ ];
-  public data: AnticipatedUseCodes[]=[];
+  public data: AnticipatedUseCodes[]=[]; 
+   
+  constructor(private dataService: DataService,private apiService: ApiService,private fb: FormBuilder) {
 
-  constructor(private dataService: DataService,private apiService: ApiService) {
-
-    //this.data = new Array<AnticipatedUseCodes>();
-  }
-  ngAfterViewInit() {
-    
-  }
-
+   
+  } 
+  get f() { return this.salesInfoForm.controls; }
 ngOnInit():void{
-  if (!this.salesInfoForm) {
-    this.salesInfoForm = new FormGroup({
-      'anticipatedUse': new FormControl('', Validators.required),
-      'details': new FormControl(null, Validators.required),
-      'supervisorApproved': new FormControl(null, Validators.required),
-      'ownerOccupied': new FormControl(null, Validators.required),
-      'brokerInvolved': new FormControl(null, Validators.required),
-      'buyerSellerRelationship': new FormControl(null, Validators.required),
-      'ifBuyerSellerRelationship': new FormControl(null, Validators.required),
-      'purchasePredatedBy': new FormControl(null, Validators.required),
-      'contractDate': new FormControl(null, Validators.required),
-      'conditionAtSales': new FormControl(null, Validators.required),
-    });
-  }
 
- 
+   this.salesInfoForm =new FormGroup({
+    anticipatedUse: new FormControl('', Validators.required),
+    details: new FormControl(null ),
+     supervisorApproved: new FormControl(null ),
+     ownerOccupied: new FormControl(null ),
+     brokerInvolved: new FormControl(null ),
+     buyerSellerRelationship: new FormControl(null ),
+     ifBuyerSellerRelationship: new FormControl(null ),
+     purchasePredatedBy: new FormControl(null),
+     contractDate: new FormControl(null),
+     conditionAtSales: new FormControl(null),
+  });
 
   this.getAnticipatedDropdownInfo();
-this.getConditionAtSaleDropdownInfo();
+    this.getConditionAtSaleDropdownInfo();
+
 
 }
-
-// onTabChange(event:any) {
-//   this.tabChange.emit(event.index);
-
-//   this.tabChange.emit();
-//   console.log('hit onSubmit');
-//   if (this.form.valid) {
-//     // Perform some action if the form is valid
-//     console.log(this.form.value);
-//   } else {
-//     // Display an error message if the form is invalid
-//     alert('Please fill in all required fields.');
-//   }
-// }
-
+  
+ 
 
 
 getAnticipatedDropdownInfo() {
   this.dataService.getAnticipatedCodes().subscribe((response) => {
-    this.data=response;    
+    this.data=response;   
     });
 }
 

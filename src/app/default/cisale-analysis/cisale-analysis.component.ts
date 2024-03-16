@@ -1,11 +1,11 @@
-import { Component,AfterViewInit,ViewChild,ViewContainerRef } from '@angular/core';
+import { Component,AfterViewInit,ViewChild,QueryList,Input,Output, EventEmitter } from '@angular/core';
 import { LogoBarComponent } from '../../Shared/logo-bar/logo-bar.component';
 import { ControlBarComponent } from '../../Shared/control-bar/control-bar.component';
 import { PropCharBarComponent } from '../../Shared/prop-char-bar/prop-char-bar.component';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SalesInfoTabComponent } from './sales-info-tab/sales-info-tab.component';
-import { TabAlignment } from "@progress/kendo-angular-layout";
+import { TabAlignment } from "@progress/kendo-angular-layout"; 
 
 @Component({
   selector: 'app-cisale-analysis',
@@ -22,22 +22,30 @@ import { TabAlignment } from "@progress/kendo-angular-layout";
   templateUrl: './cisale-analysis.component.html',
   styleUrl: './cisale-analysis.component.css',
 })
-export class CISaleAnalysisComponent  {
-  @ViewChild(SalesInfoTabComponent, { static: true }) salesInfoTabComponent!: SalesInfoTabComponent;
-  
-  selectedTabIndex: number = 0;
+export class CISaleAnalysisComponent implements AfterViewInit {
+  @ViewChild(SalesInfoTabComponent) salesInfoTabComponent!: SalesInfoTabComponent; 
+  @Output()  activeTabChange = new EventEmitter<string>();
   constructor() {
-    this.selectedTabIndex = 0;
-  }
-
+    
+  } 
   public alignment: TabAlignment = 'start';
+  ngAfterViewInit() {
+   
+  }
+  checkValidations() {
+    
+  }
   onTabChange(event: any) {
     console.log('hit ci sale tab');
     const tabTitle = event.title;
     console.log('tab title: '+tabTitle);
-    this.salesInfoTabComponent.validateAllFormFields();
-    console.log(event);
-
+    this.activeTabChange.emit(event.tab.text);
+    console.log(this.salesInfoTabComponent.salesInfoForm.valid);
+     if(!this.salesInfoTabComponent.salesInfoForm.valid)
+    {
+      event.preventDefault();
+    }
+     
     if (tabTitle === 'Sales Info') {
       // Handle Sales Info tab change
     } else if (tabTitle === 'Prop Characteristics') {

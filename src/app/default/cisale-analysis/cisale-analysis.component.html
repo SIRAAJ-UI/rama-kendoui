@@ -9,10 +9,10 @@
 </div>
 
 <div class="tab-container">
-  <kendo-tabstrip (tabSelect)="onTabChange($event)" style="margin-left: -13px; width: 1200px; height: 428px;font-size: 11px;">
+  <kendo-tabstrip #tabStrip (tabSelect)="onTabChange($event)" style="margin-left: -13px; width: 1200px; height: 428px;font-size: 11px;">
     <kendo-tabstrip-tab [title]="'Sales Info'" [selected]="true" >
       <ng-template kendoTabContent>
-        <app-sales-info-tab ></app-sales-info-tab>
+        <app-sales-info-tab #salesInfoTabComponent></app-sales-info-tab>
       </ng-template>
     </kendo-tabstrip-tab>
     <kendo-tabstrip-tab title="Prop Characteristics" height="5px">
