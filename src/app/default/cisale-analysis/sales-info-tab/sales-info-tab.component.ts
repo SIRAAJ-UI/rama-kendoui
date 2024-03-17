@@ -17,9 +17,6 @@ import { ApiService } from '@csa/@services/api.service';
 import { DataService } from '@csa/@services/data.service';
 import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service';
 
-
-
-
 @Component({
   selector: 'app-sales-info-tab',
   standalone: true,
