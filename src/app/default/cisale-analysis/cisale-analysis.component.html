@@ -2,7 +2,7 @@
   <app-logo-bar />
 </div>
 <div class="toolbar-container">
-  <app-control-bar />
+  <app-control-bar (saveClick)="onSaveEvent($event)" ></app-control-bar>
 </div>
 <div class="propchar-container">
   <app-prop-char-bar />

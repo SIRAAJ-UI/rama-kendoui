@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.dev';
 import { HttpParams } from '@angular/common/http';
+import { CISaleAnalysisComponent } from '../default/cisale-analysis/cisale-analysis.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,6 +26,11 @@ export class DataService {
     }
   getData(): Observable<any> {
     return this.http.get(`${this.baseCSAApi}/GetAnticipatedUseCodes`);
+  }
+
+  saveRecord(CISalesinfoModel: any): Observable<any> {
+    console.log(CISalesinfoModel);
+    return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
   }
 
   modReport() {

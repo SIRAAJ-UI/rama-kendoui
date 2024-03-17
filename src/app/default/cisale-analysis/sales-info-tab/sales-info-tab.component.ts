@@ -10,6 +10,7 @@ import { DataService } from '../../../Services/data.service';
 import { ApiService } from '../../../Services/api.service'
 import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CSASalesInfoService } from '../../../Services/CSASalesinfo.service';
 
 export class AnticipatedUseCodes{
   anticipateD_USE_CD: any;
@@ -49,29 +50,33 @@ export class SalesInfoTabComponent  {
   public conditionAtSales: ConditionAtsales[] = [ ];
   public data: AnticipatedUseCodes[]=[]; 
    
-  constructor(private dataService: DataService,private apiService: ApiService,private fb: FormBuilder) {
+  constructor(private dataService: DataService,private csaSalesInfoService: CSASalesInfoService, private apiService: ApiService,private fb: FormBuilder) {
 
+    this.salesInfoForm =new FormGroup({
+      anticipatedUse: new FormControl('', Validators.required),
+      details: new FormControl(null ),
+       supervisorApproved: new FormControl(null ),
+       ownerOccupied: new FormControl(null ),
+       brokerInvolved: new FormControl(null ),
+       buyerSellerRelationship: new FormControl(null ),
+       ifBuyerSellerRelationship: new FormControl(null ),
+       purchasePredatedBy: new FormControl(null),
+       contractDate: new FormControl(null),
+       conditionAtSales: new FormControl(null),
+    });
+    this.csaSalesInfoService.intializeFormObject(this.salesInfoForm)
    
   } 
   get f() { return this.salesInfoForm.controls; }
-ngOnInit():void{
-
-   this.salesInfoForm =new FormGroup({
-    anticipatedUse: new FormControl('', Validators.required),
-    details: new FormControl(null ),
-     supervisorApproved: new FormControl(null ),
-     ownerOccupied: new FormControl(null ),
-     brokerInvolved: new FormControl(null ),
-     buyerSellerRelationship: new FormControl(null ),
-     ifBuyerSellerRelationship: new FormControl(null ),
-     purchasePredatedBy: new FormControl(null),
-     contractDate: new FormControl(null),
-     conditionAtSales: new FormControl(null),
-  });
+ngOnInit():void{  
 
   this.getAnticipatedDropdownInfo();
-    this.getConditionAtSaleDropdownInfo();
+  this.getConditionAtSaleDropdownInfo();
 
+
+}
+saveSalesInfo()
+{
 
 }
   

@@ -6,6 +6,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SalesInfoTabComponent } from './sales-info-tab/sales-info-tab.component';
 import { TabAlignment } from "@progress/kendo-angular-layout"; 
+import { CSASalesInfoService } from '../../Services/CSASalesinfo.service';
 
 @Component({
   selector: 'app-cisale-analysis',
@@ -25,19 +26,30 @@ import { TabAlignment } from "@progress/kendo-angular-layout";
 export class CISaleAnalysisComponent implements AfterViewInit {
   @ViewChild(SalesInfoTabComponent) salesInfoTabComponent!: SalesInfoTabComponent; 
   @Output()  activeTabChange = new EventEmitter<string>();
-  constructor() {
+  public activeTab: string = "Sales Info";
+  constructor(private CsaSalesInfoService: CSASalesInfoService) {
     
   } 
   public alignment: TabAlignment = 'start';
   ngAfterViewInit() {
    
   }
+  onSaveEvent(event: any) {
+    console.log(this.activeTab)
+    if(this.activeTab === "Sales Info"){
+      // if(this.salesInfoTabComponent.salesInfoForm.valid){
+          this.CsaSalesInfoService.onSave();
+      //}
+    }
+  };
+
   checkValidations() {
     
   }
   onTabChange(event: any) {
     console.log('hit ci sale tab');
     const tabTitle = event.title;
+    this.activeTab = event.title;
     console.log('tab title: '+tabTitle);
     this.activeTabChange.emit(event.tab.text);
     console.log(this.salesInfoTabComponent.salesInfoForm.valid);
@@ -55,7 +67,9 @@ export class CISaleAnalysisComponent implements AfterViewInit {
     }
     
 
-}
+  }
+
+
 
 
 }
