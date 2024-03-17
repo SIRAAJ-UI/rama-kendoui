@@ -1,16 +1,16 @@
 import { Component, AfterViewInit, ViewChild, QueryList, Input, Output, EventEmitter } from '@angular/core';
-import { LogoBarComponent } from '../../Shared/logo-bar/logo-bar.component';
-import { ControlBarComponent } from '../../Shared/control-bar/control-bar.component';
-import { PropCharBarComponent } from '../../Shared/prop-char-bar/prop-char-bar.component';
-import { LayoutModule, SelectEvent } from '@progress/kendo-angular-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SalesInfoTabComponent } from './sales-info-tab/sales-info-tab.component';
-import { TabAlignment } from "@progress/kendo-angular-layout";
 
-import { MENU_NAMES } from '../../core/constants/constants';
-import { CSASalesInfoService } from '../../Services/CSASalesInfo.service';
+import { LayoutModule, SelectEvent } from '@progress/kendo-angular-layout';
+import { TabAlignment } from "@progress/kendo-angular-layout";
 import { DialogCloseResult,DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 
+import { SalesInfoTabComponent } from '@csa/@components/cisale-analysis/sales-info-tab/sales-info-tab.component'
+import { LogoBarComponent } from '@csa/@shared/logo-bar/logo-bar.component';
+import { ControlBarComponent } from '@csa/@shared/control-bar/control-bar.component';
+import { PropCharBarComponent } from '@csa/@shared/prop-char-bar/prop-char-bar.component';
+import { MENU_NAMES } from '@csa/@core/constants/constants';
+import { CSASalesInfoService } from '@csa/@services/CSASalesinfo.service';
 
 @Component({
   selector: 'app-cisale-analysis',
@@ -58,10 +58,17 @@ export class CISaleAnalysisComponent  {
     setTimeout(() => {
       this.tabStrip.selectTab(tabFilters.index);
     },1);
+    this.validationCheck();
+  };
+
+  private validationCheck(){
     const validationErrors = this.csaSalesInfoService.salesInfoFormValidation();
     console.log(validationErrors);
-    // console.log(validationErrors);
-    // const dialog:DialogRef  = this.dialogService.open({
+    if(validationErrors?.length === 0){
+      this.csaSalesInfoService.saveCSASalesForm();
+    } else {
+      alert("Error in the forms")
+// const dialog:DialogRef  = this.dialogService.open({
     //   title: "Please confirm",
     //   content: "Are you sure?",
     //   actions: [
@@ -76,14 +83,7 @@ export class CISaleAnalysisComponent  {
     //     console.log("action", result);
     //   }
     // });
-    
-    // console.log(event.index);
-    // this.activeTab = event.title;
-    // this.tabStrip.selectTab(0)
-    //
-    // if(this.csaSalesInfoService.CSASalesForm.valid){
-    //     this.onSave();
-    // }
+    }
   };
 
   onTabClose(event: any){
@@ -94,6 +94,7 @@ export class CISaleAnalysisComponent  {
     switch (this.activeTab) {
       case MENU_NAMES.SALES_INFO:
         console.log("Sales Info:")
+        this.validationCheck();
         break;
       case MENU_NAMES.PROP_CHAR:
         console.log("Prop Characteristics:")

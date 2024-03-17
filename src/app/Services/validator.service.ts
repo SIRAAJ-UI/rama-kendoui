@@ -9,7 +9,7 @@ export class ValidatorService {
 
     constructor() { }
 
-    validateMaxLength(controlName: string, maxLength: number): ValidatorFn {
+    validateMaxLength(maxLength: number): ValidatorFn {
         return (control: AbstractControl): any => {
             if (Validators.required(control)) {
 
@@ -59,7 +59,8 @@ export class ValidatorService {
         const validationErrors: string[] = [];
         Object.keys(form).forEach((controlName: string) => {
             const control: AbstractControl = form[controlName];
-            if(control && control.invalid && (control.dirty || control.touched)) {
+            // && (control.dirty || control.touched)
+            if(control && control.invalid ) {
                 Object.keys(control.errors).forEach((errorName: string) => {
                     console.log(control.errors[errorName].message)
                     if(!control.errors[errorName].message){
@@ -67,7 +68,6 @@ export class ValidatorService {
                     } else {
                         validationErrors.push(control.errors[errorName].message)
                     }
-                    
                 })
             }
         });

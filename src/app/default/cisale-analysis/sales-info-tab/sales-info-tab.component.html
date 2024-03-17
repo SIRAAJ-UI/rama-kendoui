@@ -3,40 +3,50 @@
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">Anticipated Use:</label>
-        <kendo-dropdownlist class="col-6 text-label" [data]="anticipatedUse" formControlName="anticipatedUse" 
-        [textField]="'usE_NAME'" [valueField]="'anticipateD_USE_CD'"  [valuePrimitive]="true"  isRequired="true"></kendo-dropdownlist>
+        <kendo-dropdownlist class="col-6 text-label" [data]="anticipatedUse" formControlName="ANTICIPATED_USE_CD" 
+        [textField]="'usE_NAME'" [valueField]="'anticipateD_USE_CD'" [valuePrimitive]="true"></kendo-dropdownlist>
       </div>
       <div class="flex-item">
         <label class="form-label">Benchmark Rating:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="benchmarkRatings"></kendo-textbox>
+        <kendo-textbox class="col-6 text-label" formControlName="BENCHMARK_RATE_CD"></kendo-textbox>
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">Details:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="details"></kendo-textbox>
+        <kendo-textbox class="col-6 text-label" formControlName="PROP_USE_DETL"></kendo-textbox>
       </div>
 
       <div class="flex-item">
         <label class="form-label" >Supervisor Approved:</label>
-        <label class="col-6 ">Yes</label>
+        <kendo-dropdownlist
+        formControlName="SUPRV_APPROVED_FL"
+        class="col-6 text-label"
+        [data]="brokerInvolved"
+        [textField]="'text'"
+        [valueField]="'id'"
+        [valuePrimitive]="true"
+        style="width: 70px" 
+      ></kendo-dropdownlist>
+
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">% Owner Occupied:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="ownerOccupied"></kendo-textbox>
+        <kendo-textbox class="col-6 text-label" formControlName="PCT_OWNER_OCCUP"></kendo-textbox>
       </div>
 
       <div class="flex-item">
         <label class="form-label">Broker Involved:</label>
         <kendo-dropdownlist
+          formControlName="BROKER_INVOLVED_FL"
           class="col-6 text-label"
           [data]="brokerInvolved"
           [textField]="'text'"
           [valueField]="'id'"
-          style="width: 70px" formControlName="brokerInvolved"
-
+          [valuePrimitive]="true"
+          style="width: 70px" 
         ></kendo-dropdownlist>
       </div>
     </div>
@@ -45,15 +55,17 @@
         <label class="form-label">Buyer/Seller Relationship:</label>
         <kendo-dropdownlist
           class="col-6 text-label"
+          formControlName="BUY_SELL_REL_FL"
           [data]="brokerInvolved"
           [textField]="'text'"
-          [valueField]="'id'" formControlName="buyerSellerRelationship"
+          [valueField]="'id'" 
+          [valuePrimitive]="true"
         ></kendo-dropdownlist>
       </div>
 
       <div class="flex-item">
         <label class="form-label">If so, specify:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="ifBuyerSellerRelationship"></kendo-textbox>
+        <kendo-textbox class="col-6 text-label" formControlName="BUY_SELL_REL_DESC"></kendo-textbox>
       </div>
     </div>
     <div class="flex-row">
@@ -63,7 +75,7 @@
           <input 
             type="checkbox"
             id="purchasePredatedBy"
-            formControlName="purchasePredatedBy"
+            formControlName="PUR_PREDATE_BY_OPT"
             kendoCheckBox
             style="border: 1px black solid"
           />
@@ -73,7 +85,7 @@
           <input
             type="checkbox"
             id="terms"
-            formControlName="purchasePredatedBy"
+            formControlName="PUR_PREDATE_BY_OPT"
             kendoCheckBox
             style="border: 1px black solid"
           />
@@ -86,7 +98,7 @@
         <label class="form-label">Contract Date:</label>
         <kendo-datepicker
           class="col-6 text-label"
-          placeholder="Choose a date ..." formControlName="contractDate"
+          placeholder="Choose a date ..." formControlName="PREDATE_CONT_DATE"
         ></kendo-datepicker>
       </div>
 
@@ -94,9 +106,11 @@
         <label class="form-label">Condition at sales:</label>
         <kendo-dropdownlist
           class="col-6 text-label"
-          [data]="conditionAtSales" formControlName="conditionAtSales"
+          formControlName="COND_AT_SALE_CD"
+          [data]="conditionAtSales" 
           [textField]="'cD_LONG_NAME'"
           [valueField]="'cD_ID'"
+          [valuePrimitive]="true"
         ></kendo-dropdownlist>
       </div>
 

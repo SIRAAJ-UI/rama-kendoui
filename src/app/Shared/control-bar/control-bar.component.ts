@@ -1,13 +1,11 @@
 import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { InputsModule, TextBoxModule } from '@progress/kendo-angular-inputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-import { FormsModule } from '@angular/forms';
 import { IconThemeColor, IconsModule } from '@progress/kendo-angular-icons';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { LabelModule } from '@progress/kendo-angular-label';
-import { SalesInfoTabComponent } from '../../../app/default/cisale-analysis/sales-info-tab/sales-info-tab.component';
+import { SalesInfoTabComponent } from '@csa/@components/cisale-analysis/sales-info-tab/sales-info-tab.component';
 
 @Component({
   selector: 'app-control-bar',

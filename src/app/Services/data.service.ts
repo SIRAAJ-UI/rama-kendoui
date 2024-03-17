@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment.dev';
 import { HttpParams } from '@angular/common/http';
-import { AnticipatedUseCodes, ConditionAtsales } from '../core/interfaces/csasalesinfo.interface';
 import * as Model from '../core/models/csasalesinfo.model';
+import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class DataService {
   getAnticipatedCodes(): Observable<any> {
     if(environment.withoutAPI){
       const anticipatedUse = [];
-      let anticipdateRecord:AnticipatedUseCodes;
+      let anticipdateRecord:Interfaces.AnticipatedUseCodes;
       for(let i=0;i<5;i++){
         anticipdateRecord = new Model.AnticipatedUseCodes();
         anticipdateRecord.anticipateD_USE_CD = i;
@@ -36,7 +36,7 @@ export class DataService {
   getConditionAtSale(FieldId: number): Observable<any> {
     if(environment.withoutAPI){
       const conditionAtSaleRecords = [];
-      let conditionAtSales:ConditionAtsales;
+      let conditionAtSales:Interfaces.ConditionAtsales;
       for(let i=0;i<5;i++){
         conditionAtSales = new Model.ConditionAtsales();
         conditionAtSales.cD_ID = `${i}`;
@@ -51,8 +51,7 @@ export class DataService {
     return this.http.get(`${this.baseCSAApi}/GetAnticipatedUseCodes`);
   }
 
-  saveRecord(CISalesinfoModel: any): Observable<any> {
-    console.log(CISalesinfoModel);
+  saveRecord(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> {
     return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
   }
 

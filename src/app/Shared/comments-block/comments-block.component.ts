@@ -6,11 +6,12 @@ import { GridModule, GridSize } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
-import { CSASalesInfoService } from '../../Services/CSASalesInfo.service';
-import * as Model from '../../core/models/csasalesinfo.model';
-import * as Interfaces from '../../core/interfaces/csasalesinfo.interface';
+
+import * as Model from '@csa/@core/models/csasalesinfo.model';
+import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CSASalesInfoService } from '@csa/@services/CSASalesinfo.service';
 
 @Component({
   selector: 'app-comments-block',
