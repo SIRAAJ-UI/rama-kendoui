@@ -14,8 +14,10 @@ import * as Model from '@csa/@core/models/csasalesinfo.model';
 import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 
 import { ApiService } from '@csa/@services/api.service';
-import { CSASalesInfoService } from '@csa/@services/CSASalesinfo.service';
 import { DataService } from '@csa/@services/data.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service';
+
+
 
 
 @Component({
@@ -48,7 +50,7 @@ export class SalesInfoTabComponent {
   public conditionAtSales: ConditionAtsales[] = [];
   public anticipatedUse: AnticipatedUseCodes[] = [];
 
-  constructor(private dataService: DataService, private csaSalesInfoService: CSASalesInfoService, private apiService: ApiService, private fb: FormBuilder) {
+  constructor(private dataService: DataService, private csaSalesInfoService: CsaSalesInfoService, private apiService: ApiService, private fb: FormBuilder) {
     this.salesInfoForm = this.csaSalesInfoService.salesInfoForm;
   }
 

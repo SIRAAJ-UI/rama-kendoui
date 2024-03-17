@@ -11,7 +11,7 @@ import { Observable, Subject, of } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class CSASalesInfoService {
+export class CsaSalesInfoService {
 
     public salesInfoForm: any;
     public csaId: number;

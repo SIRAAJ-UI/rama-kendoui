@@ -10,7 +10,7 @@ import { LogoBarComponent } from '@csa/@shared/logo-bar/logo-bar.component';
 import { ControlBarComponent } from '@csa/@shared/control-bar/control-bar.component';
 import { PropCharBarComponent } from '@csa/@shared/prop-char-bar/prop-char-bar.component';
 import { MENU_NAMES } from '@csa/@core/constants/constants';
-import { CSASalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service'
 
 @Component({
   selector: 'app-cisale-analysis',
@@ -37,7 +37,7 @@ export class CISaleAnalysisComponent  {
   public tabs:Array<any> = [];
   public alignment: TabAlignment = 'start';
 
-  constructor(private csaSalesInfoService: CSASalesInfoService, private dialogService: DialogService ) {
+  constructor(private csaSalesInfoService: CsaSalesInfoService, private dialogService: DialogService ) {
 
   }
   ngOnInit() {

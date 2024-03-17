@@ -11,7 +11,7 @@ import * as Model from '@csa/@core/models/csasalesinfo.model';
 import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CSASalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service';
 
 @Component({
   selector: 'app-comments-block',
@@ -33,7 +33,7 @@ export class CommentsBlockComponent {
   public smallSize: GridSize = 'small';
   @ViewChild('commentsArea') commentsArea: any;
   public dialogThemeColor: DialogThemeColor = 'primary';
-  constructor(private csaSalesInfoService: CSASalesInfoService ) { }
+  constructor(private csaSalesInfoService: CsaSalesInfoService ) { }
   public gridCommentsData: Array<Model.Comments> = [];
   public commentTitle: string = "";
   public btnLabel: string = "Save";
