@@ -51,6 +51,11 @@ export class DataService {
     return this.http.get(`${this.baseCSAApi}/GetAnticipatedUseCodes`);
   }
 
+  saveRecord(CISalesinfoModel: any): Observable<any> {
+    console.log(CISalesinfoModel);
+    return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
+  }
+
   modReport() {
     // TODO: Use power bi api to mod built report from Visual Studio
   }
