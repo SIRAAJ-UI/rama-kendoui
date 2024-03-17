@@ -23,6 +23,10 @@ export interface BuyerSellerRelationship {
     text: string;
 }
 
+export interface BenchMarkData {
+    id: number;
+    text: string;
+}
 
 export interface CISalesinfo {
     ANTICIPATED_USE_CD: number;

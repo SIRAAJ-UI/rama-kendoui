@@ -42,6 +42,11 @@ export class SalesInfoTabComponent {
   public buyerSellerRelationship: Array<Interfaces.BuyerSellerRelationship> = [
     { id: 1, text: 'Yes' },
     { id: 2, text: 'No' }];
+
+  public benchMarkData: Array<Interfaces.BenchMarkData> = [
+    { id: 1, text: "Income and Analaysis" },
+    { id: 2, text: "Value Ind tab" }
+  ]
   public benchMarkRating: any;
 
   public conditionAtSales: ConditionAtsales[] = [];

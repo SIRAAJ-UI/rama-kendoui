@@ -24,17 +24,18 @@ export class CsaSalesInfoService {
 
     initializeCSASalesForm() {
         this.salesInfoForm = new FormGroup({
-            ANTICIPATED_USE_CD: new FormControl('', [Validators.required]),
-            PROP_USE_DETL: new FormControl(null, [Validators.required, this.validatorService.validateMaxLength(20)]),
-            SUPRV_APPROVED_FL: new FormControl(null),
-            BENCHMARK_RATE_CD: new FormControl('', [Validators.required]),
-            PCT_OWNER_OCCUP: new FormControl('', [Validators.required, this.validatorService.validateMaxLength(20)]),
-            BROKER_INVOLVED_FL: new FormControl(null, [Validators.required]),
-            BUY_SELL_REL_FL: new FormControl(null, [Validators.required]),
-            BUY_SELL_REL_DESC: new FormControl(null, [Validators.required, this.validatorService.validateMaxLength(10)]),
-            PUR_PREDATE_BY_OPT: new FormControl(null, [Validators.required]),
+            
+            ANTICIPATED_USE_CD: new FormControl('', [Validators.required,this.validatorService.validateMaxLength(50)]),
+            PROP_USE_DETL: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
+            PCT_OWNER_OCCUP: new FormControl('', [this.validatorService.validateMaxLength(3)]),
+            BROKER_INVOLVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
+            BUY_SELL_REL_FL: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
+            BUY_SELL_REL_DESC: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
+            PUR_PREDATE_BY_OPT: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             PREDATE_CONT_DATE: new FormControl(null, [Validators.required]),
-            COND_AT_SALE_CD: new FormControl(null, [Validators.required]),
+            COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
+            SUPRV_APPROVED_FL: new FormControl(null,[this.validatorService.validateMaxLength(10)]),
+            BENCHMARK_RATE_CD: new FormControl('ABC', [this.validatorService.validateMaxLength(1)]),
         });
     };
 

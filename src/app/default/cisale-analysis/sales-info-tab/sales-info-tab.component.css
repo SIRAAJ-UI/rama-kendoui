@@ -32,10 +32,6 @@
     font-family: Arial, Verdana;
 }
 
-.wrap {
-    display: flex;
-    align-items: center;
-}
 
 .k-dropdownlist {
     height: 25px;
@@ -75,5 +71,9 @@
 }
 
 label {
+    margin-right: 10px;
+}
+
+.mr-2 {
     margin-right: 10px;
 }

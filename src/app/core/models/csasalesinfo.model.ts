@@ -24,6 +24,11 @@ export class BuyerSellerRelationship implements Interfaces.BuyerSellerRelationsh
     text: string;
 };
 
+export class BenchMarkData implements Interfaces.BenchMarkData {
+    id: number;
+    text: string;
+}
+
 export class CISalesinfo implements Interfaces.CISalesinfo{
     ANTICIPATED_USE_CD: number;
     PROP_USE_DETL: string;

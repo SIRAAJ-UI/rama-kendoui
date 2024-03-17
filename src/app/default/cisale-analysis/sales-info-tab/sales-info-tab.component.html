@@ -8,7 +8,7 @@
       </div>
       <div class="flex-item">
         <label class="form-label">Benchmark Rating:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="BENCHMARK_RATE_CD"></kendo-textbox>
+        <kendo-textbox class="col-6 text-label"  [readonly]="true" formControlName="BENCHMARK_RATE_CD"></kendo-textbox>
       </div>
     </div>
     <div class="flex-row">
@@ -34,7 +34,13 @@
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">% Owner Occupied:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="PCT_OWNER_OCCUP"></kendo-textbox>
+        <kendo-numerictextbox
+          [step]="1"
+          [max]="100"
+          [min]="0"
+          style="width: 70px" 
+          formControlName="PCT_OWNER_OCCUP"
+        ></kendo-numerictextbox>
       </div>
 
       <div class="flex-item">
@@ -71,25 +77,20 @@
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">Purchase Predated By:</label>
-        <div class="col-4 wrap">
-          <input 
-            type="checkbox"
-            id="purchasePredatedBy"
-            formControlName="PUR_PREDATE_BY_OPT"
-            kendoCheckBox
-            style="border: 1px black solid"
-          />
-          <label class="text-label-checkbox" for="purchasePredatedBy">Option</label>
+        <div class="col-4 mr-2">
+            <input type="checkbox" #purPredateByOpt formControlName="PUR_PREDATE_BY_OPT" kendoCheckBox />
+            <kendo-label
+            class="k-checkbox-label"
+            [for]="purPredateByOpt"
+            text="Option"></kendo-label>
         </div>
-        <div class="col-4 wrap">
-          <input
-            type="checkbox"
-            id="terms"
-            formControlName="PUR_PREDATE_BY_OPT"
-            kendoCheckBox
-            style="border: 1px black solid"
-          />
-          <label class="text-label-checkbox" id="terms">Contract of Sale</label>
+        <div class="col-4 ">
+          <input type="checkbox" formControlName="COND_AT_SALE_CD" #cond_at_sale kendoCheckBox />
+          <kendo-label
+            class="k-checkbox-label"
+            [for]="cond_at_sale"
+            text="Contract of Sale"
+          ></kendo-label>
         </div>
       </div>
     </div>

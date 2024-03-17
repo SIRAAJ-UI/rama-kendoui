@@ -35,7 +35,6 @@ export class ValidatorService {
     validateExactLength(exactLength: number): ValidatorFn {
         return (control: AbstractControl): any => {
             if (Validators.required(control)) {
-
                 // If the control is required and empty, don't perform maxLength valiation
                 return null;
             }
@@ -54,7 +53,8 @@ export class ValidatorService {
             return null; // validation passed
         }
     }
-
+    
+  
     validateForm(form: { [key: string]: AbstractControl}): any[] {
         const validationErrors: string[] = [];
         Object.keys(form).forEach((controlName: string) => {
@@ -64,7 +64,7 @@ export class ValidatorService {
                 Object.keys(control.errors).forEach((errorName: string) => {
                     console.log(control.errors[errorName].message)
                     if(!control.errors[errorName].message){
-                        validationErrors.push("Required Field")
+                        // validationErrors.push("Required Field")
                     } else {
                         validationErrors.push(control.errors[errorName].message)
                     }
