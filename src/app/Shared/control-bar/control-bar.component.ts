@@ -1,4 +1,4 @@
-import { Component,ViewChild,Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputsModule, TextBoxModule } from '@progress/kendo-angular-inputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
@@ -27,8 +27,8 @@ import { SalesInfoTabComponent } from '../../../app/default/cisale-analysis/sale
 })
 export class ControlBarComponent {
   @ViewChild(SalesInfoTabComponent) salesInfoTabComponent!: SalesInfoTabComponent;
-  @Output() saveClick: EventEmitter<string> = new EventEmitter<string>();
- 
+  @Output() onSaveCommand: EventEmitter<string> = new EventEmitter<string>();
+
   public statusColor: IconThemeColor = 'success';
   public genders: Array<{ text: string; value: number }> = [
     { text: 'Male', value: 1 },
@@ -48,10 +48,9 @@ export class ControlBarComponent {
       btn.isSelected = false;
     });
     selectedButton.isSelected = true;
-    console.log('button name: '+ selectedButton.text);
-    if(selectedButton.text == "Save")
-    {
-      this.saveClick.emit('Data from child');
+    console.log('button name: ' + selectedButton.text);
+    if (selectedButton.text == "Save") {
+      this.onSaveCommand.emit('Save');
     }
   }
 

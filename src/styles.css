@@ -98,3 +98,11 @@ kendo-dialog-titlebar{
   /* border-color: rgb(101, 97, 97); */
   background-color: rgb(101, 97, 97);
 }
+
+.k-input-solid{
+  border-color:#5e636b;
+}
+
+/* input.ng-invalid.ng-touched {
+  border: red 1px solid;
+} */

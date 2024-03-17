@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, AfterViewInit,ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit, ViewChild } from '@angular/core';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
@@ -8,17 +8,16 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { CommentsBlockComponent } from '../../../Shared/comments-block/comments-block.component';
 import { DataService } from '../../../Services/data.service';
 import { ApiService } from '../../../Services/api.service'
-import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CSASalesInfoService } from '../../../Services/CSASalesInfo.service';
+import { AnticipatedUseCodes, ConditionAtsales } from '../../../core/interfaces/csasalesinfo.interface';
+import * as Model from '../../../core/models/csasalesinfo.model';
+import * as Interfaces from '../../../core/interfaces/csasalesinfo.interface';
 
-export class AnticipatedUseCodes{
-  anticipateD_USE_CD: any;
-  usE_NAME:any;
-}
-export class ConditionAtsales{
-  cD_ID:any;
-  cD_LONG_NAME:any;
-}
+
+
+
 @Component({
   selector: 'app-sales-info-tab',
   standalone: true,
@@ -34,77 +33,43 @@ export class ConditionAtsales{
   templateUrl: './sales-info-tab.component.html',
   styleUrl: './sales-info-tab.component.css',
 })
-export class SalesInfoTabComponent  {
-  @Input() salesInfoForm!: FormGroup; 
-  submitted = false;
-  
- // public form: FormGroup = new FormGroup({});
+export class SalesInfoTabComponent {
+  public salesInfoForm!: FormGroup;
+  public submitted = false;
   public events: string[] = [];
-  public brokerInvolved: Array<{ text: string, id: number }> = [ { text: 'Yes', id: 1 },
-  { text: 'No', id: 2 }];
-  public buyerSellerRelationship:Array<{ text: string, id: number }> = [ { text: 'Yes', id: 1 },
-  { text: 'No', id: 2 }];
-  benchMarkRating :any;
+  public brokerInvolved: Array<Interfaces.BrokerInvolved> = [
+    { id: 1, text: 'Yes' },
+    { id: 2 ,text: 'No' }]
+  public buyerSellerRelationship: Array<Interfaces.BuyerSellerRelationship> = [
+    { id: 1,text: 'Yes'},
+    {  id: 2,text: 'No'}];
+  public benchMarkRating: any;
 
-  public conditionAtSales: ConditionAtsales[] = [ ];
-  public data: AnticipatedUseCodes[]=[]; 
-   
-  constructor(private dataService: DataService,private apiService: ApiService,private fb: FormBuilder) {
+  public conditionAtSales: ConditionAtsales[] = [];
+  public anticipatedUse: AnticipatedUseCodes[] = [];
 
-   
-  } 
-  get f() { return this.salesInfoForm.controls; }
-ngOnInit():void{
+  constructor(private dataService: DataService, private csaSalesInfoService: CSASalesInfoService, private apiService: ApiService, private fb: FormBuilder) {
+    this.salesInfoForm = this.csaSalesInfoService.salesInfoForm;
+  }
 
-   this.salesInfoForm =new FormGroup({
-    anticipatedUse: new FormControl('', Validators.required),
-    details: new FormControl(null ),
-     supervisorApproved: new FormControl(null ),
-     ownerOccupied: new FormControl(null ),
-     brokerInvolved: new FormControl(null ),
-     buyerSellerRelationship: new FormControl(null ),
-     ifBuyerSellerRelationship: new FormControl(null ),
-     purchasePredatedBy: new FormControl(null),
-     contractDate: new FormControl(null),
-     conditionAtSales: new FormControl(null),
-  });
-
-  this.getAnticipatedDropdownInfo();
+  ngOnInit(): void {
+    this.getAnticipatedDropdownInfo();
     this.getConditionAtSaleDropdownInfo();
-
-
-}
-  
- 
-
-
-getAnticipatedDropdownInfo() {
-  this.dataService.getAnticipatedCodes().subscribe((response) => {
-    this.data=response;   
-    });
-}
-
-getConditionAtSaleDropdownInfo() {
-  this.dataService.getConditionAtSale(120).subscribe((response) => { 
-    this.conditionAtSales=response;     
-    });
-  
-}
-
-
-  public valueChange(value: any): void {
-    this.log('valueChange', value);
   }
 
-  public selectionChange(value: any): void {
-    this.log('selectionChange', value);
+  getAnticipatedDropdownInfo() {
+    this.dataService.getAnticipatedCodes().subscribe((anticipdateUse: Array<Model.AnticipatedUseCodes>) => {
+      this.anticipatedUse = anticipdateUse;
+    });
   }
 
-  public filterChange(filter: any): void {
-    this.log('filterChange', filter);
-    // this.data = this.source.filter(
-    //   (s) => s.toLowerCase().indexOf(filter.toLowerCase()) !== -1
-    // );
+  getConditionAtSaleDropdownInfo() {
+    this.dataService.getConditionAtSale(120).subscribe((response) => {
+      this.conditionAtSales = response;
+    });
+  }
+
+  ngOnDestroy() {
   }
 
   public open(): void {
@@ -134,5 +99,5 @@ getConditionAtSaleDropdownInfo() {
   private log(event: string, arg?: any): void {
     this.events.unshift(`${event} ${arg || ''}`);
   }
-  public btnComment_Click(): void {}
+  public btnComment_Click(): void { }
 }

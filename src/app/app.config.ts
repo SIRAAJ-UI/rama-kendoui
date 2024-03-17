@@ -7,11 +7,11 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './Services/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), 
-              provideHttpClient(withInterceptors([authInterceptor])),
-              Location, 
-              {provide: LocationStrategy, useClass: HashLocationStrategy},
-              importProvidersFrom(BrowserAnimationsModule)
-              
+  providers: [provideRouter(routes),
+  provideHttpClient(withInterceptors([authInterceptor])),
+    Location,
+  { provide: LocationStrategy, useClass: HashLocationStrategy },
+  importProvidersFrom(BrowserAnimationsModule)
+
   ]
 };

@@ -1,71 +1,43 @@
-<!-- <div class="grid-top">
-  <button class="add-button"  (click)="open()">Comments +</button>
-</div> -->
-<kendo-grid
-  [data]="gridData"
-  scrollable="virtual"
-  [pageSize]="3"
-  [style.maxHeight.px]="150"
-  style="width: 865px;"
-  [size]="smallSize"
->
- <ng-template kendoGridToolbarTemplate >
+<kendo-grid [data]="gridCommentsData" scrollable="virtual" [pageSize]="3" [style.maxHeight.px]="150"
+  style="width: 865px;" [size]="smallSize">
+  <ng-template kendoGridToolbarTemplate>
+    <button kendoButton (click)="addNewComments()" style="background-color: transparent;border: none;">
+      <b>Comments +</b>
+    </button>
 
-    <b  role="button" (click)="open()">Comments +</b>
-   
   </ng-template>
-  <kendo-grid-column [width]="30">
-    <ng-template kendoGridCellTemplate let-isNew="isNew">
-      <svg
-        (click)="open()"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-pencil"
-        viewBox="0 0 16 16"
-      >
-        <path
-          fill="black"
-          d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"
-        />
-      </svg>
+  <kendo-grid-column [width]="40">
+    <ng-template kendoGridCellTemplate let-dataItem let-isNew="isNew">
+      <button kendoButton (click)="onEdit(dataItem)" style="background-color: transparent;border: none;">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-pencil" viewBox="0 0 16 16">
+        <path fill="black"
+          d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+        </svg>
+      </button>
+      
     </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column
-    field="comments"
-    title="Comments"
-    [style]="{ 'font-size': '12px' }"
-  >
+  <kendo-grid-column field="comm_Text" title="Comments" [style]="{ 'font-size': '12px' }">
   </kendo-grid-column>
 </kendo-grid>
 
-<kendo-dialog
-  title="Add Comments"
-  *ngIf="opened"
-  [minWidth]="250"
-  [width]="450"
-  (close)="close()"
->
-  <form>
+<kendo-dialog [title]="commentTitle" *ngIf="opened" [minWidth]="250" [width]="450" (close)="close()">
+  <form [formGroup]="commentsForm">
     <div class="form-group row">
       <div class="col-sm-12">
         <kendo-label text="*Comment :">
-          <kendo-textarea
-            placeholder="Enter the comments..."
-            [rows]="5"
-            resizable="vertical"
-          ></kendo-textarea>
+          <kendo-textarea formControlName="comm_Text" placeholder="Enter the comments..." [rows]="5"
+            resizable="vertical"></kendo-textarea>
         </kendo-label>
+        <span [style.color]="'red'"
+          *ngIf="commentsForm.get('comm_Text').invalid && (commentsForm.get('comm_Text').dirty || commentsForm.get('comm_Text').touched)">Please
+          enter the comments.</span>
       </div>
     </div>
   </form>
   <kendo-dialog-actions>
-    <kendo-button size="small" themeColor="primary" (click)="close()"
-      >Save</kendo-button
-    >
-    <kendo-button size="small" themeColor="primary" (click)="close()"
-      >Cancel</kendo-button
-    >
+    <kendo-button size="small" themeColor="primary" [disabled]="commentsForm.get('comm_Text').invalid && (commentsForm.get('comm_Text').dirty || commentsForm.get('comm_Text').touched)" (click)="onSaveUpdate()">{{btnLabel}}</kendo-button>
+    <kendo-button size="small" themeColor="primary" (click)="close()">Cancel</kendo-button>
   </kendo-dialog-actions>
 </kendo-dialog>

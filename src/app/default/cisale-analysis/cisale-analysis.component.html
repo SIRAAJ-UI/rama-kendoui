@@ -1,15 +1,16 @@
+<div kendoDialogContainer></div>
+
 <div class="logo-container">
   <app-logo-bar />
 </div>
 <div class="toolbar-container">
-  <app-control-bar />
+  <app-control-bar (onSaveCommand)="onSave($event)"></app-control-bar>
 </div>
 <div class="propchar-container">
   <app-prop-char-bar />
 </div>
-
 <div class="tab-container">
-  <kendo-tabstrip #tabStrip (tabSelect)="onTabChange($event)" style="margin-left: -13px; width: 1200px; height: 428px;font-size: 11px;">
+  <kendo-tabstrip #tabStrip (tabSelect)="onTabSelect($event)" style="margin-left: -13px; width: 1200px; height: 428px;font-size: 11px;">
     <kendo-tabstrip-tab [title]="'Sales Info'" [selected]="true" >
       <ng-template kendoTabContent>
         <app-sales-info-tab #salesInfoTabComponent></app-sales-info-tab>
@@ -47,3 +48,4 @@
     </kendo-tabstrip-tab>
   </kendo-tabstrip>
 </div>
+

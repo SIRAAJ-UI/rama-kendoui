@@ -6,6 +6,11 @@ import { GridModule, GridSize } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
+import { CSASalesInfoService } from '../../Services/CSASalesInfo.service';
+import * as Model from '../../core/models/csasalesinfo.model';
+import * as Interfaces from '../../core/interfaces/csasalesinfo.interface';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-comments-block',
@@ -15,6 +20,8 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
     InputsModule,
     ButtonsModule,
     LabelModule,
+    FormsModule,
+    ReactiveFormsModule,
     GridModule,
     ToolBarModule
   ],
@@ -23,40 +30,82 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 })
 export class CommentsBlockComponent {
   public smallSize: GridSize = 'small';
-
   @ViewChild('commentsArea') commentsArea: any;
   public dialogThemeColor: DialogThemeColor = 'primary';
-  public gridData: any[] = [
-    {
-      commentsID: 1,
-      comments:
-        'The Kendo UI for Angular Grid is one of the most powerful data grid components available for Angular developers. Built from the ground up for Angular and with focus on performance, the Angular Data Grid contains must-have features, including',
-    },
-    {
-      commentsID: 2,
-      comments: 'Chang',
-    },
-    {
-      commentsID: 3,
-      comments: 'Aniseed Syrup',
-    },
-    {
-      commentsID: 2,
-      comments: 'Chang',
-    },
-    {
-      commentsID: 3,
-      comments:
-        'The Kendo UI for Angular Grid is one of the most powerful data grid components available for Angular developers. Built from the ground up for Angular and with focus on performance, the Angular Data Grid contains must-have features, including',
-    },
-  ];
-
+  constructor(private csaSalesInfoService: CSASalesInfoService ) { }
+  public gridCommentsData: Array<Model.Comments> = [];
+  public commentTitle: string = "";
+  public btnLabel: string = "Save";
   public opened = false;
+  private allCommentsSubscription: Subscription;
+  private addCommentsSubscription: Subscription;
+  private updateCommentsSubscription: Subscription;
+
+
+  public commentsForm = new FormGroup({
+    comm_Id: new FormControl(null, []),
+    comm_Text: new FormControl('', [Validators.required]),
+  });
+
+  ngOnInit() {
+    this.allCommentsSubscription =  this.csaSalesInfoService.getAllComments().subscribe( (comments:Array<Model.Comments>)  => {
+      this.gridCommentsData = comments;
+    });
+  }
+
   public close(): void {
     this.opened = false;
   }
 
-  public open(): void {
+  public addNewComments(): void {
+    this.btnLabel = "Save";
+    this.commentTitle = "Add Comment";
     this.opened = true;
+    this.commentsForm.reset();
+  }
+
+  onSaveUpdate() {
+    if(this.commentsForm.valid){
+
+    if(this.btnLabel === "Save"){
+      const saveComment: Interfaces.Comments = new Model.Comments();
+      saveComment.comm_ID = 0;
+      saveComment.comm_Text = this.commentsForm.get('comm_Text').value;
+      this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe( (comments: Array<Model.Comments>) => {
+        this.gridCommentsData = comments;
+        this.opened = false;
+      });
+    } else {
+      const updateComment: Interfaces.Comments = new Model.Comments();
+      updateComment.comm_ID = this.commentsForm.get('comm_Id').value;
+      updateComment.comm_Text = this.commentsForm.get('comm_Text').value;
+      this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe( (comments: Array<Model.Comments>) => {
+        this.gridCommentsData = comments;
+        this.opened = false;
+      });
+    }
+  } else {
+    alert("error message!")
+  }
+  };
+
+  onEdit(dataItem: Interfaces.Comments){
+    this.btnLabel = "Update";
+    this.commentsForm.get('comm_Id').setValue(dataItem.comm_ID);
+    this.commentsForm.get('comm_Text').setValue(dataItem.comm_Text);
+    this.commentTitle = "Edit Comment";
+    this.opened = true;
+  }
+
+  ngOnDestroy() {
+    if(this.allCommentsSubscription){
+      this.allCommentsSubscription.unsubscribe();
+    };
+    if(this.addCommentsSubscription){
+      this.addCommentsSubscription.unsubscribe();
+    };
+    if(this.updateCommentsSubscription){
+      this.updateCommentsSubscription.unsubscribe();
+    };
   }
 }

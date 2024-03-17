@@ -5,8 +5,8 @@ import { environment } from "../../environments/environment.dev";
 
 
 export const authInterceptor: HttpInterceptorFn = (
-    req: HttpRequest<any>,
-    next: HttpHandlerFn
+  req: HttpRequest<any>,
+  next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
   const token = environment.authToken;
   if (token) {

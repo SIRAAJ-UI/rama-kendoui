@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   // This is the CSA api address
+  withoutAPI: true,
   localDevBase: 'http://localhost:52060/api',
   BaseURL: 'https://improveapid.acgov.org/api/csa',
   authToken:

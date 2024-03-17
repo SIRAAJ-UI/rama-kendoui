@@ -32,6 +32,11 @@
     font-family: Arial, Verdana;
 }
 
+.wrap {
+    display: flex;
+    align-items: center;
+}
+
 .k-dropdownlist {
     height: 25px;
     width: 200px;
