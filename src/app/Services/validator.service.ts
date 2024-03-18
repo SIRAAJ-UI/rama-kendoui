@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.dev';
-import { AbstractControl, FormControlName, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormControlName, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class ValidatorService {
                     maxLength: {
                         requiredLength: maxLength,
                         actualLength: value.length,
-                        message: 'Max length ' + maxLength + 'exceed'
+                        message: 'Max length ' + maxLength + ' exceed'
                     }
                 }
             }
@@ -31,6 +31,34 @@ export class ValidatorService {
             return null; // validation passed
         }
     }
+
+    validateAnticipatedUse(): ValidatorFn {
+        return (control: AbstractControl): any => {
+            const value: string = control.value;
+            if (!value) {
+                return {
+                    required: {
+                        message: 'Anticipated Use is required.'
+                    }
+                }
+            }
+            return null; // validation passed
+        }
+    };
+
+    customNumberValidator(): ValidatorFn {
+        return (control: AbstractControl): any => {
+            const value: string = control.value;
+            if (!value) {
+                return {
+                    required: {
+                        message: '% Owner Occupied must be a whole number between 0 and 100.'
+                    }
+                }
+            }
+            return null; // validation passed
+        }
+    };
 
     validateExactLength(exactLength: number): ValidatorFn {
         return (control: AbstractControl): any => {
@@ -38,14 +66,13 @@ export class ValidatorService {
                 // If the control is required and empty, don't perform maxLength valiation
                 return null;
             }
-
             const value: string = control.value;
             if (value && value.length > exactLength) {
                 return {
                     exactLength: {
                         requiredLength: exactLength,
                         actualLength: value.length,
-                        message: 'Need to be ' + exactLength + 'characters'
+                        message: 'Need to be ' + exactLength + ' characters'
                     }
                 }
             }
@@ -53,21 +80,16 @@ export class ValidatorService {
             return null; // validation passed
         }
     }
-    
-  
-    validateForm(form: { [key: string]: AbstractControl}): any[] {
+
+
+    validateForm(form: { [key: string]: AbstractControl }): any[] {
         const validationErrors: string[] = [];
         Object.keys(form).forEach((controlName: string) => {
             const control: AbstractControl = form[controlName];
             // && (control.dirty || control.touched)
-            if(control && control.invalid ) {
+            if (control && control.invalid) {
                 Object.keys(control.errors).forEach((errorName: string) => {
-                    console.log(control.errors[errorName].message)
-                    if(!control.errors[errorName].message){
-                        // validationErrors.push("Required Field")
-                    } else {
-                        validationErrors.push(control.errors[errorName].message)
-                    }
+                    validationErrors.push(control.errors[errorName].message)
                 })
             }
         });

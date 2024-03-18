@@ -36,6 +36,7 @@ export class SalesInfoTabComponent {
   public salesInfoForm!: FormGroup;
   public submitted = false;
   public events: string[] = [];
+  public numerictextbox: number;
   public brokerInvolved: Array<Interfaces.BrokerInvolved> = [
     { id: 1, text: 'Yes' },
     { id: 2, text: 'No' }]
@@ -65,8 +66,12 @@ export class SalesInfoTabComponent {
     this.dataService.getAnticipatedCodes().subscribe((anticipdateUse: Array<Model.AnticipatedUseCodes>) => {
       this.anticipatedUse = anticipdateUse;
     });
-  }
+  };
 
+  roundValue() {
+    this.numerictextbox = Math.round(this.numerictextbox); // Round the value to the nearest integer
+  };
+  
   getConditionAtSaleDropdownInfo() {
     this.dataService.getConditionAtSale(120).subscribe((response) => {
       this.conditionAtSales = response;

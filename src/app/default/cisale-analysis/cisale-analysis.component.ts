@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutModule, SelectEvent } from '@progress/kendo-angular-layout';
 import { TabAlignment } from "@progress/kendo-angular-layout";
-import { DialogCloseResult,DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import {  DialogCloseResult, DialogRef, DialogService, DialogsModule } from '@progress/kendo-angular-dialog';
 
 import { SalesInfoTabComponent } from '@csa/@components/cisale-analysis/sales-info-tab/sales-info-tab.component'
 import { LogoBarComponent } from '@csa/@shared/logo-bar/logo-bar.component';
@@ -11,6 +11,7 @@ import { ControlBarComponent } from '@csa/@shared/control-bar/control-bar.compon
 import { PropCharBarComponent } from '@csa/@shared/prop-char-bar/prop-char-bar.component';
 import { MENU_NAMES } from '@csa/@core/constants/constants';
 import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service'
+import { DynamicDialogContentComponent } from '@csa/@shared/dynamic-dialog-content/dynamic-dialog-content.component';
 
 @Component({
   selector: 'app-cisale-analysis',
@@ -21,7 +22,9 @@ import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service'
     PropCharBarComponent,
     LayoutModule,
     ReactiveFormsModule,
+    DialogsModule,
     FormsModule,
+    DynamicDialogContentComponent,
     SalesInfoTabComponent,
   ],
   templateUrl: './cisale-analysis.component.html',
@@ -52,6 +55,7 @@ export class CISaleAnalysisComponent  {
     ]
   }
   
+ 
   onTabSelect(event: SelectEvent) {
     console.log('activeTab: ' + this.activeTab);
     const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)});
@@ -62,30 +66,34 @@ export class CISaleAnalysisComponent  {
   };
 
   private validationCheck(){
-    const validationErrors = this.csaSalesInfoService.salesInfoFormValidation();
-    console.log(validationErrors);
+    const validationErrors:Array<string> = this.csaSalesInfoService.salesInfoFormValidation();
     if(validationErrors?.length === 0){
       this.csaSalesInfoService.saveCSASalesForm();
     } else {
-      alert("Error in the forms")
-// const dialog:DialogRef  = this.dialogService.open({
-    //   title: "Please confirm",
-    //   content: "Are you sure?",
-    //   actions: [
-    //     { text: "No" },
-    //     { text: "Yes", themeColor: 'primary' }
-    //   ]
-    // });
-    // dialog.result.subscribe((result) => {
-    //   if (result instanceof DialogCloseResult) {
-    //     console.log("close");
-    //   } else {
-    //     console.log("action", result);
-    //   }
-    // });
+      this.showConfirmation(validationErrors);
     }
   };
 
+  public showConfirmation(validationErrors: Array<string>): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Error Message",
+      content: DynamicDialogContentComponent,
+      actions: [{ text: "Ok",themeColor: "primary" }],
+      width: 450,
+      height: 300,
+      minWidth: 350,
+    });
+    const userInfo = dialog.content.instance as DynamicDialogContentComponent;
+    userInfo.ErrorMessages = validationErrors;
+    dialog.result.subscribe((result) => {
+      if (result instanceof DialogCloseResult) {
+        console.log("close");
+      } else {
+        console.log("action", result);
+      }
+
+    });
+  }
   onTabClose(event: any){
     console.log(event)
   };
