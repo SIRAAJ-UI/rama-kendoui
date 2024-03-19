@@ -7,8 +7,10 @@
           [textField]="'usE_NAME'" [valueField]="'anticipateD_USE_CD'" [valuePrimitive]="true"></kendo-dropdownlist>
       </div>
       <div class="flex-item">
-        <label class="form-label">Benchmark Rating:</label>
-        <kendo-textbox class="col-6 text-label" [readonly]="true" formControlName="BENCHMARK_RATE_CD"></kendo-textbox>
+        <label class="form-label" style="background-color: #5f90cf;">Benchmark Rating:</label>
+        <kendo-label class="col-6 text-label">{{salesInfoForm.get('BENCHMARK_RATE_CD').value}}
+        </kendo-label>
+
       </div>
     </div>
     <div class="flex-row">
@@ -19,9 +21,7 @@
 
       <div class="flex-item">
         <label class="form-label">Supervisor Approved:</label>
-        <kendo-dropdownlist formControlName="SUPRV_APPROVED_FL" class="col-6 text-label" [data]="brokerInvolved"
-          [textField]="'text'" [valueField]="'id'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
-
+        <kendo-textbox class="col-6 text-label" formControlName="SUPRV_APPROVED_FL"></kendo-textbox>
       </div>
     </div>
     <div class="flex-row">

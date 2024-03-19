@@ -15,12 +15,12 @@ export class Comments implements Interfaces.Comments {
 };
 
 export class BrokerInvolved implements Interfaces.BrokerInvolved {
-    id: number;
+    id: string;
     text: string;
 };
 
 export class BuyerSellerRelationship implements Interfaces.BuyerSellerRelationship {
-    id: number;
+    id: string;
     text: string;
 };
 

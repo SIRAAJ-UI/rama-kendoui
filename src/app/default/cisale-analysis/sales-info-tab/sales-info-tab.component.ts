@@ -38,11 +38,11 @@ export class SalesInfoTabComponent {
   public events: string[] = [];
   public numerictextbox: number;
   public brokerInvolved: Array<Interfaces.BrokerInvolved> = [
-    { id: 1, text: 'Yes' },
-    { id: 2, text: 'No' }]
+    { id: "Y", text: 'Yes' },
+    { id: "N", text: 'No' }]
   public buyerSellerRelationship: Array<Interfaces.BuyerSellerRelationship> = [
-    { id: 1, text: 'Yes' },
-    { id: 2, text: 'No' }];
+    { id: "Y", text: 'Yes' },
+    { id: "N", text: 'No' }];
 
   public benchMarkData: Array<Interfaces.BenchMarkData> = [
     { id: 1, text: "Income and Analaysis" },

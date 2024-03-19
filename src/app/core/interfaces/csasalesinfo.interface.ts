@@ -14,12 +14,12 @@ export interface Comments {
 }
 
 export interface BrokerInvolved {
-    id: number;
+    id: string;
     text: string;
 }
 
 export interface BuyerSellerRelationship {
-    id: number;
+    id: string;
     text: string;
 }
 
