@@ -38,8 +38,8 @@ export class SalesInfoTabComponent {
   public events: string[] = [];
   public numerictextbox: number;
   public brokerInvolved: Array<Interfaces.BrokerInvolved> = [
-    { id: "Y", text: 'Yes' },
-    { id: "N", text: 'No' }]
+    { SUPRV_APPROVED_FL: 'Y', SUPRV_APPROVED_FL_TEXT: 'Yes' },
+    { SUPRV_APPROVED_FL: 'N', SUPRV_APPROVED_FL_TEXT: 'No' }]
   public buyerSellerRelationship: Array<Interfaces.BuyerSellerRelationship> = [
     { id: "Y", text: 'Yes' },
     { id: "N", text: 'No' }];
@@ -49,6 +49,9 @@ export class SalesInfoTabComponent {
     { id: 2, text: "Value Ind tab" }
   ]
   public benchMarkRating: any;
+
+  public SelectedanticipatedUse:any;
+  public SelectedbenchmarkRating:any;
 
   public conditionAtSales: ConditionAtsales[] = [];
   public anticipatedUse: AnticipatedUseCodes[] = [];
