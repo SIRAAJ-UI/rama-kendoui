@@ -34,14 +34,14 @@
       <div class="flex-item">
         <label class="form-label">Broker Involved:</label>
         <kendo-dropdownlist formControlName="BROKER_INVOLVED_FL" class="col-6 text-label" [data]="brokerInvolved"
-          [textField]="'text'" [valueField]="'id'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
+          [textField]="'SUPRV_APPROVED_FL_TEXT'" [valueField]="'SUPRV_APPROVED_FL'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">Buyer/Seller Relationship:</label>
-        <kendo-dropdownlist class="col-6 text-label" formControlName="BUY_SELL_REL_FL" [data]="brokerInvolved"
-          [textField]="'text'" [valueField]="'id'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
+        <kendo-dropdownlist class="col-6 text-label" formControlName="BUY_SELL_REL_FL" [data]="buyerSellerRelationship"
+          [textField]="'BUY_SELL_REL_FL_TEXT'" [valueField]="'BUY_SELL_REL_FL'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
       </div>
 
       <div class="flex-item">

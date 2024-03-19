@@ -15,13 +15,13 @@ export class Comments implements Interfaces.Comments {
 };
 
 export class BrokerInvolved implements Interfaces.BrokerInvolved {
-    id: string;
-    text: string;
+    SUPRV_APPROVED_FL: string;
+    SUPRV_APPROVED_FL_TEXT: string;
 };
 
 export class BuyerSellerRelationship implements Interfaces.BuyerSellerRelationship {
-    id: string;
-    text: string;
+    BUY_SELL_REL_FL: string;
+    BUY_SELL_REL_FL_TEXT: string;
 };
 
 export class BenchMarkData implements Interfaces.BenchMarkData {

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core'; 
-import { DataService } from '@csa/@services/data.service';
-
+import { Component } from '@angular/core';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-logo-bar',
@@ -10,21 +10,18 @@ import { DataService } from '@csa/@services/data.service';
   styleUrl: './logo-bar.component.css'
 })
 export class LogoBarComponent {
-
-  lblPageTitleBar:any;
-  constructor(private _DataService: DataService){}
-  ngOnInit()
-  {
-    this.GetPageTitleByCSAType();
-
+  private titleSubscription: Subscription;
+  public lblPageTitleBar: string;
+  
+  constructor(private csaSalesInfoService: CsaSalesInfoService) { }
+  ngOnInit() {
+    this.titleSubscription = this.csaSalesInfoService.GetPageTitleByCSAType(113).subscribe((response: string) => {
+      this.lblPageTitleBar = response;
+    });
   }
-  private GetPageTitleByCSAType(){
-  this._DataService.getPageTitleByCSAType(113).subscribe((response) => {
-    this.lblPageTitleBar = response; 
-  },
-  (error) => {
-    console.error(error);
-     
-  });
-}
+
+  ngOnDestroy() {
+    this.titleSubscription.unsubscribe();
+  }
+
 }

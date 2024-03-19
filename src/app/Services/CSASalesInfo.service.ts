@@ -132,6 +132,9 @@ export class CsaSalesInfoService {
         });
     };
 
+    GetPageTitleByCSAType(csaType: number):Observable<any> {
+        return this.dataService.getPageTitleByCSAType(csaType)
+    }
     saveCSASalesForm() {
         let CISalesinfo: any = new Model.CISalesinfo()
         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {

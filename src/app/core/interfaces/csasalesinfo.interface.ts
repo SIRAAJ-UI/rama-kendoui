@@ -19,8 +19,8 @@ export interface BrokerInvolved {
 }
 
 export interface BuyerSellerRelationship {
-    id: string;
-    text: string;
+    BUY_SELL_REL_FL: string;
+    BUY_SELL_REL_FL_TEXT: string;
 }
 
 export interface BenchMarkData {
