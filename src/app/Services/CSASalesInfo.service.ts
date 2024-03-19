@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from './validator.service';
 import * as Model from '../core/models/csasalesinfo.model';
 import * as Interfaces from '../core/interfaces/csasalesinfo.interface';
-import { Observable, debounceTime, distinctUntilChanged, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
 
 
 @Injectable({
@@ -13,12 +13,14 @@ import { Observable, debounceTime, distinctUntilChanged, of } from 'rxjs';
 export class CsaSalesInfoService {
 
     public salesInfoForm: any;
-    public propCharForm:any;
     public csaId: number;
     public commentText: string;
     public comments: Array<Model.Comments> = [];
+    
+    public CsaDocument: Subject<Interfaces.CsaDocument>;
 
     constructor(private dataService: DataService, private validatorService: ValidatorService) {
+        this.CsaDocument = new Subject();
         this.initializeCSASalesForm();
         this.listenToChange();
         this.getSalesinfo();
@@ -29,7 +31,7 @@ export class CsaSalesInfoService {
         this.salesInfoForm = new FormGroup({
             ANTICIPATED_USE_CD: new FormControl(null, [this.validatorService.validateAnticipatedUse()]),
             PROP_USE_DETL: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
-            PCT_OWNER_OCCUP: new FormControl('', [this.validatorService.validateMaxLength(3),this.validatorService.customNumberValidator()]),
+            PCT_OWNER_OCCUP: new FormControl('', [this.validatorService.validateMaxLength(3), this.validatorService.customNumberValidator()]),
             BROKER_INVOLVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             BUY_SELL_REL_FL: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             BUY_SELL_REL_DESC: new FormControl(null, []),
@@ -39,37 +41,43 @@ export class CsaSalesInfoService {
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
         });
-        this.propCharForm = new FormGroup({
+       
+    };
+
+    getSalesinfo() {
+
+        this.dataService.getSalesInfo(17149).subscribe(data => {
+
+            var salesinfo = data[0];
+            console.log('salesinfo details' + salesinfo.suprv_approved_fl);
+            
+            //************************************ */
+            const csaDocument:Interfaces.CsaDocument = new Model.CsaDocument();
+            csaDocument.doc_prefix = salesinfo.doc_prefix;
+            csaDocument.event_ts = salesinfo.event_ts;
+            csaDocument.buyer_name = salesinfo.buyer_name;
+            csaDocument.seller_name = salesinfo.seller_name;
+            this.CsaDocument.next(csaDocument);
+            //*********************************** */
+            this.salesInfoForm.patchValue({
+                ANTICIPATED_USE_CD: salesinfo.anticipated_use_cd,
+                PROP_USE_DETL: salesinfo.csa_prop_use_detl,
+                PCT_OWNER_OCCUP: salesinfo.pct_owner_occup,
+                BROKER_INVOLVED_FL: salesinfo.broker_involved_fl,
+                BUY_SELL_REL_FL: salesinfo.buy_sell_rel_fl,
+                BUY_SELL_REL_DESC: salesinfo.buy_sell_rel_desc,
+                PUR_PREDATE_BY_OPT: salesinfo.pur_predate_by_opt,
+                PREDATE_CONT_DATE: new Date(salesinfo.predate_cont_date),
+                cD_ID: salesinfo.cond_at_sale_cd,
+                SUPRV_APPROVED_FL: salesinfo.suprv_approved_fl,
+                BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd,
+            });
 
 
         });
-    };
-    getSalesinfo()
-    {
-       
-      this.dataService.getSalesInfo(17149).subscribe(data => {
+        console.log('sales info controls' + this.salesInfoForm.controls);
 
-       var salesinfo = data[0];
-      console.log('salesinfo details'+salesinfo.suprv_approved_fl);
-       this.salesInfoForm.patchValue({
-        ANTICIPATED_USE_CD: salesinfo.anticipated_use_cd,
-        PROP_USE_DETL: salesinfo.csa_prop_use_detl,
-        PCT_OWNER_OCCUP: salesinfo.pct_owner_occup,
-        BROKER_INVOLVED_FL: salesinfo.broker_involved_fl,
-        BUY_SELL_REL_FL: salesinfo.buy_sell_rel_fl,
-        BUY_SELL_REL_DESC: salesinfo.buy_sell_rel_desc,
-        PUR_PREDATE_BY_OPT: salesinfo.pur_predate_by_opt,
-        PREDATE_CONT_DATE: new Date(salesinfo.predate_cont_date),
-        cD_ID: salesinfo.cond_at_sale_cd,
-        SUPRV_APPROVED_FL: salesinfo.suprv_approved_fl,
-        BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd,
-     });
-     
-
-    }); 
-    console.log('sales info controls'+this.salesInfoForm.controls);
-
-    } 
+    }
     private listenToChange() {
         const controls = this.salesInfoForm.controls;
         controls.BUY_SELL_REL_DESC.valueChanges
@@ -122,17 +130,17 @@ export class CsaSalesInfoService {
             });
 
         controls.COND_AT_SALE_CD.valueChanges
-        .subscribe((isChecked: boolean) => {
-            const controlValue = this.salesInfoForm.controls.PREDATE_CONT_DATE.value;
-            if(isChecked){
-                if(!controlValue){
-                    controls.PREDATE_CONT_DATE.setErrors({ required: { message: "Contract date is required." } })
+            .subscribe((isChecked: boolean) => {
+                const controlValue = this.salesInfoForm.controls.PREDATE_CONT_DATE.value;
+                if (isChecked) {
+                    if (!controlValue) {
+                        controls.PREDATE_CONT_DATE.setErrors({ required: { message: "Contract date is required." } })
+                    }
                 }
-            }
-        });
+            });
     };
 
-    GetPageTitleByCSAType(csaType: number):Observable<any> {
+    GetPageTitleByCSAType(csaType: number): Observable<any> {
         return this.dataService.getPageTitleByCSAType(csaType)
     }
     saveCSASalesForm() {
@@ -140,10 +148,10 @@ export class CsaSalesInfoService {
         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
         }
-       // this.dataService.saveRecord(CISalesinfo);
+        // this.dataService.saveRecord(CISalesinfo);
     };
 
-    
+
 
     salesInfoFormValidation(): Array<string> {
         return this.validatorService.validateForm(this.salesInfoForm.controls);

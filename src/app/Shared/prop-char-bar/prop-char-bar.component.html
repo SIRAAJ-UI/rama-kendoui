@@ -1,5 +1,3 @@
-<form [formGroup]="propCharForm">
-
 <div class="container">
   <div class="top-row">
     <div class="col-md-6">
@@ -11,24 +9,23 @@
         <div class="row">
           <div class="row-item">
             <label class="form-label">Document:</label>
-            <label class="text-label" formControlName="doc_prefix" ></label>
+            <label class="text-label" >{{CsaDocument?.doc_prefix}}</label>
           </div>
 
           <div class="row-item">
             <label class="form-label">Buyer:</label>
-            <label class="text-label" formControlName="buyer_name" 
-              > </label
+            <label class="text-label">{{CsaDocument?.buyer_name}}</label
             >
           </div>
 
           <div class="row-item">
             <label class="form-label">Event Date:</label>
-            <label class="text-label" formControlName="event_ts"></label>
+            <label class="text-label">{{CsaDocument?.event_ts |  date:'shortDate' }}</label>
           </div>
 
           <div class="row-item">
             <label class="form-label">Seller:</label>
-            <label class="text-label" formControlName="seller_name"></label>
+            <label class="text-label">{{CsaDocument?.seller_name}}</label>
           </div>
         </div>
       </fieldset>
@@ -122,4 +119,3 @@
     </div>
   </div>
 </div>
-</form>

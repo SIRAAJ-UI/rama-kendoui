@@ -28,6 +28,14 @@ export interface BenchMarkData {
     text: string;
 }
 
+export interface CsaDocument {
+    doc_prefix: string;
+    buyer_name: string;
+    seller_name: string;
+    event_ts: Date;
+}
+
+
 // export interface CISalesinfo {
 //     doc_prefix:String;
 // situs_city:String;
