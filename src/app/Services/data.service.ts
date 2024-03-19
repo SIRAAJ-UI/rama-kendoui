@@ -14,47 +14,43 @@ export class DataService {
   private baseCSAApi = '${this.baseUrl}/csa/api';
   constructor(private http: HttpClient) { }
   getPageTitleByCSAType(csaType: number): Observable<string> {
+    return new Observable<string>(observer => {
+      this.http.get(environment.localDevBase + '/csa/GetPageTitleByCSAType/' + csaType, { responseType: 'text' }).subscribe(
+        (response) => {
+          observer.next(response);
+          observer.complete();
+        },
+        (error) => {
+          observer.error(error);
+        }
+      );
+    });
     // TODO: complete the function based on design doc principle
-    const apiUrl = `getPageTitleByCSAType`; // Replace with actual API endpoint
-    return this.http.get<string>(apiUrl);
+   // const apiUrl = `getPageTitleByCSAType`; // Replace with actual API endpoint
+   // return this.http.get<any>(environment.localDevBase + '/csa/GetPageTitleByCSAType/' + csaType);
   }
   getAnticipatedCodes(): Observable<any> {
-    if(environment.withoutAPI){
-      const anticipatedUse = [];
-      let anticipdateRecord:Interfaces.AnticipatedUseCodes;
-      for(let i=0;i<5;i++){
-        anticipdateRecord = new Model.AnticipatedUseCodes();
-        anticipdateRecord.anticipateD_USE_CD = i;
-        anticipdateRecord.usE_NAME = "Test"+i;
-        anticipatedUse.push(anticipdateRecord);
-      }
-      return of(anticipatedUse);
-    }
+    
     return this.http.get<any>(environment.localDevBase + '/csa/GetAnticipatedUseCodes');
 
   }
   getConditionAtSale(FieldId: number): Observable<any> {
-    if(environment.withoutAPI){
-      const conditionAtSaleRecords = [];
-      let conditionAtSales:Interfaces.ConditionAtsales;
-      for(let i=0;i<5;i++){
-        conditionAtSales = new Model.ConditionAtsales();
-        conditionAtSales.cD_ID = `${i}`;
-        conditionAtSales.cD_LONG_NAME = "Condition"+i;
-        conditionAtSaleRecords.push(conditionAtSales);
-      }
-      return of(conditionAtSaleRecords);
-    }
+    
     return this.http.get<any>(environment.localDevBase + '/common/GetFieldCode/' + FieldId);
   }
+  
+  getSalesInfo(CSA_Id:number):Observable<any>{
+    return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
+  }
+
+  //saveRecord(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> { 
+    //return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
+
+ // }
+
   getData(): Observable<any> {
     return this.http.get(`${this.baseCSAApi}/GetAnticipatedUseCodes`);
   }
-
-  saveRecord(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> {
-    return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
-  }
-
   modReport() {
     // TODO: Use power bi api to mod built report from Visual Studio
   }

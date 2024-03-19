@@ -13,16 +13,19 @@ import { Observable, debounceTime, distinctUntilChanged, of } from 'rxjs';
 export class CsaSalesInfoService {
 
     public salesInfoForm: any;
+    public propCharForm:any;
     public csaId: number;
     public commentText: string;
     public comments: Array<Model.Comments> = [];
 
     constructor(private dataService: DataService, private validatorService: ValidatorService) {
         this.initializeCSASalesForm();
-        this.listenToChange()
+        this.listenToChange();
+        this.getSalesinfo();
     }
 
     initializeCSASalesForm() {
+
         this.salesInfoForm = new FormGroup({
             ANTICIPATED_USE_CD: new FormControl(null, [this.validatorService.validateAnticipatedUse()]),
             PROP_USE_DETL: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
@@ -36,8 +39,37 @@ export class CsaSalesInfoService {
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
         });
-    };
+        this.propCharForm = new FormGroup({
 
+
+        });
+    };
+    getSalesinfo()
+    {
+       
+      this.dataService.getSalesInfo(17149).subscribe(data => {
+
+       var salesinfo = data[0];
+      console.log('salesinfo details'+salesinfo.suprv_approved_fl);
+       this.salesInfoForm.patchValue({
+        ANTICIPATED_USE_CD: salesinfo.anticipated_use_cd,
+        PROP_USE_DETL: salesinfo.csa_prop_use_detl,
+        PCT_OWNER_OCCUP: salesinfo.pct_owner_occup,
+        BROKER_INVOLVED_FL: salesinfo.broker_involved_fl,
+        BUY_SELL_REL_FL: salesinfo.buy_sell_rel_fl,
+        BUY_SELL_REL_DESC: salesinfo.buy_sell_rel_desc,
+        PUR_PREDATE_BY_OPT: salesinfo.pur_predate_by_opt,
+        PREDATE_CONT_DATE: new Date(salesinfo.predate_cont_date),
+        cD_ID: salesinfo.cond_at_sale_cd,
+        SUPRV_APPROVED_FL: salesinfo.suprv_approved_fl,
+        BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd,
+     });
+     
+
+    }); 
+    console.log('sales info controls'+this.salesInfoForm.controls);
+
+    } 
     private listenToChange() {
         const controls = this.salesInfoForm.controls;
         controls.BUY_SELL_REL_DESC.valueChanges
@@ -105,8 +137,10 @@ export class CsaSalesInfoService {
         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
         }
-        this.dataService.saveRecord(CISalesinfo);
+       // this.dataService.saveRecord(CISalesinfo);
     };
+
+    
 
     salesInfoFormValidation(): Array<string> {
         return this.validatorService.validateForm(this.salesInfoForm.controls);

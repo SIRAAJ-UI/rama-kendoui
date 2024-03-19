@@ -1,3 +1,5 @@
+<form [formGroup]="propCharForm">
+
 <div class="container">
   <div class="top-row">
     <div class="col-md-6">
@@ -9,24 +11,24 @@
         <div class="row">
           <div class="row-item">
             <label class="form-label">Document:</label>
-            <label class="text-label">1970-136268</label>
+            <label class="text-label" formControlName="doc_prefix" ></label>
           </div>
 
           <div class="row-item">
             <label class="form-label">Buyer:</label>
-            <label class="text-label"
-              >Carlislie Ralph & Katherine J & John W & Jean E</label
+            <label class="text-label" formControlName="buyer_name" 
+              > </label
             >
           </div>
 
           <div class="row-item">
             <label class="form-label">Event Date:</label>
-            <label class="text-label">12/10/1970 23:01</label>
+            <label class="text-label" formControlName="event_ts"></label>
           </div>
 
           <div class="row-item">
             <label class="form-label">Seller:</label>
-            <label class="text-label">Gilpin Mary H</label>
+            <label class="text-label" formControlName="seller_name"></label>
           </div>
         </div>
       </fieldset>
@@ -41,7 +43,7 @@
         <div class="row">
           <div class="row-item">
             <label class="form-label">APN:</label>
-            <label class="text-label">49-1177-7-1</label>
+            <label class="text-label" formControlName="">49-1177-7-1</label>
           </div>
 
           <div class="row-item">
@@ -120,3 +122,4 @@
     </div>
   </div>
 </div>
+</form>

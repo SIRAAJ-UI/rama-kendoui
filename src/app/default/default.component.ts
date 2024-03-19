@@ -35,6 +35,7 @@ export class DefaultComponent {
 
   async ngOnInit(): Promise<void> {
     try {
+
       let _errText: string = "";
       let _rc: number;
       let _sessionID: number;
@@ -265,5 +266,6 @@ export class DefaultComponent {
   public onButtonClick(): void {
     console.log("click");
   }
+  
 }
 
