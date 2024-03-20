@@ -44,8 +44,8 @@ export class CommentsBlockComponent {
 
 
   public commentsForm = new FormGroup({
-    comm_Id: new FormControl(null, []),
-    comm_Text: new FormControl('', [Validators.required]),
+    seQ_NUM: new FormControl(null, []),
+    commenT_TEXT: new FormControl('', [Validators.required]),
   });
 
   ngOnInit() {
@@ -70,16 +70,16 @@ export class CommentsBlockComponent {
 
     if(this.btnLabel === "Save"){
       const saveComment: Interfaces.Comments = new Model.Comments();
-      saveComment.comm_ID = 0;
-      saveComment.comm_Text = this.commentsForm.get('comm_Text').value;
+      saveComment.seQ_NUM = 0;
+      saveComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
       this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe( (comments: Array<Model.Comments>) => {
         this.gridCommentsData = comments;
         this.opened = false;
       });
     } else {
       const updateComment: Interfaces.Comments = new Model.Comments();
-      updateComment.comm_ID = this.commentsForm.get('comm_Id').value;
-      updateComment.comm_Text = this.commentsForm.get('comm_Text').value;
+      updateComment.seQ_NUM = this.commentsForm.get('seQ_NUM').value;
+      updateComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
       this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe( (comments: Array<Model.Comments>) => {
         this.gridCommentsData = comments;
         this.opened = false;
@@ -92,8 +92,8 @@ export class CommentsBlockComponent {
 
   onEdit(dataItem: Interfaces.Comments){
     this.btnLabel = "Update";
-    this.commentsForm.get('comm_Id').setValue(dataItem.comm_ID);
-    this.commentsForm.get('comm_Text').setValue(dataItem.comm_Text);
+    this.commentsForm.get('seQ_NUM').setValue(dataItem.seQ_NUM);
+    this.commentsForm.get('commenT_TEXT').setValue(dataItem.commenT_TEXT);
     this.commentTitle = "Edit Comment";
     this.opened = true;
   }

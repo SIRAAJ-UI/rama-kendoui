@@ -9,8 +9,8 @@ export interface ConditionAtsales {
 }
 
 export interface Comments {
-    comm_ID: number;
-    comm_Text: string;
+    seQ_NUM: number;
+    commenT_TEXT: string;
 }
 
 export interface BrokerInvolved {

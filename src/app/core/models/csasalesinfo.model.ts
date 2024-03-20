@@ -10,8 +10,8 @@ export class ConditionAtsales implements Interfaces.ConditionAtsales {
 };
 
 export class Comments implements Interfaces.Comments {
-    comm_ID: number;
-    comm_Text: string;
+    seQ_NUM: number;
+    commenT_TEXT: string;
 };
 
 export class BrokerInvolved implements Interfaces.BrokerInvolved {

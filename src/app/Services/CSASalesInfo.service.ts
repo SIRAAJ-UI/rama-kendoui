@@ -68,9 +68,9 @@ export class CsaSalesInfoService {
                 BUY_SELL_REL_DESC: salesinfo.buy_sell_rel_desc,
                 PUR_PREDATE_BY_OPT: salesinfo.pur_predate_by_opt,
                 PREDATE_CONT_DATE: new Date(salesinfo.predate_cont_date),
-                cD_ID: salesinfo.cond_at_sale_cd,
+                COND_AT_SALE_CD: salesinfo.cond_at_sale_cd,
                 SUPRV_APPROVED_FL: salesinfo.suprv_approved_fl,
-                BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd,
+                BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd, 
             });
 
 
@@ -78,6 +78,7 @@ export class CsaSalesInfoService {
         console.log('sales info controls' + this.salesInfoForm.controls);
 
     }
+    
     private listenToChange() {
         const controls = this.salesInfoForm.controls;
         controls.BUY_SELL_REL_DESC.valueChanges
@@ -158,28 +159,33 @@ export class CsaSalesInfoService {
     };
 
     addComments(addComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
-        addComment.comm_ID = this.comments.length++;
-        this.comments[addComment.comm_ID] = addComment;
+        addComment.seQ_NUM = this.comments.length++;
+        this.comments[addComment.seQ_NUM] = addComment;
         return of(this.comments)
     };
 
     updateComments(editedComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
         this.comments.forEach((comment: Interfaces.Comments) => {
-            if (comment.comm_ID === editedComment.comm_ID) {
-                comment.comm_Text = editedComment.comm_Text;
+            if (comment.seQ_NUM === editedComment.seQ_NUM) {
+                comment.commenT_TEXT = editedComment.commenT_TEXT;
             }
         });
         return of(this.comments)
     };
 
     getAllComments(): Observable<Array<Model.Comments>> {
-        let comment: Interfaces.Comments;
-        for (let i = 0; i < 5; i++) {
-            comment = new Model.Comments();
-            comment.comm_ID = i;
-            comment.comm_Text = "Comments" + i;
-            this.comments.push(comment)
-        }
-        return of(this.comments)
+        // let comment: Interfaces.Comments;
+        // for (let i = 0; i < 5; i++) {
+        //     comment = new Model.Comments();
+        //     comment.comm_ID = i;
+        //     comment.comm_Text = "Comments" + i;
+        //     this.comments.push(comment)
+        // }
+        // return of(this.comments)
+console.log('comments'+ this.dataService.getAllComments(17149));
+        return this.dataService.getAllComments(17149);
+
+
+
     };
 }

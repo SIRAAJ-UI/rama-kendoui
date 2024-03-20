@@ -43,7 +43,9 @@ export class DataService {
     // return this.http.get('assets/sales.info.tab.json')
     return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
   }
-
+  getAllComments(CSA_Id:number):Observable<any>{
+    return this.http.get<any>(environment.localDevBase + '/csa/GetCSAComments/' + CSA_Id);  
+  }
   //saveRecord(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> { 
     //return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
 

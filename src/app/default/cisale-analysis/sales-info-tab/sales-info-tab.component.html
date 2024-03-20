@@ -6,9 +6,9 @@
         <kendo-dropdownlist class="col-6 text-label" [data]="anticipatedUse" formControlName="ANTICIPATED_USE_CD"
           [textField]="'usE_NAME'" [valueField]="'anticipateD_USE_CD'" [valuePrimitive]="true"  ></kendo-dropdownlist>
       </div>
-      <div class="flex-item">
-        <label class="form-label" style="background-color: #5f90cf;">Benchmark Rating:</label>
-        <kendo-label class="col-6 text-label">{{salesInfoForm.get('BENCHMARK_RATE_CD').value}}
+      <div class="flex-item" style="background-color: #5f90cf;">
+        <label class="form-label" >Benchmark Rating:</label>
+        <kendo-label class="col-6 text-label" style="background-color: white;">{{salesInfoForm.get('BENCHMARK_RATE_CD').value}}
         </kendo-label>
 
       </div>
@@ -27,7 +27,7 @@
     <div class="flex-row">
       <div class="flex-item">
         <label class="form-label">% Owner Occupied:</label>
-        <kendo-numerictextbox [min]="0" [max]="100" format="'n0'" [(ngModel)]="numerictextbox" [spinners]="true"
+        <kendo-numerictextbox [min]="0" [max]="100" format="'n0'"  [spinners]="true"
           (change)="roundValue()" style="width: 90px" formControlName="PCT_OWNER_OCCUP"></kendo-numerictextbox>
       </div>
 
@@ -57,8 +57,8 @@
           <kendo-label class="k-checkbox-label" [for]="purPredateByOpt" text="Option"></kendo-label>
         </div>
         <div class="col-4 ">
-          <input type="checkbox" formControlName="COND_AT_SALE_CD" #cond_at_sale kendoCheckBox />
-          <kendo-label class="k-checkbox-label" [for]="cond_at_sale" text="Contract of Sale"></kendo-label>
+          <input type="checkbox" formControlName="PUR_PRED_CONT_SALE" #purPredBySale kendoCheckBox />
+          <kendo-label class="k-checkbox-label" [for]="purPredBySale" text="Contract of Sale"></kendo-label>
         </div>
       </div>
     </div>
