@@ -39,11 +39,15 @@ export class CISaleAnalysisComponent  {
   public activeTab: string = MENU_NAMES.SALES_INFO;
   public tabs:Array<any> = [];
   public alignment: TabAlignment = 'start';
+  public isDisableTabs: boolean = false;
 
   constructor(private csaSalesInfoService: CsaSalesInfoService, private dialogService: DialogService ) {
 
   }
   ngOnInit() {
+    this.csaSalesInfoService.disabledTabs.subscribe((isTabDisable: boolean) => {
+      this.isDisableTabs = isTabDisable;
+    });
     this.tabs = [
       { index: 0, name: MENU_NAMES.SALES_INFO},
       { index: 1, name: MENU_NAMES.PROP_CHAR},
@@ -93,6 +97,12 @@ export class CISaleAnalysisComponent  {
       }
 
     });
+  }
+
+  onDisableTabs(event: any) {
+    console.log("******************");
+    console.log(event);
+    console.log("******************");
   }
   onTabClose(event: any){
     console.log(event)

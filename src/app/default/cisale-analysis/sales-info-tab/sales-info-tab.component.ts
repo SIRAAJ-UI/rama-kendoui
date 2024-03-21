@@ -49,10 +49,8 @@ export class SalesInfoTabComponent {
     { id: 2, text: "Value Ind tab" }
   ]
   public benchMarkRating: any;
-
   public SelectedanticipatedUse:any;
   public SelectedbenchmarkRating:any;
-
   public conditionAtSales: ConditionAtsales[] = [];
   public anticipatedUse: AnticipatedUseCodes[] = [];
 
@@ -61,6 +59,7 @@ export class SalesInfoTabComponent {
   }
 
   ngOnInit(): void {
+   
     this.getAnticipatedDropdownInfo();
     this.getConditionAtSaleDropdownInfo();
   }
@@ -79,37 +78,37 @@ export class SalesInfoTabComponent {
     this.dataService.getConditionAtSale(120).subscribe((response) => {
       this.conditionAtSales = response;
     });
-  }
+  };
 
   ngOnDestroy() {
-  }
+  };
 
   public open(): void {
     this.log('open');
-  }
+  };
 
   public close(): void {
     this.log('close');
-  }
+  };
 
   public opened(): void {
     this.log('opened', 'after the popup has been opened');
-  }
+  };
 
   public closed(): void {
     this.log('closed', 'after the popup has been closed');
-  }
+  };
 
   public focus(): void {
     this.log('focus');
-  }
+  };
 
   public blur(): void {
     this.log('blur');
-  }
+  };
 
   private log(event: string, arg?: any): void {
     this.events.unshift(`${event} ${arg || ''}`);
-  }
-  public btnComment_Click(): void { }
+  };
+
 }

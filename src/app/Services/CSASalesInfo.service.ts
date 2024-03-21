@@ -16,19 +16,18 @@ export class CsaSalesInfoService {
     public csaId: number;
     public commentText: string;
     public comments: Array<Model.Comments> = [];
-    
     public CsaDocument: Subject<Interfaces.CsaDocument>;
-
+    public disabledTabs: Subject<any>;
 
     constructor(private dataService: DataService, private validatorService: ValidatorService) {
         this.CsaDocument = new Subject();
+        this.disabledTabs = new Subject();
         this.initializeCSASalesForm();
         this.listenToChange();
         this.getSalesinfo();
     }
 
     initializeCSASalesForm() {
-
         this.salesInfoForm = new FormGroup({
             ANTICIPATED_USE_CD: new FormControl(null, [this.validatorService.validateAnticipatedUse()]),
             PROP_USE_DETL: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
@@ -43,71 +42,44 @@ export class CsaSalesInfoService {
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
         });
-       
     };
 
     getSalesinfo() {
+        this.dataService.getSalesInfo(17149).subscribe((data: Array<Interfaces.CISalesinfo>) => {
+            const salesinfo = data[0];
+            const csaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
+            csaDocument.doc_prefix = salesinfo.doC_PREFIX + salesinfo.doC_SERIES;
+            csaDocument.event_ts = new Date(salesinfo.evenT_TS);
+            csaDocument.buyer_name = salesinfo.mailinG_NAME;
+            csaDocument.seller_name = salesinfo.mailinG_NAME;
+            csaDocument.apn = salesinfo.prinT_PARCEL;
+            csaDocument.usecode = salesinfo.usE_CD;
+            csaDocument.use = salesinfo.usE_NAME;
+            csaDocument.address = salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD;
 
-        this.dataService.getSalesInfo(17149).subscribe(data => {
-
-            var salesinfo = data[0];
-            console.log('salesinfo details' + salesinfo.suprv_approved_fl);
-            
-            //************************************ */
-            const csaDocument:Interfaces.CsaDocument = new Model.CsaDocument();
-            csaDocument.doc_prefix = salesinfo.doc_prefix+salesinfo.doc_series;
-            //csaDocument.event_ts = new Date(salesinfo.event_ts);
-            csaDocument.buyer_name = salesinfo.mailing_name;
-            csaDocument.seller_name = salesinfo.mailing_name;
-            csaDocument.apn = salesinfo.print_parcel;
-            csaDocument.usecode = salesinfo.use_id;
-            csaDocument.use = salesinfo.use_name;
-            csaDocument.address = salesinfo.address + salesinfo.situs_city_name+salesinfo.situs_state+salesinfo.zip_cd;
-
-            csaDocument.apncount = salesinfo.doc_parcel_cnt;
-            csaDocument.indpurprice = salesinfo.indpurprice;
-            csaDocument.adjsalesprice = salesinfo.adjsalesprice;
-            csaDocument.transtaxprice = salesinfo.transtaxprice;
+            csaDocument.apncount = salesinfo.doC_PARCEL_CNT;
+            csaDocument.indpurprice = salesinfo.inD_PUR_PRICE;
+            csaDocument.adjsalesprice = salesinfo.adJ_SALES_PRICE;
+            csaDocument.transtaxprice = salesinfo.traN_TAX_PRICE;
 
             this.CsaDocument.next(csaDocument);
-
-            // const csaAPN:Interfaces.CsaAPN = new Model.CsaAPN();
-            // csaAPN.apn = salesinfo.print_parcel;
-            // csaAPN.usecode = salesinfo.use_id;
-            // csaAPN.use = salesinfo.use_name;
-            // csaAPN.address = salesinfo.address + salesinfo.situs_city_name+salesinfo.situs_state+salesinfo.zip_cd;
-
-            // this.CsaApn.next(csaAPN);
-
-            // const csaSale:Interfaces.CsaSale = new Model.CsaSale();
-            // csaSale.apncount = salesinfo.doc_parcel_cnt;
-            // csaSale.indpurprice = salesinfo.indpurprice;
-            // csaSale.adjsalesprice = salesinfo.adjsalesprice;
-            // csaSale.transtaxprice = salesinfo.transtaxprice;
-
-            // this.CsaSale.next(csaSale);
-
-            //*********************************** */
             this.salesInfoForm.patchValue({
-                ANTICIPATED_USE_CD: salesinfo.anticipated_use_cd,
-                PROP_USE_DETL: salesinfo.csa_prop_use_detl,
-                PCT_OWNER_OCCUP: salesinfo.pct_owner_occup,
-                BROKER_INVOLVED_FL: salesinfo.broker_involved_fl,
-                BUY_SELL_REL_FL: salesinfo.buy_sell_rel_fl,
-                BUY_SELL_REL_DESC: salesinfo.buy_sell_rel_desc,
-                PUR_PREDATE_BY_OPT: salesinfo.pur_predate_by_opt,
-                PREDATE_CONT_DATE: new Date(salesinfo.predate_cont_date),
-                COND_AT_SALE_CD: salesinfo.cond_at_sale_cd,
-                SUPRV_APPROVED_FL: salesinfo.suprv_approved_fl,
-                BENCHMARK_RATE_CD: salesinfo.benchmark_rate_cd, 
+                ANTICIPATED_USE_CD: salesinfo.anticipateD_USE_CD,
+                PROP_USE_DETL: salesinfo.csA_PROP_USE_DETL,
+                PCT_OWNER_OCCUP: salesinfo.pcT_OWNER_OCCUP,
+                BROKER_INVOLVED_FL: salesinfo.brokeR_INVOLVED_FL,
+                BUY_SELL_REL_FL: salesinfo.buY_SELL_REL_FL,
+                BUY_SELL_REL_DESC: salesinfo.buY_SELL_REL_DESC,
+                PUR_PREDATE_BY_OPT: salesinfo.puR_PREDATE_BY_OPT,
+                PREDATE_CONT_DATE: salesinfo.predatE_CONT_DATE,
+                COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
+                SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
+                BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD
             });
-
-
         });
         console.log('sales info controls' + this.salesInfoForm.controls);
-
     }
-    
+
     private listenToChange() {
         const controls = this.salesInfoForm.controls;
         controls.BUY_SELL_REL_DESC.valueChanges
@@ -149,12 +121,10 @@ export class CsaSalesInfoService {
                     }
                 }
                 if (buy_sell_rel_fl === 2) {
-
                     if (controlValue) {
                         controls.BUY_SELL_REL_DESC.setErrors({ required: { message: "Do not specify Buyer/Seller relationship if none is indicated." } })
                     } else {
                         controls.BUY_SELL_REL_DESC.setErrors(null)
-
                     }
                 }
             });
@@ -168,11 +138,21 @@ export class CsaSalesInfoService {
                     }
                 }
             });
+
+        controls.PCT_OWNER_OCCUP.valueChanges
+            .subscribe((value: number) => {
+               if(value === 100){
+                    this.disabledTabs.next(true);
+               } else {
+                    this.disabledTabs.next(false);
+               }
+            });
     };
 
     GetPageTitleByCSAType(csaType: number): Observable<any> {
         return this.dataService.getPageTitleByCSAType(csaType)
-    }
+    };
+
     saveCSASalesForm() {
         let CISalesinfo: any = new Model.CISalesinfo()
         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
@@ -180,8 +160,6 @@ export class CsaSalesInfoService {
         }
         // this.dataService.saveRecord(CISalesinfo);
     };
-
-
 
     salesInfoFormValidation(): Array<string> {
         return this.validatorService.validateForm(this.salesInfoForm.controls);
@@ -211,10 +189,7 @@ export class CsaSalesInfoService {
         //     this.comments.push(comment)
         // }
         // return of(this.comments)
-console.log('comments'+ this.dataService.getAllComments(17149));
+        console.log('comments' + this.dataService.getAllComments(17149));
         return this.dataService.getAllComments(17149);
-
-
-
     };
 }
