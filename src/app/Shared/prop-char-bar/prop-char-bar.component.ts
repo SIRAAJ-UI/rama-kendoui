@@ -16,7 +16,6 @@ import { DatePipe } from '@angular/common';
 })
 export class PropCharBarComponent {
   CsaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
-
   constructor(private csaSalesInfoService: CsaSalesInfoService) {
 
   }
@@ -24,7 +23,8 @@ export class PropCharBarComponent {
   ngOnInit() {
     this.csaSalesInfoService.CsaDocument.subscribe((csaDocument: Interfaces.CsaDocument) => {
       this.CsaDocument = csaDocument;
-    })
+    });
+   
   }
 
 

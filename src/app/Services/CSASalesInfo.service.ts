@@ -19,6 +19,7 @@ export class CsaSalesInfoService {
     
     public CsaDocument: Subject<Interfaces.CsaDocument>;
 
+
     constructor(private dataService: DataService, private validatorService: ValidatorService) {
         this.CsaDocument = new Subject();
         this.initializeCSASalesForm();
@@ -36,6 +37,7 @@ export class CsaSalesInfoService {
             BUY_SELL_REL_FL: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             BUY_SELL_REL_DESC: new FormControl(null, []),
             PUR_PREDATE_BY_OPT: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
+            PUR_PRED_CONT_SALE: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             PREDATE_CONT_DATE: new FormControl(null, []),
             COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
@@ -53,11 +55,38 @@ export class CsaSalesInfoService {
             
             //************************************ */
             const csaDocument:Interfaces.CsaDocument = new Model.CsaDocument();
-            csaDocument.doc_prefix = salesinfo.doc_prefix;
-            csaDocument.event_ts = salesinfo.event_ts;
-            csaDocument.buyer_name = salesinfo.buyer_name;
-            csaDocument.seller_name = salesinfo.seller_name;
+            csaDocument.doc_prefix = salesinfo.doc_prefix+salesinfo.doc_series;
+            //csaDocument.event_ts = new Date(salesinfo.event_ts);
+            csaDocument.buyer_name = salesinfo.mailing_name;
+            csaDocument.seller_name = salesinfo.mailing_name;
+            csaDocument.apn = salesinfo.print_parcel;
+            csaDocument.usecode = salesinfo.use_id;
+            csaDocument.use = salesinfo.use_name;
+            csaDocument.address = salesinfo.address + salesinfo.situs_city_name+salesinfo.situs_state+salesinfo.zip_cd;
+
+            csaDocument.apncount = salesinfo.doc_parcel_cnt;
+            csaDocument.indpurprice = salesinfo.indpurprice;
+            csaDocument.adjsalesprice = salesinfo.adjsalesprice;
+            csaDocument.transtaxprice = salesinfo.transtaxprice;
+
             this.CsaDocument.next(csaDocument);
+
+            // const csaAPN:Interfaces.CsaAPN = new Model.CsaAPN();
+            // csaAPN.apn = salesinfo.print_parcel;
+            // csaAPN.usecode = salesinfo.use_id;
+            // csaAPN.use = salesinfo.use_name;
+            // csaAPN.address = salesinfo.address + salesinfo.situs_city_name+salesinfo.situs_state+salesinfo.zip_cd;
+
+            // this.CsaApn.next(csaAPN);
+
+            // const csaSale:Interfaces.CsaSale = new Model.CsaSale();
+            // csaSale.apncount = salesinfo.doc_parcel_cnt;
+            // csaSale.indpurprice = salesinfo.indpurprice;
+            // csaSale.adjsalesprice = salesinfo.adjsalesprice;
+            // csaSale.transtaxprice = salesinfo.transtaxprice;
+
+            // this.CsaSale.next(csaSale);
+
             //*********************************** */
             this.salesInfoForm.patchValue({
                 ANTICIPATED_USE_CD: salesinfo.anticipated_use_cd,

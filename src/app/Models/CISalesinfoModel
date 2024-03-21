@@ -1,6 +1,6 @@
 export class CISalesinfoModel {
     doc_prefix:String;
-    situs_city:String;
+    situs_city_name:String;
     broker_involved_fl:String;
     zoning_cd:String;
     buy_sell_rel_fl:String;
@@ -35,9 +35,10 @@ export class CISalesinfoModel {
     release_dt:Date;
     update_ts:Date;
     print_parcel:String;
-    buyer_name:String;
+    mailing_name:String;
     seller_name:String;
     anticipated_use_cd_name:String;
     suprv_approved_fl:String;
     suprv_approved_fl_text:String;
+    zip_cd:String;
 }

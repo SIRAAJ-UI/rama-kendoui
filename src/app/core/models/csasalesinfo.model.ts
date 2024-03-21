@@ -30,6 +30,14 @@ export class BenchMarkData implements Interfaces.BenchMarkData {
 };
 
 export class CsaDocument implements Interfaces.CsaDocument {
+    apn: string;
+    usecode: string;
+    use: string;
+    address: string;
+    apncount: string;
+    indpurprice: string;
+    adjsalesprice: string;
+    transtaxprice: string;
     doc_prefix: string;
     buyer_name: string;
     seller_name: string;

@@ -33,6 +33,14 @@ export interface CsaDocument {
     buyer_name: string;
     seller_name: string;
     event_ts: Date;
+    apn: string;
+    usecode: string;
+    use: string;
+    address: string;
+    apncount: string;
+    indpurprice: string;
+    adjsalesprice: string;
+    transtaxprice: string;
 }
 
 
