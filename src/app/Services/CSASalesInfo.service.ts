@@ -66,6 +66,7 @@ export class CsaSalesInfoService {
             csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
 
             this.CsaDocument.next(csaDocument);
+
             this.salesInfoForm.patchValue({
                 ANTICIPATED_USE_CD: salesinfo.anticipateD_USE_CD,
                 PROP_USE_DETL: salesinfo.csA_PROP_USE_DETL,
@@ -74,13 +75,20 @@ export class CsaSalesInfoService {
                 BUY_SELL_REL_FL: salesinfo.buY_SELL_REL_FL,
                 BUY_SELL_REL_DESC: salesinfo.buY_SELL_REL_DESC,
                 PUR_PREDATE_BY_OPT: salesinfo.puR_PREDATE_BY_OPT,
-                PREDATE_CONT_DATE: salesinfo.predatE_CONT_DATE,
+                PREDATE_CONT_DATE: new Date(salesinfo.predatE_CONT_DATE),
                 COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
                 SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
                 BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD
             });
+
+            console.log("SUPRV_APPROVED_FL")
+            console.log(salesinfo.suprV_APPROVED_FL);
         });
+
+       
+
         console.log('sales info controls' + this.salesInfoForm.controls);
+        console.log(this.salesInfoForm.get('COND_AT_SALE_CD').value)
     }
 
     private listenToChange() {
