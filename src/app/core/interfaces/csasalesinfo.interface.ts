@@ -34,13 +34,16 @@ export interface CsaDocument {
     seller_name: string;
     event_ts: Date;
     apn: string;
-    usecode: number;
+    use_id: number;
     use: string;
     address: string;
     apncount: string;
     indpurprice: number;
     adjsalesprice: number;
     transtaxprice: number;
+    toT_BUILDING_AREA:number;
+    toT_LOT_SIZE:number;
+    toT_NET_RENT_AREA:number;
 }
 
 

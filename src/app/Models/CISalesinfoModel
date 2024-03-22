@@ -41,4 +41,6 @@ export class CISalesinfoModel {
     suprv_approved_fl:String;
     suprv_approved_fl_text:String;
     zip_cd:String;
+    doc_parcel_cnt:number;
+    
 }

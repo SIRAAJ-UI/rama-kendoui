@@ -43,7 +43,7 @@
 
           <div class="row-item">
             <label class="form-label">Use Code:</label>
-            <label class="text-label">{{CsaDocument?.usecode}}</label> 
+            <label class="text-label">{{CsaDocument?.use_id}}</label> 
             <label class="form-label" style="margin-left: 15px;">Use:</label>
             <label class="text-label">{{CsaDocument?.use}}</label> 
           </div>
@@ -96,17 +96,17 @@
         <div class="row">
           <div class="row-item">
             <label class="form-label">Gross SF:</label>
-            <label class="text-label">45</label>
+            <label class="text-label">{{CsaDocument.toT_BUILDING_AREA}}</label>
           </div>
 
           <div class="row-item">
             <label class="form-label">Land Area:</label>
-            <label class="text-label">7,341</label>
+            <label class="text-label">{{CsaDocument.toT_LOT_SIZE}}</label>
           </div>
 
           <div class="row-item">
             <label class="form-label">PC NRA:</label>
-            <label class="text-label">6200</label>
+            <label class="text-label">{{CsaDocument.toT_NET_RENT_AREA}}</label>
           </div>
         </div>
       </fieldset>

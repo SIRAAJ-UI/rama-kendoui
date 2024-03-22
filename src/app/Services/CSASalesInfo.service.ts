@@ -37,7 +37,7 @@ export class CsaSalesInfoService {
             BUY_SELL_REL_DESC: new FormControl(null, []),
             PUR_PREDATE_BY_OPT: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             PUR_PRED_CONT_SALE: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
-            PREDATE_CONT_DATE: new FormControl(null, []),
+            PREDATE_CONT_DATE: new FormControl(''),
             COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
@@ -53,7 +53,7 @@ export class CsaSalesInfoService {
             csaDocument.buyer_name = salesinfo.mailinG_NAME;
             csaDocument.seller_name = salesinfo.mailinG_NAME;
             csaDocument.apn = salesinfo.prinT_PARCEL;
-            csaDocument.usecode = salesinfo.usE_CD;
+            csaDocument.use_id = salesinfo.usE_CD;
             csaDocument.use = salesinfo.usE_NAME;
             csaDocument.address = salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD;
 
@@ -61,6 +61,9 @@ export class CsaSalesInfoService {
             csaDocument.indpurprice = salesinfo.inD_PUR_PRICE;
             csaDocument.adjsalesprice = salesinfo.adJ_SALES_PRICE;
             csaDocument.transtaxprice = salesinfo.traN_TAX_PRICE;
+            csaDocument.toT_BUILDING_AREA=salesinfo.toT_BUILDING_AREA;
+            csaDocument.toT_LOT_SIZE=salesinfo.toT_LOT_SIZE;
+            csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
 
             this.CsaDocument.next(csaDocument);
             this.salesInfoForm.patchValue({
@@ -131,10 +134,10 @@ export class CsaSalesInfoService {
 
         controls.COND_AT_SALE_CD.valueChanges
             .subscribe((isChecked: boolean) => {
-                const controlValue = this.salesInfoForm.controls.PREDATE_CONT_DATE.value;
+                const controlValue = this.salesInfoForm.controls.COND_AT_SALE_CD.value;
                 if (isChecked) {
                     if (!controlValue) {
-                        controls.PREDATE_CONT_DATE.setErrors({ required: { message: "Contract date is required." } })
+                        controls.COND_AT_SALE_CD.setErrors({ required: { message: "Contract date is required." } })
                     }
                 }
             });
