@@ -41,6 +41,7 @@ export class CsaSalesInfoService {
             COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
+            CSADOCUMENT:new FormControl()
         });
     };
 
@@ -78,7 +79,8 @@ export class CsaSalesInfoService {
                 PREDATE_CONT_DATE: new Date(salesinfo.predatE_CONT_DATE),
                 COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
                 SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
-                BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD
+                BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD,
+                CSADOCUMENT:csaDocument
             });
 
             console.log("SUPRV_APPROVED_FL")
