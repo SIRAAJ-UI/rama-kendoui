@@ -59,23 +59,32 @@ export class CISaleAnalysisComponent  {
     ]
   }
   
- 
   onTabSelect(event: SelectEvent) {
-    console.log('activeTab: ' + this.activeTab);
-    const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)});
-    setTimeout(() => {
-      this.tabStrip.selectTab(tabFilters.index);
-    },1);
-    this.validationCheck();
+    const seletedTab = event.index;
+    const invalid: boolean = this.validationCheck();
+    if(!invalid){
+      event.preventDefault();
+    } else {
+      this.tabStrip.selectTab(seletedTab)
+    }
+    // console.log('activeTab: ' + this.activeTab);
+    // const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)});
+    // setTimeout(() => {
+    //   this.tabStrip.selectTab(tabFilters.index);
+    // },1);
+    // this.validationCheck();
   };
 
-  private validationCheck(){
+  private validationCheck(): boolean {
     const validationErrors:Array<string> = this.csaSalesInfoService.salesInfoFormValidation();
     if(validationErrors?.length === 0){
       this.csaSalesInfoService.saveCSASalesForm();
+      return true;
     } else {
       this.showConfirmation(validationErrors);
+      return false;
     }
+    return false;
   };
 
   public showConfirmation(validationErrors: Array<string>): void {
