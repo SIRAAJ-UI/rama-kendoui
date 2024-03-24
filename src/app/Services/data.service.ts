@@ -25,9 +25,6 @@ export class DataService {
         }
       );
     });
-    // TODO: complete the function based on design doc principle
-   // const apiUrl = `getPageTitleByCSAType`; // Replace with actual API endpoint
-   // return this.http.get<any>(environment.localDevBase + '/csa/GetPageTitleByCSAType/' + csaType);
   }
   getAnticipatedCodes(): Observable<any> {
     
@@ -39,17 +36,23 @@ export class DataService {
     return this.http.get<any>(environment.localDevBase + '/common/GetFieldCode/' + FieldId);
   }
   
-  getSalesInfo(CSA_Id:number):Observable<any>{
-    // return this.http.get('assets/sales.info.tab.json')
+  getSalesInfo(CSA_Id:number):Observable<any>{ 
     return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
   }
   getAllComments(CSA_Id:number):Observable<any>{
     return this.http.get<any>(environment.localDevBase + '/csa/GetCSAComments/' + CSA_Id);  
   }
-  //saveRecord(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> { 
-    //return this.http.post( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
 
- // }
+  saveCSASalesInfoTab(CISalesinfoModel: Interfaces.CISalesinfo): Observable<any> { 
+    return this.http.post<any>( environment.localDevBase+'/csa/SaveCSASalesInfoTab',CISalesinfoModel);
+
+ }
+ saveCSAComments(CSAComments:Interfaces.Comments):Observable<any>{
+  return this.http.post<any>( environment.localDevBase+'/csa/SaveCsaComments',CSAComments);
+ }
+ updateCSAComments(CSAComments:Interfaces.Comments):Observable<any>{
+  return this.http.post<any>( environment.localDevBase+'/csa/UpdateCsaComments',CSAComments);
+ }
 
   // getData(): Observable<any> {
   //   return this.http.get(`${this.baseCSAApi}/GetAnticipatedUseCodes`);

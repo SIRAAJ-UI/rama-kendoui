@@ -12,6 +12,14 @@ export class ConditionAtsales implements Interfaces.ConditionAtsales {
 export class Comments implements Interfaces.Comments {
     seQ_NUM: number;
     commenT_TEXT: string;
+    CSA_ID:number;
+    ENTRY_TS:Date;
+    ENTRY_WORKER:Date;
+    UPDATE_TS:Date;
+    ROW_CHANGE_TS:Date;
+    ENTRY_USER: string;
+    UPDATE_USER: string;
+    UPDATE_WORKER: string;
 };
 
 export class BrokerInvolved implements Interfaces.BrokerInvolved {
@@ -30,6 +38,7 @@ export class BenchMarkData implements Interfaces.BenchMarkData {
 };
 
 export class CsaDocument implements Interfaces.CsaDocument {
+    
     apn: string;
     use_id: number;
     use: string;
@@ -39,12 +48,23 @@ export class CsaDocument implements Interfaces.CsaDocument {
     adjsalesprice: number;
     transtaxprice: number;
     doc_prefix: string;
+    doc_series:string;
     buyer_name: string;
     seller_name: string;
     event_ts: Date;
+    entry_ts:Date;
+    entry_worker:string;
     toT_BUILDING_AREA:number;
     toT_LOT_SIZE:number;
     toT_NET_RENT_AREA:number;
+    situS_CITY_NAME: string;
+    situS_STATE: string;
+    ziP_CD: string;
+    property_id:number;
+    ROW_CHANGE_TS:Date;
+    csa_id:number;
+    csa_type:number;
+
 };
 
 export class CISalesinfo {

@@ -51,7 +51,9 @@ export class CommentsBlockComponent {
   ngOnInit() {
     this.allCommentsSubscription =  this.csaSalesInfoService.getAllComments().subscribe( (comments:Array<Model.Comments>)  => {
       this.gridCommentsData = comments;
+      
     });
+
   }
 
   public close(): void {

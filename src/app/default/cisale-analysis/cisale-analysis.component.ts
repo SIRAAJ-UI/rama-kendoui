@@ -59,32 +59,23 @@ export class CISaleAnalysisComponent  {
     ]
   }
   
+ 
   onTabSelect(event: SelectEvent) {
-    const seletedTab = event.index;
-    const invalid: boolean = this.validationCheck();
-    if(!invalid){
-      event.preventDefault();
-    } else {
-      this.tabStrip.selectTab(seletedTab)
-    }
-    // console.log('activeTab: ' + this.activeTab);
-    // const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)});
-    // setTimeout(() => {
-    //   this.tabStrip.selectTab(tabFilters.index);
-    // },1);
-    // this.validationCheck();
+    console.log('activeTab: ' + this.activeTab);
+    const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)});
+    setTimeout(() => {
+      this.tabStrip.selectTab(tabFilters.index);
+    },1);
+    this.validationCheck();
   };
 
-  private validationCheck(): boolean {
+  private validationCheck(){
     const validationErrors:Array<string> = this.csaSalesInfoService.salesInfoFormValidation();
     if(validationErrors?.length === 0){
       this.csaSalesInfoService.saveCSASalesForm();
-      return true;
     } else {
       this.showConfirmation(validationErrors);
-      return false;
     }
-    return false;
   };
 
   public showConfirmation(validationErrors: Array<string>): void {
@@ -109,37 +100,28 @@ export class CISaleAnalysisComponent  {
   }
 
   onDisableTabs(event: any) {
-    console.log("******************");
     console.log(event);
-    console.log("******************");
   }
   onTabClose(event: any){
-    console.log(event)
+    console.log(event);
   };
 
   onSave(event: any = null) {
     switch (this.activeTab) {
       case MENU_NAMES.SALES_INFO:
-        console.log("Sales Info:")
         this.validationCheck();
         break;
       case MENU_NAMES.PROP_CHAR:
-        console.log("Prop Characteristics:")
         break;
       case MENU_NAMES.INCOME:
-        console.log("Income:")
         break;
       case MENU_NAMES.EXPENSES:
-        console.log("Expenses:")
         break;
       case MENU_NAMES.ADJUSTMENTS:
-        console.log("Adjustments:")
         break;
       case MENU_NAMES.INCOME_ANALYSIS:
-        console.log("Adjustments:")
         break;
       case MENU_NAMES.SOURCES:
-        console.log("Sources:")
         break;
       default:
         break;

@@ -41,58 +41,68 @@ export class CsaSalesInfoService {
             COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
-            CSADOCUMENT:new FormControl()
+            CSA_DOCUMENT: new FormControl()
         });
     };
 
     getSalesinfo() {
         this.dataService.getSalesInfo(17149).subscribe((data: Array<Interfaces.CISalesinfo>) => {
-            const salesinfo = data[0];
-            const csaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
-            csaDocument.doc_prefix = salesinfo.doC_PREFIX + salesinfo.doC_SERIES;
-            csaDocument.event_ts = new Date(salesinfo.evenT_TS);
-            csaDocument.buyer_name = salesinfo.mailinG_NAME;
-            csaDocument.seller_name = salesinfo.mailinG_NAME;
-            csaDocument.apn = salesinfo.prinT_PARCEL;
-            csaDocument.use_id = salesinfo.usE_CD;
-            csaDocument.use = salesinfo.usE_NAME;
-            csaDocument.address = salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD;
-
-            csaDocument.apncount = salesinfo.doC_PARCEL_CNT;
-            csaDocument.indpurprice = salesinfo.inD_PUR_PRICE;
-            csaDocument.adjsalesprice = salesinfo.adJ_SALES_PRICE;
-            csaDocument.transtaxprice = salesinfo.traN_TAX_PRICE;
-            csaDocument.toT_BUILDING_AREA=salesinfo.toT_BUILDING_AREA;
-            csaDocument.toT_LOT_SIZE=salesinfo.toT_LOT_SIZE;
-            csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
-
-            this.CsaDocument.next(csaDocument);
-
-            this.salesInfoForm.patchValue({
-                ANTICIPATED_USE_CD: salesinfo.anticipateD_USE_CD,
-                PROP_USE_DETL: salesinfo.csA_PROP_USE_DETL,
-                PCT_OWNER_OCCUP: salesinfo.pcT_OWNER_OCCUP,
-                BROKER_INVOLVED_FL: salesinfo.brokeR_INVOLVED_FL,
-                BUY_SELL_REL_FL: salesinfo.buY_SELL_REL_FL,
-                BUY_SELL_REL_DESC: salesinfo.buY_SELL_REL_DESC,
-                PUR_PREDATE_BY_OPT: salesinfo.puR_PREDATE_BY_OPT,
-                PREDATE_CONT_DATE: new Date(salesinfo.predatE_CONT_DATE),
-                COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
-                SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
-                BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD,
-                CSADOCUMENT:csaDocument
-            });
-
-            console.log("SUPRV_APPROVED_FL")
-            console.log(salesinfo.suprV_APPROVED_FL);
-        });
-
-       
-
-        console.log('sales info controls' + this.salesInfoForm.controls);
-        console.log(this.salesInfoForm.get('COND_AT_SALE_CD').value)
+            this.bindedToSaleInfo(data[0]);
+            console.log(data[0]);
+        }); 
+        console.log(this.salesInfoForm.value)
     }
+     
+    private bindedToSaleInfo(record: Interfaces.CISalesinfo){
+        const salesinfo = record;
+        const csaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
+        csaDocument.doc_prefix = salesinfo.doC_PREFIX 
+        csaDocument.doc_series= salesinfo.doC_SERIES;
+        csaDocument.entry_ts=salesinfo.entrY_TS;
+        csaDocument.entry_worker=salesinfo.entrY_WORKER;
+        csaDocument.property_id=salesinfo.propertY_ID;
+        csaDocument.ROW_CHANGE_TS=salesinfo.roW_CHANGE_TS;
+        csaDocument.event_ts = new Date(salesinfo.evenT_TS);
+        csaDocument.buyer_name = salesinfo.mailinG_NAME;
+        csaDocument.seller_name = salesinfo.mailinG_NAME;
+        csaDocument.apn = salesinfo.prinT_PARCEL;
+        csaDocument.use_id = salesinfo.usE_CD;
+        csaDocument.use = salesinfo.usE_NAME;
+        csaDocument.address = salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD;
 
+        csaDocument.situS_CITY_NAME =  salesinfo.situS_CITY_NAME;
+        csaDocument.situS_STATE = salesinfo.situS_STATE;
+        csaDocument.ziP_CD =  salesinfo.ziP_CD;
+
+
+
+        csaDocument.apncount = salesinfo.doC_PARCEL_CNT;
+        csaDocument.indpurprice = salesinfo.inD_PUR_PRICE;
+        csaDocument.adjsalesprice = salesinfo.adJ_SALES_PRICE;
+        csaDocument.transtaxprice = salesinfo.traN_TAX_PRICE;
+        csaDocument.toT_BUILDING_AREA=salesinfo.toT_BUILDING_AREA;
+        csaDocument.toT_LOT_SIZE=salesinfo.toT_LOT_SIZE;
+        csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
+        csaDocument.csa_id=17149;
+        csaDocument.csa_type=933;
+
+        this.CsaDocument.next(csaDocument);
+
+        this.salesInfoForm.patchValue({
+            ANTICIPATED_USE_CD: salesinfo.anticipateD_USE_CD,
+            PROP_USE_DETL: salesinfo.csA_PROP_USE_DETL,
+            PCT_OWNER_OCCUP: salesinfo.pcT_OWNER_OCCUP,
+            BROKER_INVOLVED_FL: salesinfo.brokeR_INVOLVED_FL,
+            BUY_SELL_REL_FL: salesinfo.buY_SELL_REL_FL,
+            BUY_SELL_REL_DESC: salesinfo.buY_SELL_REL_DESC,
+            PUR_PREDATE_BY_OPT: salesinfo.puR_PREDATE_BY_OPT,
+            PREDATE_CONT_DATE: new Date(salesinfo.predatE_CONT_DATE),
+            COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
+            SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
+            BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD,
+            CSA_DOCUMENT: csaDocument
+        });
+    };
     private listenToChange() {
         const controls = this.salesInfoForm.controls;
         controls.BUY_SELL_REL_DESC.valueChanges
@@ -167,11 +177,17 @@ export class CsaSalesInfoService {
     };
 
     saveCSASalesForm() {
-        let CISalesinfo: any = new Model.CISalesinfo()
-        for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
+        let CISalesinfo: any = new Model.CISalesinfo();
+         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
-        }
-        // this.dataService.saveRecord(CISalesinfo);
+           
+        }  
+        console.log(CISalesinfo);   
+         this.dataService.saveCSASalesInfoTab(CISalesinfo).subscribe(result =>{
+            console.log("result");
+            //this.salesInfoForm.patch(result);
+         },
+            error=> {console.log(error)});
     };
 
     salesInfoFormValidation(): Array<string> {
@@ -180,8 +196,14 @@ export class CsaSalesInfoService {
 
     addComments(addComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
         addComment.seQ_NUM = this.comments.length++;
+
+        this.dataService.saveCSAComments(addComment).subscribe(result => {
+            addComment=result;
+        }, error=>{console.log(error);} );
         this.comments[addComment.seQ_NUM] = addComment;
-        return of(this.comments)
+
+        return of(this.comments);
+
     };
 
     updateComments(editedComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
@@ -190,19 +212,16 @@ export class CsaSalesInfoService {
                 comment.commenT_TEXT = editedComment.commenT_TEXT;
             }
         });
+        this.dataService.saveCSAComments(editedComment).subscribe(result => {
+            editedComment=result;
+        }, error=>{console.log(error);} );
         return of(this.comments)
     };
 
     getAllComments(): Observable<Array<Model.Comments>> {
-        // let comment: Interfaces.Comments;
-        // for (let i = 0; i < 5; i++) {
-        //     comment = new Model.Comments();
-        //     comment.comm_ID = i;
-        //     comment.comm_Text = "Comments" + i;
-        //     this.comments.push(comment)
-        // }
-        // return of(this.comments)
-        console.log('comments' + this.dataService.getAllComments(17149));
-        return this.dataService.getAllComments(17149);
+        var csaComments=this.dataService.getAllComments(17149);
+        console.log('get comments data :'+ JSON.stringify(csaComments));
+
+        return csaComments;
     };
 }

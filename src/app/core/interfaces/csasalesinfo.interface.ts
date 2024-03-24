@@ -11,6 +11,14 @@ export interface ConditionAtsales {
 export interface Comments {
     seQ_NUM: number;
     commenT_TEXT: string;
+    CSA_ID:number;
+    ENTRY_TS:Date;
+    ENTRY_WORKER:Date;
+    UPDATE_TS:Date;
+    ROW_CHANGE_TS:Date;
+    ENTRY_USER: string;
+    UPDATE_USER: string;
+    UPDATE_WORKER: string;
 }
 
 export interface BrokerInvolved {
@@ -30,9 +38,14 @@ export interface BenchMarkData {
 
 export interface CsaDocument {
     doc_prefix: any;
+    doc_series:any;
     buyer_name: string;
     seller_name: string;
     event_ts: Date;
+    entry_ts:Date;
+    entry_worker:string;
+    property_id:number;
+    ROW_CHANGE_TS:Date;
     apn: string;
     use_id: number;
     use: string;
@@ -44,6 +57,12 @@ export interface CsaDocument {
     toT_BUILDING_AREA:number;
     toT_LOT_SIZE:number;
     toT_NET_RENT_AREA:number;
+    situS_CITY_NAME: string;
+    situS_STATE:string;
+    ziP_CD: string;
+    csa_id:number;
+    csa_type:number;
+
 }
 
 
@@ -101,4 +120,5 @@ export interface CISalesinfo {
     mailinG_NAME: string;
     carE_OF_NAME: string;
     attentioN_NAME: string;
+    csa_document:CsaDocument
 }
