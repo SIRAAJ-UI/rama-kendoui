@@ -41,22 +41,7 @@ export class CsaSalesInfoService {
             COND_AT_SALE_CD: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             SUPRV_APPROVED_FL: new FormControl(null, [this.validatorService.validateMaxLength(10)]),
             BENCHMARK_RATE_CD: new FormControl('A', [this.validatorService.validateMaxLength(1)]),
-            doc_prefix: new FormControl(''),
-            event_ts: new FormControl(''),
-            buyer_name: new FormControl(''),
-            seller_name: new FormControl(''),
-            apn: new FormControl(''),
-            use_id: new FormControl(''),
-            use:new FormControl(''),
-            address: new FormControl(''),
-
-            apncount: new FormControl(''),
-            indpurprice:new FormControl(''),
-            adjsalesprice:new FormControl(''),
-            transtaxprice:new FormControl(''),
-            toT_BUILDING_AREA:new FormControl(''),
-            toT_LOT_SIZE:new FormControl(''),
-            toT_NET_RENT_AREA:new FormControl(''),
+            CSADOCUMENT:new FormControl()
         });
     };
 
@@ -82,8 +67,6 @@ export class CsaSalesInfoService {
             csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
 
             this.CsaDocument.next(csaDocument);
-            console.log("this.csaDocument");
-            console.log(csaDocument);
 
             this.salesInfoForm.patchValue({
                 ANTICIPATED_USE_CD: salesinfo.anticipateD_USE_CD,
@@ -97,28 +80,11 @@ export class CsaSalesInfoService {
                 COND_AT_SALE_CD: salesinfo.conD_AT_SALE_CD,
                 SUPRV_APPROVED_FL: salesinfo.suprV_APPROVED_FL,
                 BENCHMARK_RATE_CD: salesinfo.benchmarK_RATE_CD,
-                // CSADOCUMENT:csaDocument
-                doc_prefix: salesinfo.doC_PREFIX + salesinfo.doC_SERIES,
-                event_ts: new Date(salesinfo.evenT_TS),
-                buyer_name: salesinfo.mailinG_NAME,
-                seller_name: salesinfo.mailinG_NAME,
-                apn: salesinfo.prinT_PARCEL,
-                use_id: salesinfo.usE_CD,
-                use:salesinfo.usE_NAME,
-                address: salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD,
-    
-                apncount: salesinfo.doC_PARCEL_CNT,
-                indpurprice:salesinfo.inD_PUR_PRICE,
-                adjsalesprice:salesinfo.adJ_SALES_PRICE,
-                transtaxprice:salesinfo.traN_TAX_PRICE,
-                toT_BUILDING_AREA:salesinfo.toT_BUILDING_AREA,
-                toT_LOT_SIZE:salesinfo.toT_LOT_SIZE,
-                toT_NET_RENT_AREA:salesinfo.toT_NET_RENT_AREA
-    
+                CSADOCUMENT:csaDocument
             });
 
-            console.log("salesInfoForm")
-            console.log(this.salesInfoForm);
+            console.log("SUPRV_APPROVED_FL")
+            console.log(salesinfo.suprV_APPROVED_FL);
         });
 
        
@@ -201,8 +167,7 @@ export class CsaSalesInfoService {
     };
 
     saveCSASalesForm() {
-        let CISalesinfo: any = new Model.CISalesinfo();
-        console.log(CISalesinfo)
+        let CISalesinfo: any = new Model.CISalesinfo()
         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
         }

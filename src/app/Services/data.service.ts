@@ -40,8 +40,8 @@ export class DataService {
   }
   
   getSalesInfo(CSA_Id:number):Observable<any>{
-    return this.http.get('assets/sales.info.tab.json')
-    // return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
+    // return this.http.get('assets/sales.info.tab.json')
+    return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
   }
   getAllComments(CSA_Id:number):Observable<any>{
     return this.http.get<any>(environment.localDevBase + '/csa/GetCSAComments/' + CSA_Id);  
