@@ -33,7 +33,6 @@ export class CommentsBlockComponent {
   public smallSize: GridSize = 'small';
   @ViewChild('commentsArea') commentsArea: any;
   public dialogThemeColor: DialogThemeColor = 'primary';
-  constructor(private csaSalesInfoService: CsaSalesInfoService ) { }
   public gridCommentsData: Array<Model.Comments> = [];
   public commentTitle: string = "";
   public btnLabel: string = "Save";
@@ -41,17 +40,19 @@ export class CommentsBlockComponent {
   private allCommentsSubscription: Subscription;
   private addCommentsSubscription: Subscription;
   private updateCommentsSubscription: Subscription;
-
-
   public commentsForm = new FormGroup({
-    seQ_NUM: new FormControl(null, []),
-    commenT_TEXT: new FormControl('', [Validators.required]),
+    SEQ_NUM: new FormControl(null, []),
+    COMMENT_TEXT: new FormControl('', [Validators.required]),
   });
+
+  constructor(private csaSalesInfoService: CsaSalesInfoService ) { }
 
   ngOnInit() {
     this.allCommentsSubscription =  this.csaSalesInfoService.getAllComments().subscribe( (comments:Array<Model.Comments>)  => {
       this.gridCommentsData = comments;
-      
+      this.csaSalesInfoService.comments = comments;
+      console.log("gridCommentsData");
+      console.log(this.gridCommentsData);
     });
 
   }
@@ -68,34 +69,33 @@ export class CommentsBlockComponent {
   }
 
   onSaveUpdate() {
-    if(this.commentsForm.valid){
-
-    if(this.btnLabel === "Save"){
-      const saveComment: Interfaces.Comments = new Model.Comments();
-      saveComment.seQ_NUM = 0;
-      saveComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
-      this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe( (comments: Array<Model.Comments>) => {
-        this.gridCommentsData = comments;
-        this.opened = false;
-      });
+    if (this.commentsForm.valid) {
+      if (this.btnLabel === "Save") {
+        const saveComment: Interfaces.Comments = new Model.Comments();
+        saveComment.SEQ_NUM = 0;
+        saveComment.COMMENT_TEXT = this.commentsForm.get('COMMENT_TEXT').value;
+        this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe((comments: Array<Model.Comments>) => {
+          this.gridCommentsData = comments;
+          this.opened = false;
+        });
+      } else {
+        const updateComment: Interfaces.Comments = new Model.Comments();
+        updateComment.SEQ_NUM = this.commentsForm.get('SEQ_NUM').value;
+        updateComment.COMMENT_TEXT = this.commentsForm.get('COMMENT_TEXT').value;
+        this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe((comments: Array<Model.Comments>) => {
+          this.gridCommentsData = comments;
+          this.opened = false;
+        });
+      }
     } else {
-      const updateComment: Interfaces.Comments = new Model.Comments();
-      updateComment.seQ_NUM = this.commentsForm.get('seQ_NUM').value;
-      updateComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
-      this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe( (comments: Array<Model.Comments>) => {
-        this.gridCommentsData = comments;
-        this.opened = false;
-      });
+      alert("error message!")
     }
-  } else {
-    alert("error message!")
-  }
   };
 
   onEdit(dataItem: Interfaces.Comments){
     this.btnLabel = "Update";
-    this.commentsForm.get('seQ_NUM').setValue(dataItem.seQ_NUM);
-    this.commentsForm.get('commenT_TEXT').setValue(dataItem.commenT_TEXT);
+    this.commentsForm.get('SEQ_NUM').setValue(dataItem.SEQ_NUM);
+    this.commentsForm.get('COMMENT_TEXT').setValue(dataItem.COMMENT_TEXT);
     this.commentTitle = "Edit Comment";
     this.opened = true;
   }

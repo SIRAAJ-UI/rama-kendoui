@@ -4,7 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidatorService } from './validator.service';
 import * as Model from '../core/models/csasalesinfo.model';
 import * as Interfaces from '../core/interfaces/csasalesinfo.interface';
-import { BehaviorSubject, Observable, Subject, debounceTime, distinctUntilChanged, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, debounceTime, distinctUntilChanged, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class CsaSalesInfoService {
     public CsaDocument: Subject<Interfaces.CsaDocument>;
     public disabledTabs: Subject<any>;
 
-    constructor(private dataService: DataService, private validatorService: ValidatorService) {
+    constructor(private dataService: DataService, private validatorService: ValidatorService, private http: HttpClient) {
         this.CsaDocument = new Subject();
         this.disabledTabs = new Subject();
         this.initializeCSASalesForm();
@@ -49,19 +50,19 @@ export class CsaSalesInfoService {
         this.dataService.getSalesInfo(17149).subscribe((data: Array<Interfaces.CISalesinfo>) => {
             this.bindedToSaleInfo(data[0]);
             console.log(data[0]);
-        }); 
+        });
         console.log(this.salesInfoForm.value)
     }
-     
-    private bindedToSaleInfo(record: Interfaces.CISalesinfo){
+
+    private bindedToSaleInfo(record: Interfaces.CISalesinfo) {
         const salesinfo = record;
         const csaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
-        csaDocument.doc_prefix = salesinfo.doC_PREFIX 
-        csaDocument.doc_series= salesinfo.doC_SERIES;
-        csaDocument.entry_ts=salesinfo.entrY_TS;
-        csaDocument.entry_worker=salesinfo.entrY_WORKER;
-        csaDocument.property_id=salesinfo.propertY_ID;
-        csaDocument.ROW_CHANGE_TS=salesinfo.roW_CHANGE_TS;
+        csaDocument.doc_prefix = salesinfo.doC_PREFIX
+        csaDocument.doc_series = salesinfo.doC_SERIES;
+        csaDocument.entry_ts = salesinfo.entrY_TS;
+        csaDocument.entry_worker = salesinfo.entrY_WORKER;
+        csaDocument.property_id = salesinfo.propertY_ID;
+        csaDocument.ROW_CHANGE_TS = salesinfo.roW_CHANGE_TS;
         csaDocument.event_ts = new Date(salesinfo.evenT_TS);
         csaDocument.buyer_name = salesinfo.mailinG_NAME;
         csaDocument.seller_name = salesinfo.mailinG_NAME;
@@ -70,9 +71,9 @@ export class CsaSalesInfoService {
         csaDocument.use = salesinfo.usE_NAME;
         csaDocument.address = salesinfo.address + salesinfo.situS_CITY_NAME + salesinfo.situS_STATE + salesinfo.ziP_CD;
 
-        csaDocument.situS_CITY_NAME =  salesinfo.situS_CITY_NAME;
+        csaDocument.situS_CITY_NAME = salesinfo.situS_CITY_NAME;
         csaDocument.situS_STATE = salesinfo.situS_STATE;
-        csaDocument.ziP_CD =  salesinfo.ziP_CD;
+        csaDocument.ziP_CD = salesinfo.ziP_CD;
 
 
 
@@ -80,11 +81,11 @@ export class CsaSalesInfoService {
         csaDocument.indpurprice = salesinfo.inD_PUR_PRICE;
         csaDocument.adjsalesprice = salesinfo.adJ_SALES_PRICE;
         csaDocument.transtaxprice = salesinfo.traN_TAX_PRICE;
-        csaDocument.toT_BUILDING_AREA=salesinfo.toT_BUILDING_AREA;
-        csaDocument.toT_LOT_SIZE=salesinfo.toT_LOT_SIZE;
-        csaDocument.toT_NET_RENT_AREA=salesinfo.toT_NET_RENT_AREA;
-        csaDocument.csa_id=17149;
-        csaDocument.csa_type=933;
+        csaDocument.toT_BUILDING_AREA = salesinfo.toT_BUILDING_AREA;
+        csaDocument.toT_LOT_SIZE = salesinfo.toT_LOT_SIZE;
+        csaDocument.toT_NET_RENT_AREA = salesinfo.toT_NET_RENT_AREA;
+        csaDocument.csa_id = 17149;
+        csaDocument.csa_type = 933;
 
         this.CsaDocument.next(csaDocument);
 
@@ -164,11 +165,11 @@ export class CsaSalesInfoService {
 
         controls.PCT_OWNER_OCCUP.valueChanges
             .subscribe((value: number) => {
-               if(value === 100){
+                if (value === 100) {
                     this.disabledTabs.next(true);
-               } else {
+                } else {
                     this.disabledTabs.next(false);
-               }
+                }
             });
     };
 
@@ -178,16 +179,16 @@ export class CsaSalesInfoService {
 
     saveCSASalesForm() {
         let CISalesinfo: any = new Model.CISalesinfo();
-         for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
+        for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
-           
-        }  
-        console.log(CISalesinfo);   
-         this.dataService.saveCSASalesInfoTab(CISalesinfo).subscribe(result =>{
+
+        }
+        console.log(CISalesinfo);
+        this.dataService.saveCSASalesInfoTab(CISalesinfo).subscribe(result => {
             console.log("result");
             //this.salesInfoForm.patch(result);
-         },
-            error=> {console.log(error)});
+        },
+            error => { console.log(error) });
     };
 
     salesInfoFormValidation(): Array<string> {
@@ -195,33 +196,46 @@ export class CsaSalesInfoService {
     };
 
     addComments(addComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
-        addComment.seQ_NUM = this.comments.length++;
-
+        addComment.SEQ_NUM = this.comments.length++;
         this.dataService.saveCSAComments(addComment).subscribe(result => {
-            addComment=result;
-        }, error=>{console.log(error);} );
-        this.comments[addComment.seQ_NUM] = addComment;
-
+            addComment = result;
+        }, error => { console.log(error); });
+        this.comments[addComment.SEQ_NUM] = addComment;
         return of(this.comments);
-
     };
 
     updateComments(editedComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
         this.comments.forEach((comment: Interfaces.Comments) => {
-            if (comment.seQ_NUM === editedComment.seQ_NUM) {
-                comment.commenT_TEXT = editedComment.commenT_TEXT;
+            if (comment.SEQ_NUM === editedComment.SEQ_NUM) {
+                comment.COMMENT_TEXT = editedComment.COMMENT_TEXT;
             }
         });
-        this.dataService.saveCSAComments(editedComment).subscribe(result => {
-            editedComment=result;
-        }, error=>{console.log(error);} );
+        // this.dataService.saveCSAComments(editedComment).subscribe(result => {
+        //     editedComment = result;
+        // }, error => { console.log(error); });
+        console.log("this.comments");
+        console.log(this.comments);
         return of(this.comments)
     };
 
-    getAllComments(): Observable<Array<Model.Comments>> {
-        var csaComments=this.dataService.getAllComments(17149);
-        console.log('get comments data :'+ JSON.stringify(csaComments));
+    getAllComments(): Observable<Array<Interfaces.Comments>> {
+        return this.http.get<any[]>('assets/comments.json').pipe(
+            map((comments: Array<Interfaces.Comments>) =>  comments  ), // Assuming comments are in a 'comments' property
+            catchError(error => {
+                console.error('Error loading comments:', error);
+                return [];
+            })
+        );
+        //    return this.http.get('assets/comments.json').subscribe((comments:any) => {
+        //         console.log(comments);
+        //         return comments;
+        //     });
+        //     console.log("COOOOOO")
+        //     return of(comments);
 
-        return csaComments;
+        //    return this.dataService.getAllComments(17149).subscribe(csaComments: any => {
+        //         console.log('get comments data :'+ JSON.stringify(csaComments));
+        //         return csaComments;
+        //     })
     };
 }
