@@ -134,7 +134,7 @@ export class CsaSalesInfoService {
         controls.BUY_SELL_REL_FL.valueChanges
             .subscribe((buy_sell_rel_fl: number) => {
                 const controlValue = this.salesInfoForm.controls.BUY_SELL_REL_DESC.value;
-                if (buy_sell_rel_fl === 1) {
+                if (String(buy_sell_rel_fl) === "Y") {
                     if ((!controlValue) || (controlValue === "")) {
                         controls.BUY_SELL_REL_DESC.setErrors({ required: { message: "Buyer/Seller relationship description is required." } })
                     } else {
