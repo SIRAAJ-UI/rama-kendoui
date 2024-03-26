@@ -13,9 +13,9 @@ import { AnticipatedUseCodes, ConditionAtsales } from '@csa/@core/interfaces/csa
 import * as Model from '@csa/@core/models/csasalesinfo.model';
 import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 
-import { ApiService } from '@csa/@services/api.service';
-import { DataService } from '@csa/@services/data.service';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { ApiService } from '../../../services/api.service';
+import { DataService } from '../../../services/data.service';
+import { CsaSalesInfoService } from '../../../services/CSASalesInfo.service';
 
 @Component({
   selector: 'app-sales-info-tab',

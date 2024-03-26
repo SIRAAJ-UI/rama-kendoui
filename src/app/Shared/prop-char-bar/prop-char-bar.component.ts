@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import * as Model from '@csa/@core/models/csasalesinfo.model';

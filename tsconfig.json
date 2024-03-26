@@ -22,7 +22,7 @@
     "paths": {
       "@csa/@components/*": ["./src/app/default/*"],
       "@csa/@core/*": ["./src/app/core/*"],
-      "@csa/@services/*": ["./src/app/Services/*"],
+      "@csa/@services/*": ["./src/app/services/*"],
       "@csa/@shared/*": ["./src/app/Shared/*"],
 
       },

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingOverlayComponent } from '../Shared/loading-overlay/loading-overlay.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../Services/data.service';
-import { QueryParamsService } from '../Services/query-params.service';
+import { DataService } from '../services/data.service';
+import { QueryParamsService } from '../services/query-params.service';
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { HttpClientModule } from '@angular/common/http'
 

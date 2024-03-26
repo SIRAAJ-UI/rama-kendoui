@@ -40,6 +40,7 @@ export class DataService {
     return this.http.get<any>(environment.localDevBase + '/csa/GetFullSaleInfo/' + CSA_Id);
   }
   getAllComments(CSA_Id:number):Observable<any>{
+    // return this.http.get<any[]>('assets/comments.json')
     return this.http.get<any>(environment.localDevBase + '/csa/GetCSAComments/' + CSA_Id);  
   }
 
@@ -52,6 +53,7 @@ export class DataService {
   return this.http.post<any>( environment.localDevBase+'/csa/SaveCsaComments',CSAComments);
  }
  updateCSAComments(CSAComments:Interfaces.Comments):Observable<any>{
+  //  return of([CSAComments]);
   return this.http.post<any>( environment.localDevBase+'/csa/UpdateCsaComments',CSAComments);
  }
 

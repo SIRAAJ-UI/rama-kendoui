@@ -10,15 +10,15 @@ export interface ConditionAtsales {
 
 export interface Comments {
     csA_ID: any;
-        seQ_NUM: any;
-        commenT_TEXT: string;
-        entrY_TS: Date;
-        entrY_WORKER: string;
-        updatE_TS: Date;
-        roW_CHANGE_TS: string;
-        entrY_USER: string;
-        updatE_USER: string;
-        updatE_WORKER: string;    
+    seQ_NUM: any;
+    commenT_TEXT: string;
+    entrY_TS: Date;
+    entrY_WORKER: string;
+    updatE_TS: Date;
+    roW_CHANGE_TS: string;
+    entrY_USER: string;
+    updatE_USER: string;
+    updatE_WORKER: string;
 }
 
 export interface BrokerInvolved {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
 import { Subscription } from 'rxjs';
 
 @Component({

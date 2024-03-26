@@ -11,7 +11,7 @@ import * as Model from '@csa/@core/models/csasalesinfo.model';
 import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
 import { dateInRange } from '@progress/kendo-angular-dateinputs/util';
 
 @Component({
@@ -113,8 +113,6 @@ export class CommentsBlockComponent {
         updateComment.entrY_USER = this.commentsForm.get('entrY_USER').value;
         updateComment.updatE_USER = this.commentsForm.get('updatE_USER').value;
         updateComment.updatE_WORKER = this.commentsForm.get('updatE_WORKER').value;
-
-
 
 
         this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe((comments: Array<Model.Comments>) => {

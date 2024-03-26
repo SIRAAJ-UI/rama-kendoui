@@ -48,9 +48,7 @@ export class CsaSalesInfoService {
     getSalesinfo() {
         this.dataService.getSalesInfo(17149).subscribe((data: Array<Interfaces.CISalesinfo>) => {
             this.bindedToSaleInfo(data[0]);
-            console.log(data[0]);
         }); 
-        console.log(this.salesInfoForm.value)
     }
      
     private bindedToSaleInfo(record: Interfaces.CISalesinfo){
@@ -180,9 +178,7 @@ export class CsaSalesInfoService {
         let CISalesinfo: any = new Model.CISalesinfo();
          for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
-           
         }  
-        console.log(CISalesinfo);   
          this.dataService.saveCSASalesInfoTab(CISalesinfo).subscribe(result =>{
             console.log("result");
             //this.salesInfoForm.patch(result);
@@ -194,45 +190,34 @@ export class CsaSalesInfoService {
         return this.validatorService.validateForm(this.salesInfoForm.controls);
     };
     addComments(addComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
-        
-        this.dataService.saveCSAComments(addComment).subscribe(result => {
-            addComment = result;
-        }, error => { console.log(error); });
-        this.comments[addComment.seQ_NUM] = addComment;
-        return of(this.comments);
+        return this.dataService.saveCSAComments(addComment).pipe(
+            map((comments: Array<Interfaces.Comments>) =>  {
+                return comments;
+            }), // Assuming comments are in a 'comments' property
+            catchError(error => {
+                console.error('Error loading comments:', error);
+                return [];
+            })
+        );
     };
 
     updateComments(editedComment: Interfaces.Comments): Observable<Array<Model.Comments>> {
-        this.dataService.updateCSAComments(editedComment).subscribe(result => {
-            editedComment = result;
-            console.log('updated result '+result);
-        }, error => { console.log(error); });
-        console.log("this.comments");
-        console.log(this.comments);
-        return of(this.comments)
+        return this.dataService.updateCSAComments(editedComment).pipe(
+            map((comments: Array<Interfaces.Comments>) =>  {
+                return comments;
+            }), // Assuming comments are in a 'comments' property
+            catchError(error => {
+                console.error('Error loading comments:', error);
+                return [];
+            })
+        );
     };
 
     getAllComments(): Observable<Array<Interfaces.Comments>> {
-        // return this.http.get<any[]>('assets/comments.json').pipe(
-        //     map((comments: Array<Interfaces.Comments>) =>  comments  ), // Assuming comments are in a 'comments' property
-        //     catchError(error => {
-        //         console.error('Error loading comments:', error);
-        //         return [];
-        //     })
-        // );
-        //    return this.http.get('assets/comments.json').subscribe((comments:any) => {
-        //         console.log(comments);
-        //         return comments;
-        //     });
-        //     console.log("COOOOOO")
-        //     return of(comments);
-
-        // return this.dataService.getAllComments(17149).subscribe(csaComments: any => {
-        //     console.log('get comments data :'+ JSON.stringify(csaComments));
-        //     return csaComments;
-        // })
         return this.dataService.getAllComments(17149).pipe(
-            map((comments: Array<Interfaces.Comments>) =>  comments  ), // Assuming comments are in a 'comments' property
+            map((comments: Array<Interfaces.Comments>) => {
+                return comments
+            }), // Assuming comments are in a 'comments' property
             catchError(error => {
                 console.error('Error loading comments:', error);
                 return [];
