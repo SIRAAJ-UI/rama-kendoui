@@ -18,7 +18,7 @@
       
     </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column field="COMMENT_TEXT" title="Comments" [style]="{ 'font-size': '12px' }">
+  <kendo-grid-column field="commenT_TEXT" title="Comments" [style]="{ 'font-size': '12px' }">
   </kendo-grid-column>
 </kendo-grid>
 
@@ -27,17 +27,17 @@
     <div class="form-group row">
       <div class="col-sm-12">
         <kendo-label text="*Comment :">
-          <kendo-textarea formControlName="COMMENT_TEXT" placeholder="Enter the comments..." [rows]="5"
+          <kendo-textarea formControlName="commenT_TEXT" placeholder="Enter the comments..." [rows]="5"
             resizable="vertical"></kendo-textarea>
         </kendo-label>
         <span [style.color]="'red'"
-          *ngIf="commentsForm.get('COMMENT_TEXT').invalid && (commentsForm.get('COMMENT_TEXT').dirty || commentsForm.get('COMMENT_TEXT').touched)">Please
+          *ngIf="commentsForm.get('commenT_TEXT').invalid && (commentsForm.get('commenT_TEXT').dirty || commentsForm.get('commenT_TEXT').touched)">Please
           enter the comments.</span>
       </div>
     </div>
   </form>
   <kendo-dialog-actions>
-    <kendo-button size="small" themeColor="primary" [disabled]="commentsForm.get('COMMENT_TEXT').invalid && (commentsForm.get('COMMENT_TEXT').dirty || commentsForm.get('COMMENT_TEXT').touched)" (click)="onSaveUpdate()">{{btnLabel}}</kendo-button>
+    <kendo-button size="small" themeColor="primary" [disabled]="commentsForm.get('commenT_TEXT').invalid && (commentsForm.get('commenT_TEXT').dirty || commentsForm.get('commenT_TEXT').touched)" (click)="onSaveUpdate()">{{btnLabel}}</kendo-button>
     <kendo-button size="small" themeColor="primary" (click)="close()">Cancel</kendo-button>
   </kendo-dialog-actions>
 </kendo-dialog>

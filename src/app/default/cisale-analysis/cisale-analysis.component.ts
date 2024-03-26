@@ -10,7 +10,7 @@ import { LogoBarComponent } from '@csa/@shared/logo-bar/logo-bar.component';
 import { ControlBarComponent } from '@csa/@shared/control-bar/control-bar.component';
 import { PropCharBarComponent } from '@csa/@shared/prop-char-bar/prop-char-bar.component';
 import { MENU_NAMES } from '@csa/@core/constants/constants';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service'
+import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service'
 import { DynamicDialogContentComponent } from '@csa/@shared/dynamic-dialog-content/dynamic-dialog-content.component';
 
 @Component({

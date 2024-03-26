@@ -15,7 +15,7 @@ import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 
 import { ApiService } from '@csa/@services/api.service';
 import { DataService } from '@csa/@services/data.service';
-import { CsaSalesInfoService } from '@csa/@services/CSASalesInfo.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
 
 @Component({
   selector: 'app-sales-info-tab',

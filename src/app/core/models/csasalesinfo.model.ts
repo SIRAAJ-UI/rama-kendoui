@@ -10,17 +10,16 @@ export class ConditionAtsales implements Interfaces.ConditionAtsales {
 };
 
 export class Comments implements Interfaces.Comments {
-    CSAComments: string;
-    CSA_ID: number;
-    SEQ_NUM: number;
-    COMMENT_TEXT: string;
-    ENTRY_TS: string;
-    ENTRY_WORKER: string;
-    UPDATE_TS: string;
-    ROW_CHANGE_TS: string;
-    ENTRY_USER: string;
-    UPDATE_USER: string;
-    UPDATE_WORKER: string;
+    csA_ID: any;
+    seQ_NUM: any;
+    commenT_TEXT: string;
+    entrY_TS: Date;
+    entrY_WORKER: string;
+    updatE_TS: Date;
+    roW_CHANGE_TS: string;
+    entrY_USER: string;
+    updatE_USER: string;
+    updatE_WORKER: string; 
 };
 
 export class BrokerInvolved implements Interfaces.BrokerInvolved {
@@ -39,6 +38,7 @@ export class BenchMarkData implements Interfaces.BenchMarkData {
 };
 
 export class CsaDocument implements Interfaces.CsaDocument {
+    
     apn: string;
     use_id: number;
     use: string;
@@ -64,6 +64,7 @@ export class CsaDocument implements Interfaces.CsaDocument {
     ROW_CHANGE_TS:Date;
     csa_id:number;
     csa_type:number;
+
 };
 
 export class CISalesinfo {
@@ -109,6 +110,7 @@ export class CISalesinfo {
     anticipated_use_cd_name: String;
     suprv_approved_fl: String;
     suprv_approved_fl_text: String;
+
 }
 
 
