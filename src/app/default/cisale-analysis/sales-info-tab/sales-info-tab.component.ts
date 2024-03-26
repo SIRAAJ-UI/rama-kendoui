@@ -64,6 +64,16 @@ export class SalesInfoTabComponent {
     this.getConditionAtSaleDropdownInfo();
   }
 
+  onPredateChange(event: boolean) {
+    return event ? 'y' : 'n';
+  };
+  
+  onPredBySaleChange(event: boolean) {
+    return event ? 'y' : 'n';
+  };
+
+  
+
   getAnticipatedDropdownInfo() {
     this.dataService.getAnticipatedCodes().subscribe((anticipdateUse: Array<Model.AnticipatedUseCodes>) => {
       this.anticipatedUse = anticipdateUse;

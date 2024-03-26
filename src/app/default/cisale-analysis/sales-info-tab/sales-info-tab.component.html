@@ -53,11 +53,11 @@
       <div class="flex-item">
         <label class="form-label">Purchase Predated By:</label>
         <div class="col-4 mr-2">
-          <input type="checkbox" #purPredateByOpt formControlName="PUR_PREDATE_BY_OPT" kendoCheckBox />
+          <input type="checkbox" #purPredateByOpt (ngModelChange)="onPredateChange($event)" formControlName="PUR_PREDATE_BY_OPT" kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredateByOpt" text="Option"></kendo-label>
         </div>
         <div class="col-4 ">
-          <input type="checkbox" formControlName="PUR_PRED_CONT_SALE" #purPredBySale kendoCheckBox />
+          <input type="checkbox" #purPredBySale (ngModelChange)="onPredBySaleChange($event)" formControlName="PUR_PRED_CONT_SALE" kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredBySale" text="Contract of Sale"></kendo-label>
         </div>
       </div>
