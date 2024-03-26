@@ -54,7 +54,7 @@ export class SalesInfoTabComponent {
   public conditionAtSales: ConditionAtsales[] = [];
   public anticipatedUse: AnticipatedUseCodes[] = [];
 
-  constructor(private dataService: DataService, private csaSalesInfoService: CsaSalesInfoService, private apiService: ApiService, private fb: FormBuilder) {
+  constructor(private dataService: DataService,  private csaSalesInfoService: CsaSalesInfoService, private apiService: ApiService, private fb: FormBuilder) {
     this.salesInfoForm = this.csaSalesInfoService.salesInfoForm;
   }
 
@@ -65,11 +65,13 @@ export class SalesInfoTabComponent {
   }
 
   onPredateChange(event: boolean) {
-    return event ? 'y' : 'n';
+    const flag = event ? 'Y' : 'N';
+    this.salesInfoForm.get('PUR_PREDATE_BY_OPT').setValue(flag)
   };
-  
+
   onPredBySaleChange(event: boolean) {
-    return event ? 'y' : 'n';
+    const flag = event ? 'Y' : 'N';
+    this.salesInfoForm.get('PUR_PRED_CONT_SALE').setValue(flag)
   };
 
   
