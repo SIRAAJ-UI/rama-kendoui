@@ -175,7 +175,6 @@ export class CsaSalesInfoService {
     };
 
     saveCSASalesForm() {
-        this.progressBarService.showProgress(10,'red');
         let CISalesinfo: any = new Model.CISalesinfo();
          for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
             CISalesinfo[key] = this.salesInfoForm.get(key).value;
