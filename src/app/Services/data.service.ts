@@ -9,8 +9,8 @@ import { MenuItem } from '../Models/menu-item.model';
 })
 export class DataService {
   // private baseUrl: string = environment.localDevBase;
-  private baseUrl: string = environment.localDevBase;
-  private csaBaseUrl: string = environment.localBaseDevBase;
+  private baseUrl: string = environment.ImproveBaseURL;
+  private csaBaseUrl: string = environment.BaseURL;
 
   constructor(private http: HttpClient ) { }
   GetPageTitleByCSAType(fieldId: number): Observable<string> {

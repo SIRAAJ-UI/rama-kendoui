@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
-  localDevBase: 'http://localhost:52060/api',
-  localBaseDevBase: 'http://localhost:52060/api/CSA',
+  localDevBase: 'http://localhost:52060/api/CSA',
   ImproveBaseURL: 'https://improveapid.acgov.org/api',
   BaseURL: 'https://improveapid.acgov.org/api/CSA',
   authToken:

@@ -56,11 +56,11 @@
       <div class="flex-item">
         <label class="form-label" for="lblpurchanse">Purchase Predated By:</label>
         <div class="col-4 mr-2">
-          <input type="checkbox" #purPredateByOpt id="lblpurchanse"  formControlName="pur_predate_by_opt" kendoCheckBox />
+          <input type="checkbox" #purPredateByOpt id="lblpurchanse"  formControlName="isoptionchecked"  kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredateByOpt" text="Option"></kendo-label>
         </div>
         <div class="col-4 ">
-          <input type="checkbox" #purPredBySale  formControlName="pur_pred_cont_sale" id="purPredBySale" kendoCheckBox />
+          <input type="checkbox" #purPredBySale  formControlName="iscontsalechecked" id="purPredBySale"   kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredBySale" text="Contract of Sale"></kendo-label>
         </div>
       </div>

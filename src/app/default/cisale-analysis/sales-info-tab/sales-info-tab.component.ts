@@ -36,6 +36,8 @@ import { QueryParamsService } from '@csa/@services/query-params.service';
 import { ConstantValueService } from '@csa/@services/constant-values.service';
 import { LoadingOverlayComponent } from '@csa/@shared/loading-overlay/loading-overlay.component';
 import { csaexpenses } from '@csa/@core/models/csaexpenses.model'; 
+import {  DialogCloseResult, DialogRef, DialogService, DialogTitleBarComponent, DialogsModule } from '@progress/kendo-angular-dialog';
+import { DynamicDialogContentComponent } from '@csa/@shared/dynamic-dialog-content/dynamic-dialog-content.component';
 
 @Component({
   selector: 'app-sales-info-tab',
@@ -73,8 +75,7 @@ export class SalesInfoTabComponent {
   public SelectedanticipatedUse: any;
   public SelectedbenchmarkRating: any;
   public conditionAtSales: conditionatsales[] = [];
-  public anticipatedUse: anticipatedusecodes[] = [];
-
+  public anticipatedUse: anticipatedusecodes[] = []; 
   public csa_Id: number = 0;
   SaleInfoHasIncomesExpenses: boolean;
   constructor(
@@ -84,21 +85,14 @@ export class SalesInfoTabComponent {
     private apiService: ApiService,
     private _QueryParams: QueryParamsService,
     private fb: FormBuilder,
-    private _constantValueService: ConstantValueService
+    private _constantValueService: ConstantValueService, 
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(){
-    this.loadingService.showLoading();
-
+    this.loadingService.showLoading(); 
     this.salesInfoForm = this.csaSalesInfoService.salesInfoForm;
-    this.csa_Id = this._QueryParams.csaId;
-    // NOTE: Some data is still fetch with irregular timing behavior,
-    // double check on all data loading process
-    
-    // Apply loading overlay to load data, turn off after loading all
-    // give the 0.1 sec for overlay to display, otherwise async will excute before
-    // overlay take the flag change and show
-     //new Promise(resolve => setTimeout(resolve, 100));
+    this.csa_Id = this._QueryParams.csaId; 
      this.fetchAllData();
     
   }
@@ -112,6 +106,39 @@ export class SalesInfoTabComponent {
     this.loadingService.hideLoading();
   }
 
+// TODO (RAMADEVI): If this is just for your tab validation, put it in your tab
+validationCheck(): boolean {
+  const validationErrors:Array<string> = this.csaSalesInfoService.salesInfoFormValidation();
+  if(validationErrors?.length === 0){
+    
+    this.csaSalesInfoService.UpdatedSaleInfoWithCIAnalysis();
+    return true;
+  } else {
+    this.showConfirmation(validationErrors);
+    return false;
+  }
+};
+
+public showConfirmation(validationErrors: Array<string>): void {
+  const dialog: DialogRef = this.dialogService.open({
+    title: "IMPROVE", 
+    content: DynamicDialogContentComponent, 
+    width: 530,
+    height: 200,
+    minWidth: 450
+  });
+  const userInfo = dialog.content.instance as DynamicDialogContentComponent;
+  validationErrors = validationErrors.filter( element => {
+    return element !== undefined
+  })
+  userInfo.ErrorMessages = validationErrors;
+  dialog.result.subscribe((result) => {
+    if (result instanceof DialogCloseResult) { 
+    } else { 
+    }
+
+  });
+}
   getAnticipatedDropdownInfo() {
     this.dataService
       .GetDataByUrl('GetAnticipatedUseCodes')

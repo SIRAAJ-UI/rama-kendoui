@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.dev';
 import { AbstractControl, FormControl, FormControlName, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ResourceService } from '@csa/@services/resource.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ValidatorService {
+    public resources: any;
 
-    constructor() { }
-
+    constructor( private resourceService: ResourceService ,) { }
+    getResourceData()
+    {
+        this.resources = this.resourceService.getResources();
+    }
     validateMaxLength(maxLength: number): ValidatorFn {
         return (control: AbstractControl): any => {
             if (Validators.required(control)) {
@@ -23,7 +28,7 @@ export class ValidatorService {
                     maxLength: {
                         requiredLength: maxLength,
                         actualLength: value.length,
-                        message: 'Max length ' + maxLength + ' exceed'
+                        message:  this.resources?.Exceeds.replace("{0}",value).replace("{1}",maxLength) 
                     }
                 }
             }
@@ -38,7 +43,7 @@ export class ValidatorService {
             if (value==null) {
                 return {
                     required: {
-                        message: 'Anticipated Use is required.'
+                        message: this.resources?.Required_Field.replace("{0}", "Anticipated Use") 
                     }
                 }
             }
@@ -54,7 +59,7 @@ export class ValidatorService {
             if ((value < 0) || (value >100)){
                 return {
                     required: {
-                        message: '% Owner Occupied must be a whole number between 0 and 100.'
+                        message: this.resources?.Owner_Occupied_Range
                     }
                 }
             }
@@ -74,11 +79,10 @@ export class ValidatorService {
                     exactLength: {
                         requiredLength: exactLength,
                         actualLength: value.length,
-                        message: 'Need to be ' + exactLength + ' characters'
+                        message: this.resources?.ExactLength.replace("{0}",exactLength)  
                     }
                 }
             }
-
             return null; // validation passed
         }
     }

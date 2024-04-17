@@ -1,5 +1,5 @@
 {
-  "//": "Generic Error Messages",
+  "_comment1": "Generic Error Messages",
   "Activity_Cannot_Be_Deleted": "This Activity cannot be deleted because it has been worked.",
   "Already_Added": "Already added to the {0}.",
   "Already_Exists": "{0} already exists.",
@@ -154,7 +154,8 @@
   "Window_Open": "{0} is already open.<BR>Select it from the Windows menu.",
   "Windows_Limit_Exceeded": "The number of active windows has exceeded the limit of {0}.<br>Close windows to allow new windows to be listed in the Windows menu.",
   
-  "//": "CSA Error Messages",
+  "_comment2": "CSA Error Messages",
+  "ExactLength": "Need to be {0} characters",
   "Buy_Sell_Relationship_Description_Indication": "Do not specify Buyer/Seller relationship if none is indicated.",
   "Buy_Sell_Relationship_Description_Required": "Buyer/Seller relationship description is required.",
   "Contract_Date_Required": "Contract date is required.",

@@ -9,11 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutModule, SelectEvent } from '@progress/kendo-angular-layout';
 import { TabAlignment } from "@progress/kendo-angular-layout";
-import {  DialogCloseResult, DialogRef, DialogService, DialogTitleBarComponent, DialogsModule } from '@progress/kendo-angular-dialog';
  
 import { MENU_NAMES } from '@csa/@core/constants/constants';
 import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service'
-import { DynamicDialogContentComponent } from '@csa/@shared/dynamic-dialog-content/dynamic-dialog-content.component';
 import { AuthService } from "@csa/@services/auth.service";
 import { Router } from "@angular/router";
 
@@ -27,9 +25,7 @@ import { Router } from "@angular/router";
     PropCharBarComponent,
     LayoutModule,
     ReactiveFormsModule,
-    DialogsModule,
     FormsModule,
-    DynamicDialogContentComponent,
     SalesInfoTabComponent,
     PropCharsTabComponent,
   ],
@@ -42,12 +38,14 @@ export class CISaleAnalysisComponent  {
 
   @Output() activeTabChange = new EventEmitter<string>();
   @ViewChild("tabStrip") tabStrip:any;
+  @ViewChild("salesInfoTabComponent") salesinfotabcomponent: SalesInfoTabComponent;
+
   public activeTab: string = MENU_NAMES.SALES_INFO;
   public tabs:Array<any> = [];
   public alignment: TabAlignment = 'start';
   public isDisableTabs: boolean = false;
 
-  constructor(private csaSalesInfoService: CsaSalesInfoService, private dialogService: DialogService, private authService: AuthService, 
+  constructor(private csaSalesInfoService: CsaSalesInfoService, private authService: AuthService,
     private router: Router ) {
 
   }
@@ -74,43 +72,12 @@ export class CISaleAnalysisComponent  {
   onTabSelect(event: SelectEvent) {  
     event.preventDefault();
     const tabFilters:{index: number, name: string} = this.tabs.find( tab => { return (tab.name === this.activeTab)}); 
-    if(this.validationCheck()){
+    if(this.salesinfotabcomponent && this.salesinfotabcomponent.validationCheck()){
       this.tabStrip.selectTab(event.index);
     }
   };
 
-  private validationCheck(): boolean {
-    const validationErrors:Array<string> = this.csaSalesInfoService.salesInfoFormValidation();
-    if(validationErrors?.length === 0){
-      
-      this.csaSalesInfoService.UpdatedSaleInfoWithCIAnalysis();
-      return true;
-    } else {
-      this.showConfirmation(validationErrors);
-      return false;
-    }
-  };
 
-  public showConfirmation(validationErrors: Array<string>): void {
-    const dialog: DialogRef = this.dialogService.open({
-      title: "IMPROVE", 
-      content: DynamicDialogContentComponent, 
-      width: 530,
-      height: 200,
-      minWidth: 450
-    });
-    const userInfo = dialog.content.instance as DynamicDialogContentComponent;
-    validationErrors = validationErrors.filter( element => {
-      return element !== undefined
-    })
-    userInfo.ErrorMessages = validationErrors;
-    dialog.result.subscribe((result) => {
-      if (result instanceof DialogCloseResult) { 
-      } else { 
-      }
-
-    });
-  }
 
   onDisableTabs(event: any) {
   }
@@ -120,7 +87,7 @@ export class CISaleAnalysisComponent  {
   onSave(event: any = null) {
     switch (this.activeTab) {
       case MENU_NAMES.SALES_INFO:
-        this.validationCheck();
+        this.salesinfotabcomponent.validationCheck();
         break;
       case MENU_NAMES.PROP_CHAR:
         break;

@@ -16,21 +16,21 @@ import { environment } from '../../environments/environment';
 } from "@angular/common/http"; 
 import { ErrorLoggingService } from './error-logging.service';
  import { LoadingService } from './loading.service';
-
 @Injectable({
     providedIn: 'root'
 })
 export class CsaSalesInfoService {
 
-    public salesInfoForm: any;
-     
+    public salesInfoForm: any; 
+    public isoptionchecked:boolean=false;
+    public iscontsalechecked:boolean=false;
     public commentText: string;
     public comments: Array<Model.comments> = [];
     public PropertyInfo: Subject<Interfaces.propertyinfo>;
     public disabledTabs: Subject<any>;
     public SaleInfoHasIncomesExpenses: boolean;
     public resources: any;
-    private baseUrl: string = environment.localDevBase;
+    private baseUrl: string = environment.ImproveBaseURL;
 
     constructor(private loadingService: LoadingService,
         private dataService: DataService, 
@@ -38,8 +38,7 @@ export class CsaSalesInfoService {
          private _QueryParams: QueryParamsService,
          private resourceService: ResourceService ,
          private http: HttpClient,
-         private errorService: ErrorLoggingService
-
+         private errorService: ErrorLoggingService,
          ) { 
             this.loadingService.showLoading();
         this.PropertyInfo = new Subject();
@@ -51,7 +50,8 @@ export class CsaSalesInfoService {
         this.loadingService.hideLoading();
     } 
 
-    initializeCSASalesForm() {
+    initializeCSASalesForm() { 
+
         this.salesInfoForm = new FormGroup({
             anticipated_use_cd: new FormControl(null, [this.validatorService.validateAnticipatedUse()]),
             csa_prop_use_detl: new FormControl(null, [this.validatorService.validateMaxLength(30)]),
@@ -59,8 +59,10 @@ export class CsaSalesInfoService {
             broker_involved_fl: new FormControl(null),
             buy_sell_rel_fl: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             buy_sell_rel_desc: new FormControl(null, []),
+            isoptionchecked: new FormControl(false),
+            iscontsalechecked: new FormControl(false),
             pur_predate_by_opt: new FormControl(false),
-            pur_pred_cont_sale: new FormControl(false),
+            pur_pred_cont_sale : new FormControl(false),
             predate_cont_date: new FormControl(''),
             cond_at_sale_cd: new FormControl(null, [this.validatorService.validateMaxLength(1)]),
             suprv_approved_fl: new FormControl(null),
@@ -100,6 +102,8 @@ export class CsaSalesInfoService {
     {
         this.resources = this.resourceService.getResources();
     }
+    
+
     getSalesinfo() { 
         this.dataService.GetDataByUrl("GetFullSaleInfo",this._QueryParams.csaId).subscribe(
             (data: Array<Interfaces.cisalesinfo>) => {
@@ -158,16 +162,31 @@ export class CsaSalesInfoService {
      
     private bindedToSaleInfo(record: Interfaces.cisalesinfo){
         const salesinfo = record; 
-      
+        if(salesinfo.pur_predate_by_opt== 'N')
+            {
+             this.isoptionchecked = false;
+            }
+            else  if(salesinfo.pur_predate_by_opt== 'Y')
+                {
+                    this.isoptionchecked = true;
+                }
+            if(salesinfo.pur_pred_cont_sale == 'N')
+                {
+                  this.iscontsalechecked=false;
+                }
+                else  if(salesinfo.pur_pred_cont_sale == 'Y')
+                    {
+                        this.iscontsalechecked=true;
+                    }
         const salesInfoVariable = {
             anticipated_use_cd: salesinfo.anticipated_use_cd,
             csa_prop_use_detl: salesinfo.csa_prop_use_detl,
             pct_owner_occup: salesinfo.pct_owner_occup,
             broker_involved_fl: salesinfo.broker_involved_fl,
             buy_sell_rel_fl: salesinfo.buy_sell_rel_fl,
-            buy_sell_rel_desc: String(salesinfo.buy_sell_rel_desc).trim(),
-            pur_predate_by_opt: salesinfo.pur_predate_by_opt == 'N' ?    false:true ,
-            pur_pred_cont_sale: salesinfo.pur_pred_cont_sale== 'N'?false:true,
+            buy_sell_rel_desc: String(salesinfo.buy_sell_rel_desc).trim(),            
+            isoptionchecked:this.isoptionchecked,  
+            iscontsalechecked:this.iscontsalechecked,
             predate_cont_date: salesinfo.predate_cont_date!=null?new Date(salesinfo.predate_cont_date):null,
             cond_at_sale_cd: salesinfo.cond_at_sale_cd,
             suprv_approved_fl: salesinfo.suprv_approved_fl,
@@ -298,19 +317,19 @@ export class CsaSalesInfoService {
     UpdatedSaleInfoWithCIAnalysis () {   
         let CISalesinfo: any = new Model.cisalesinfo();
          for (let [key, control] of Object.entries(this.salesInfoForm.controls)) {
-             if(this.salesInfoForm.get('pur_predate_by_opt').value==false)
+             if(this.salesInfoForm.get('isoptionchecked').value==false)
              {
                 this.salesInfoForm.get('pur_predate_by_opt').value = 'N';
              }
-             else if(this.salesInfoForm.get('pur_predate_by_opt').value==true)
+             else if(this.salesInfoForm.get('isoptionchecked').value==true)
              {
                 this.salesInfoForm.get('pur_predate_by_opt').value = 'Y';
              }
-             if(this.salesInfoForm.get('pur_pred_cont_sale').value==false)
+             if(this.salesInfoForm.get('iscontsalechecked').value==false)
              {
                 this.salesInfoForm.get('pur_pred_cont_sale').value = 'N';
              }
-             else if(this.salesInfoForm.get('pur_pred_cont_sale').value==true)
+             else if(this.salesInfoForm.get('iscontsalechecked').value==true)
              {
                 this.salesInfoForm.get('pur_pred_cont_sale').value = 'Y';
              }
