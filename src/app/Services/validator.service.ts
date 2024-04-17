@@ -34,8 +34,8 @@ export class ValidatorService {
 
     validateAnticipatedUse(): ValidatorFn {
         return (control: AbstractControl): any => {
-            const value: string = control.value;
-            if (!value) {
+            const value: number = control.value;
+            if (value==null) {
                 return {
                     required: {
                         message: 'Anticipated Use is required.'
@@ -46,10 +46,12 @@ export class ValidatorService {
         }
     };
 
+    
+
     customNumberValidator(): ValidatorFn {
         return (control: AbstractControl): any => {
-            const value: string = control.value;
-            if (!value) {
+            const value: number = control.value;
+            if ((value < 0) || (value >100)){
                 return {
                     required: {
                         message: '% Owner Occupied must be a whole number between 0 and 100.'

@@ -1,6 +1,6 @@
 <div class="toolbar" style="border: 3px #fff solid">
   <ng-container *ngFor="let button of buttons; let i = index">
-    <button aria-pressed="false"
+    <button aria-pressed="false" role="button"
       class="custom-button"
       [ngClass]="button.isSelected === true ? 'aspbutton' : ''"
       (click)="buttonClicked(button)">

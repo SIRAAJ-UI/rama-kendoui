@@ -14,3 +14,14 @@
     font-weight: bold;
     font-size: 14px;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-bar{
+    background-color: #d1dded;
+    color: black;
+    padding: 10px;
+}

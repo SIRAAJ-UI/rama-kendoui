@@ -1,116 +1,130 @@
 import * as Interfaces from '../interfaces/csasalesinfo.interface';
-export class AnticipatedUseCodes implements Interfaces.AnticipatedUseCodes {
-    anticipateD_USE_CD: number;
-    usE_NAME: string;
+export class anticipatedusecodes implements Interfaces.anticipatedusecodes {
+    anticipated_use_cd: number;
+    use_name: string;
 };
 
-export class ConditionAtsales implements Interfaces.ConditionAtsales {
-    cD_ID: string;
-    cD_LONG_NAME: string;
+export class conditionatsales implements Interfaces.conditionatsales {
+    cd_id: string;
+    cd_long_name: string;
 };
 
-export class Comments implements Interfaces.Comments {
-    csA_ID: any;
-    seQ_NUM: any;
-    commenT_TEXT: string;
-    entrY_TS: Date;
-    entrY_WORKER: string;
-    updatE_TS: Date;
-    roW_CHANGE_TS: string;
-    entrY_USER: string;
-    updatE_USER: string;
-    updatE_WORKER: string; 
+export class comments implements Interfaces.comments {
+    csa_id: any;
+    seq_num: any;
+    comment_text: string;
+    entry_ts: string;
+    entry_worker: string;
+    update_ts: string;
+    row_change_ts: string;
+    entry_user: string;
+    update_user: string;
+    update_worker: string; 
 };
 
-export class BrokerInvolved implements Interfaces.BrokerInvolved {
-    SUPRV_APPROVED_FL: string;
-    SUPRV_APPROVED_FL_TEXT: string;
+export class brokerinvolved implements Interfaces.brokerinvolved {
+    broker_involved_fl: string;
+    broker_involved_fl_text: string;
 };
 
 export class BuyerSellerRelationship implements Interfaces.BuyerSellerRelationship {
-    BUY_SELL_REL_FL: string;
-    BUY_SELL_REL_FL_TEXT: string;
+    buy_sell_rel_fl: string;
+    buy_sell_rel_fl_text: string;
 };
 
-export class BenchMarkData implements Interfaces.BenchMarkData {
-    id: number;
-    text: string;
-};
-
-export class CsaDocument implements Interfaces.CsaDocument {
-    
-    apn: string;
+ 
+export class propertyinfo implements Interfaces.propertyinfo { 
     use_id: number;
-    use: string;
     address: string;
-    apncount: string;
-    indpurprice: number;
-    adjsalesprice: number;
-    transtaxprice: number;
+    ind_pur_price: number;
+    adj_sales_price: number;
+    trans_tax_price: number;
     doc_prefix: string;
-    doc_series:string;
+    doc_series:number;
     buyer_name: string;
     seller_name: string;
     event_ts: Date;
     entry_ts:Date;
     entry_worker:string;
-    toT_BUILDING_AREA:number;
-    toT_LOT_SIZE:number;
-    toT_NET_RENT_AREA:number;
-    situS_CITY_NAME: string;
-    situS_STATE: string;
-    ziP_CD: string;
+    entry_user:string;
+    tot_building_area:number;
+    tot_lot_size:number;
+    tot_net_rent_area:number;
+    situs_city_name: string;
+    situs_state: string;
+    zip_cd: string;
     property_id:number;
-    ROW_CHANGE_TS:Date;
+    row_change_ts:string;
     csa_id:number;
     csa_type:number;
+    print_parcel: string;
+    use_name: string;
+    tran_tax_price: number;
+    update_ts: Date;
+    update_user: string;
+    update_worker: string;
 
+    doc_parcel_cnt: number; 
 };
 
-export class CISalesinfo {
-    doc_prefix: String;
-    situs_city: String;
-    broker_involved_fl: String;
-    zoning_cd: String;
-    buy_sell_rel_fl: String;
-    buy_sell_rel_desc: String;
-    pur_predate_by_opt: String;
-    pur_pred_cont_sale: String;
-    full_expenses_fl: String;
-    entrY_WORKER: String;
-    situs_state: String;
-    update_worker: String;
-    csa_prop_use_detl: String;
-    benchmark_rate_cd_name: String;
+export class cisalesinfo {
     anticipated_use_cd: number;
-    csa_id: number;
-    csa_type: number;
-    doc_series: number;
-    property_id: number;
     benchmark_rate_cd: number;
+    broker_involved_fl: string;
+    buy_sell_rel_desc: string;                        
+    buy_sell_rel_fl: string;
     cond_at_sale_cd: number;
     csa_prop_use_cd: number;
-    shape_cd: number;
-    tot_building_area: number;
-    tot_lot_size: number;
-    tot_net_rent_area: number;
-    use_cd: number;
-    zoning_agency_cd: number;
-    csa_net_rent_area: number;
+    csa_prop_use_detl: string;
+    full_expenses_fl: string;
+    oar_fl: string;
     pct_owner_occup: number;
-    event_ts: Date;
-    entrY_TS: Date;
-    entrY_USER: string;
     predate_cont_date: Date;
+    pur_predate_by_opt: string;
+    pur_pred_cont_sale: string;
     release_dt: Date;
+    shape_cd: number;
+   
+    suprv_approved_fl: string;
+    suprv_appr_upd_ts: Date;
+    suprv_appr_upd_wkr: string;
     update_ts: Date;
-    print_parcel: String;
-    buyer_name: String;
-    seller_name: String;
-    anticipated_use_cd_name: String;
-    suprv_approved_fl: String;
-    suprv_approved_fl_text: String;
-
+    update_user: string;
+    update_worker: string;
+    zoning_agency_cd: number;
+    zoning_cd: number; 
+    addr_id: number;
+    std_addr_cd: number;
+    mailing_name: string;
+    care_of_name: string;
+    attention_name: string;
+    use_id: number;
+    address: string;
+    ind_pur_price: number;
+    adj_sales_price: number;
+    trans_tax_price: number;
+    doc_prefix: string;
+    doc_series:number;
+    buyer_name: string;
+    seller_name: string;
+    event_ts: Date;
+    entry_ts:Date;
+    entry_worker:string;
+    tot_building_area:number;
+    tot_lot_size:number;
+    tot_net_rent_area:number;
+    situs_city_name: string;
+    situs_state: string;
+    zip_cd: string;
+    property_id:number;
+    row_change_ts:string;
+    csa_id:number;
+    csa_type:number;
+    print_parcel: string;
+    use_name: string;
+    tran_tax_price: number;
+    doc_parcel_cnt: number;
+    property_info:propertyinfo;
 }
 
 

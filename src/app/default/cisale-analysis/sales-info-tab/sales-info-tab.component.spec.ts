@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SalesInfoTabComponent } from './sales-info-tab.component';
+import { SalesInfoTabComponent } from './SalesInfoTabComponent';
 
 describe('SalesInfoTabComponent', () => {
   let component: SalesInfoTabComponent;

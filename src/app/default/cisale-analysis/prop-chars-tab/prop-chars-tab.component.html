@@ -1,0 +1,205 @@
+<app-loading-overlay />
+<br />
+<form>
+  <div class="container">
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        &nbsp;
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        &nbsp;
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        &nbsp;
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label text="LOW" class="form-label">Low</label>
+          <label text="HIGH" class="form-label marg_left">High</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        &nbsp;
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label text="LOW" class="form-label">Low</label>
+
+          <label text="HIGH" class="form-label">High</label>
+        </div>
+      </div>
+    </div>
+    <br />
+    @if("prop_chars"){
+    <div class="flex-row">
+      <div class="flex-item">
+        <label class="text-label">Zoning:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">{{prop_chars.ZONING_NAME}}</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">SBE:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.SBE_CLASS_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.SBE_CLASS_HI}}</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">No of Bldngs:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.NUM_BUILDINGS_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.NUM_BUILDINGS_HI}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Gross Sq Foot:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">{{prop_chars.TOT_BUILDING_AREA}}</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">MVS:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.MVS_CLASS_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.MVS_CLASS_HI}}</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Stories:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.NUM_STORIES_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.NUM_STORIES_HI}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Net Rentable Area:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">{{prop_chars.TOT_NET_RENT_AREA}}&nbsp;sq/ft</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">Year Built:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.BLDG_BUILT_YR_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.BLDG_BUILT_YR_HI}}</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Wall Height:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.AVG_ACTUAL_HT_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.AVG_ACTUAL_HT_HI}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Land Area:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">{{prop_chars.TOT_LOT_SIZE}}&nbsp;sq/ft</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">Effective Year:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.BLDG_EFF_YR_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.BLDG_EFF_YR_HI}}</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Land Imp Ratio:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.LAND_IMP_RATIO_LOW}}</label>
+
+          <label class="text-label-lt">{{prop_chars.LAND_IMP_RATIO_HI}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        <label class="text-label">Parking:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">{{prop_chars.TOT_PARKING}}&nbsp;sq/ft</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">Percent Built Out:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.PCT_BUILT_OUT_LOW}}%</label>
+          <label class="text-label-lt">{{prop_chars.PCT_BUILT_OUT_HI}}%</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">FAR:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.FAR_LOW}}</label>
+          <label class="text-label-lt">{{prop_chars.FAR_HI}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-row">
+      <div class="flex-item col-sm-2">
+        <label class="text-label">&nbsp;</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">&nbsp;</label>
+      </div>
+      <div class="flex-item_sm col-sm-2">
+        <label class="text-label">Percentage Office:</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <div class="row">
+          <label class="text-label-lt fix_wid">{{prop_chars.PCT_OFFICE_LOW}}%</label>
+          <label class="text-label-lt">{{prop_chars.PCT_OFFICE_HI}}%</label>
+        </div>
+      </div>
+      <div class="flex-item col-sm-2">
+        <label class="text-label">&nbsp;</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">&nbsp;</label>
+      </div>
+      <div class="flex-item_sm col-sm-1">
+        <label class="text-label-lt">&nbsp;</label>
+      </div>
+    </div>
+    }
+  </div>
+</form>

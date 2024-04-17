@@ -1,78 +1,81 @@
+<app-loading-overlay />
 <form [formGroup]="salesInfoForm">
   <div class="container">
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">Anticipated Use:</label>
-        <kendo-dropdownlist class="col-6 text-label" [data]="anticipatedUse" formControlName="ANTICIPATED_USE_CD"
-          [textField]="'usE_NAME'" [valueField]="'anticipateD_USE_CD'" [valuePrimitive]="true"  ></kendo-dropdownlist>
+        <label class="form-label" for="anticipated_use_cd">Anticipated Use:</label>
+        <kendo-dropdownlist class="col-6 text-label" id="anticipated_use_cd" [data]="anticipatedUse" formControlName="anticipated_use_cd"
+          [textField]="'use_name'" [valueField]="'anticipated_use_cd'" [valuePrimitive]="true"  ></kendo-dropdownlist>
       </div>
-      <div class="flex-item" style="background-color: #5f90cf;">
-        <label class="form-label" >Benchmark Rating:</label>
-        <kendo-label class="col-6 text-label" style="background-color: white;">{{salesInfoForm.get('BENCHMARK_RATE_CD').value}}
+      <div class="flex-item"  >
+        <label class="form-label">Benchmark Rating:</label>
+        <kendo-label  class="col-6 text-label" >{{salesInfoForm.get('benchmark_rate_cd').value}}
         </kendo-label>
 
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">Details:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="PROP_USE_DETL"></kendo-textbox>
+        <label class="form-label" for="csa_prop_use_detl">Details:</label>
+        <kendo-textbox class="col-6 text-label" id="csa_prop_use_detl" formControlName="csa_prop_use_detl"></kendo-textbox>
       </div>
 
       <div class="flex-item">
-        <label class="form-label">Supervisor Approved:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="SUPRV_APPROVED_FL"></kendo-textbox>
+        <label class="form-label"  >Supervisor Approved:</label>
+        <kendo-label class="col-6 text-label"   >{{salesInfoForm.get('suprv_approved_fl').value}}
+        </kendo-label>
+      
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">% Owner Occupied:</label>
-        <kendo-numerictextbox [min]="0" [max]="100" format="'n0'"  [spinners]="true"
-          (change)="roundValue()" style="width: 90px" formControlName="PCT_OWNER_OCCUP"></kendo-numerictextbox>
+        <label class="form-label" for="pct_owner_occup">% Owner Occupied:</label>
+        <kendo-textbox class="col-6 text-label" id="pct_owner_occup" formControlName="pct_owner_occup" [maxlength]="3"
+         (keypress)="($event.charCode>=48 && $event.charCode<58)" style="width: 90px"></kendo-textbox> 
       </div>
 
       <div class="flex-item">
-        <label class="form-label">Broker Involved:</label>
-        <kendo-dropdownlist formControlName="BROKER_INVOLVED_FL" class="col-6 text-label" [data]="brokerInvolved"
-          [textField]="'SUPRV_APPROVED_FL_TEXT'" [valueField]="'SUPRV_APPROVED_FL'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
+        <label class="form-label" for="lblbroker">Broker Involved:</label>
+        <kendo-dropdownlist id="lblbroker" formControlName="broker_involved_fl" class="col-6 text-label" [data]="brokerInvolved"
+          [textField]="'broker_involved_fl_text'" [valueField]="'broker_involved_fl'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">Buyer/Seller Relationship:</label>
-        <kendo-dropdownlist class="col-6 text-label" formControlName="BUY_SELL_REL_FL" [data]="buyerSellerRelationship"
-          [textField]="'BUY_SELL_REL_FL_TEXT'" [valueField]="'BUY_SELL_REL_FL'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
+        <label class="form-label" for="lblbuyer">Buyer/Seller Relationship:</label>
+        <kendo-dropdownlist id="lblbuyer" class="col-6 text-label" formControlName="buy_sell_rel_fl" [data]="buyerSellerRelationship"
+          [textField]="'buy_sell_rel_fl_text'" [valueField]="'buy_sell_rel_fl'" [valuePrimitive]="true" style="width: 90px"></kendo-dropdownlist>
       </div>
 
       <div class="flex-item">
-        <label class="form-label">If so, specify:</label>
-        <kendo-textbox class="col-6 text-label" formControlName="BUY_SELL_REL_DESC"></kendo-textbox>
+        <label class="form-label" for="lblspecify">If so, specify:</label>
+        <kendo-textbox class="col-6 text-label" id="=lblspecify" formControlName="buy_sell_rel_desc"></kendo-textbox>
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">Purchase Predated By:</label>
+        <label class="form-label" for="lblpurchanse">Purchase Predated By:</label>
         <div class="col-4 mr-2">
-          <input type="checkbox" #purPredateByOpt (ngModelChange)="onPredateChange($event)" formControlName="PUR_PREDATE_BY_OPT" kendoCheckBox />
+          <input type="checkbox" #purPredateByOpt id="lblpurchanse"  formControlName="pur_predate_by_opt" kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredateByOpt" text="Option"></kendo-label>
         </div>
         <div class="col-4 ">
-          <input type="checkbox" #purPredBySale (ngModelChange)="onPredBySaleChange($event)" formControlName="PUR_PRED_CONT_SALE" kendoCheckBox />
+          <input type="checkbox" #purPredBySale  formControlName="pur_pred_cont_sale" id="purPredBySale" kendoCheckBox />
           <kendo-label class="k-checkbox-label" [for]="purPredBySale" text="Contract of Sale"></kendo-label>
         </div>
       </div>
     </div>
     <div class="flex-row">
       <div class="flex-item">
-        <label class="form-label">Contract Date:</label>
-        <kendo-datepicker class="col-6 text-label" placeholder="Choose a date ..."
-          [format]="'dd-MM-yyyy'" formControlName="PREDATE_CONT_DATE"></kendo-datepicker>
+        <label class="form-label" for="lblcontract">Contract Date:</label>
+        <kendo-datepicker id="lblcontract" class="col-6 text-label" placeholder="Choose a date ..."
+          [format]="'dd-MM-yyyy'" formControlName="predate_cont_date"></kendo-datepicker>
       </div>
 
       <div class="flex-item">
-        <label class="form-label">Condition at sales:</label>
-        <kendo-dropdownlist class="col-6 text-label" formControlName="COND_AT_SALE_CD" [data]="conditionAtSales"
-          [textField]="'cD_LONG_NAME'" [valueField]="'cD_ID'" [valuePrimitive]="true"></kendo-dropdownlist>
+        <label class="form-label" for="lblconditionatsale">Condition at sales:</label>
+        <kendo-dropdownlist class="col-6 text-label" id="lblconditionatsale" formControlName="cond_at_sale_cd" [data]="conditionAtSales"
+          [textField]="'cd_long_name'" [valueField]="'cd_id'" [valuePrimitive]="true"></kendo-dropdownlist>
       </div>
 
       <div class="flex-item" style="width: 2043px; margin-top: 10px">

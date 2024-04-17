@@ -1,5 +1,5 @@
-<kendo-grid [data]="gridCommentsData" scrollable="virtual" [pageSize]="3" [style.maxHeight.px]="150"
-  style="width: 865px;" [size]="smallSize">
+<kendo-grid [data]="gridCommentsData" scrollable="virtual" [pageSize]="3" [style.maxHeight.px]="180"
+  style="width: 865px;" [size]="smallSize" [rowHeight]="36">
   <ng-template kendoGridToolbarTemplate>
     <button kendoButton (click)="addNewComments()" style="background-color: transparent;border: none;">
       <b>Comments +</b>
@@ -18,7 +18,7 @@
       
     </ng-template>
   </kendo-grid-column>
-  <kendo-grid-column field="commenT_TEXT" title="Comments" [style]="{ 'font-size': '12px' }">
+  <kendo-grid-column field="comment_text" title="Comments" [style]="{ 'font-size': '12px' }">
   </kendo-grid-column>
 </kendo-grid>
 
@@ -26,18 +26,18 @@
   <form [formGroup]="commentsForm">
     <div class="form-group row">
       <div class="col-sm-12">
-        <kendo-label text="*Comment :">
-          <kendo-textarea formControlName="commenT_TEXT" placeholder="Enter the comments..." [rows]="5"
+        <kendo-label text="*Comment :" >
+          <kendo-textarea formControlName="comment_text" placeholder="Enter the comments..." [rows]="5"
             resizable="vertical"></kendo-textarea>
         </kendo-label>
-        <span [style.color]="'red'"
-          *ngIf="commentsForm.get('commenT_TEXT').invalid && (commentsForm.get('commenT_TEXT').dirty || commentsForm.get('commenT_TEXT').touched)">Please
+        <span id="commenterrormessage" [style.color]="'red'"
+          *ngIf="commentsForm.get('comment_text').invalid && (commentsForm.get('comment_text').dirty || commentsForm.get('comment_text').touched)">Please
           enter the comments.</span>
       </div>
     </div>
   </form>
   <kendo-dialog-actions>
-    <kendo-button size="small" themeColor="primary" [disabled]="commentsForm.get('commenT_TEXT').invalid && (commentsForm.get('commenT_TEXT').dirty || commentsForm.get('commenT_TEXT').touched)" (click)="onSaveUpdate()">{{btnLabel}}</kendo-button>
-    <kendo-button size="small" themeColor="primary" (click)="close()">Cancel</kendo-button>
+    <kendo-button aria-pressed="false" size="small" themeColor="primary" [disabled]="commentsForm.get('comment_text').invalid && (commentsForm.get('comment_text').dirty || commentsForm.get('comment_text').touched)" (click)="onSaveUpdate()">{{btnLabel}}</kendo-button>
+    <kendo-button aria-pressed="false" size="small" themeColor="primary" (click)="close()">Cancel</kendo-button>
   </kendo-dialog-actions>
 </kendo-dialog>

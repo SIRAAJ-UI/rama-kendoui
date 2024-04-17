@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import * as Model from '@csa/@core/models/csasalesinfo.model';
@@ -15,14 +15,15 @@ import { DatePipe } from '@angular/common';
   styleUrl: './prop-char-bar.component.css'
 })
 export class PropCharBarComponent {
-  CsaDocument: Interfaces.CsaDocument = new Model.CsaDocument();
-  constructor(private csaSalesInfoService: CsaSalesInfoService) {
+  ProprtyInfo: Interfaces.propertyinfo = new Model.propertyinfo();
+  constructor(     private csaSalesInfoService: CsaSalesInfoService,
+  ) {
 
   }
 
   ngOnInit() {
-    this.csaSalesInfoService.CsaDocument.subscribe((csaDocument: Interfaces.CsaDocument) => {
-      this.CsaDocument = csaDocument;
+    this.csaSalesInfoService.PropertyInfo.subscribe((proprtyinfo: Interfaces.propertyinfo) => {
+      this.ProprtyInfo = proprtyinfo; 
     });
    
   }

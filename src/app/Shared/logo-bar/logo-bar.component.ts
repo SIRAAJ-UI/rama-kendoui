@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
+import { ConstantValueService } from '@csa/@services/constant-values.service';
+import { QueryParamsService } from '@csa/@services/query-params.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,11 +14,15 @@ import { Subscription } from 'rxjs';
 export class LogoBarComponent {
   private titleSubscription: Subscription;
   public lblPageTitleBar: string;
-  
-  constructor(private csaSalesInfoService: CsaSalesInfoService) { }
-  ngOnInit() {
-    this.titleSubscription = this.csaSalesInfoService.GetPageTitleByCSAType(113).subscribe((response: string) => {
-      this.lblPageTitleBar = response;
+  public lblWorkId:string;
+  constructor(private csaSalesInfoService: CsaSalesInfoService,
+    private _constantvalues: ConstantValueService,
+    private _QueryParams: QueryParamsService
+    ) { }
+  ngOnInit() { 
+    this.lblWorkId=this._QueryParams.workerId;
+    this.titleSubscription = this.csaSalesInfoService.GetPageTitleByCSAType(this._constantvalues.pageTiltle_fieldId).subscribe((response: string) => {
+      this.lblPageTitleBar = response; 
     });
   }
 

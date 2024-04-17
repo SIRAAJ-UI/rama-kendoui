@@ -10,9 +10,13 @@ import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 import * as Model from '@csa/@core/models/csasalesinfo.model';
 import * as Interfaces from '@csa/@core/interfaces/csasalesinfo.interface';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { CsaSalesInfoService } from '../../services/CSASalesInfo.service';
+import { Subscription, catchError } from 'rxjs';
+import { CsaSalesInfoService } from '@csa/@services/CSASalesinfo.service';
 import { dateInRange } from '@progress/kendo-angular-dateinputs/util';
+import { QueryParamsService } from '@csa/@services/query-params.service';
+import { LoadingService } from '@csa/@services/loading.service';
+import { ErrorLoggingService } from "@csa/@services/error-logging.service";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-comments-block',
@@ -33,39 +37,58 @@ import { dateInRange } from '@progress/kendo-angular-dateinputs/util';
 export class CommentsBlockComponent {
   public smallSize: GridSize = 'small';
   @ViewChild('commentsArea') commentsArea: any;
-  public dialogThemeColor: DialogThemeColor = 'primary';
-  public gridCommentsData: Array<Model.Comments> = [];
+   public dialogThemeColor: DialogThemeColor = 'primary';
+  public gridCommentsData: Array<Model.comments> = [];
   public commentTitle: string = "";
   public btnLabel: string = "Save";
   public opened = false;
+  public seq_num=0;
   private allCommentsSubscription: Subscription;
   private addCommentsSubscription: Subscription;
   private updateCommentsSubscription: Subscription;
   public commentsForm = new FormGroup({
-    seQ_NUM: new FormControl(null, []),
-    commenT_TEXT: new FormControl('', [Validators.required]),
-    csA_ID: new FormControl(''),
-    entrY_TS: new FormControl(''),
-    entrY_WORKER: new FormControl(''),
-    updatE_TS: new FormControl(''),
-    roW_CHANGE_TS: new FormControl(''),
-    entrY_USER: new FormControl(''),
-    updatE_USER: new FormControl(''),
-    updatE_WORKER: new FormControl(''), 
+    seq_num: new FormControl(null, []),
+    comment_text: new FormControl('', [Validators.required]),
+    csa_id: new FormControl(''),
+    entry_ts: new FormControl(''),
+    entry_worker: new FormControl(''),
+    update_ts: new FormControl(''),
+    row_change_ts: new FormControl(''),
+    entry_user: new FormControl(''),
+    update_user: new FormControl(''),
+    update_worker: new FormControl(''), 
   });
 
-  constructor(private csaSalesInfoService: CsaSalesInfoService ) { }
+  constructor(private csaSalesInfoService: CsaSalesInfoService, 
+    private loadingService: LoadingService, 
+    private errorService: ErrorLoggingService,  
+     private _QueryParams: QueryParamsService
+    ) { }
 
   ngOnInit() {
-    this.allCommentsSubscription =  this.csaSalesInfoService.getAllComments().subscribe( (comments:Array<Model.Comments>)  => {
+    this.loadingService.showLoading();
+
+    this.allCommentsSubscription =  this.csaSalesInfoService.getAllComments().subscribe( (comments:Array<Model.comments>)  => {
+      try {
+      
       this.gridCommentsData = comments;
-     
-     
+      this.loadingService.hideLoading();
+      } catch (e) {
+        console.error("Error getting:", e);
+        catchError(this.handleError);
+        return null;
+      }
       
     });
 
   }
-
+ 
+  private handleError(err: HttpErrorResponse) {
+    return this.errorService.logError(
+      2,
+      "Error getting property characteristics. " + err.error
+    );
+  }
   public close(): void {
     this.opened = false;
   }
@@ -80,48 +103,49 @@ export class CommentsBlockComponent {
   onSaveUpdate() {
     if (this.commentsForm.valid) {
       if (this.btnLabel === "Save") {
-        const saveComment: Interfaces.Comments = new Model.Comments();    
+        const saveComment: Interfaces.comments = new Model.comments();    
+        
+        saveComment.seq_num = this.gridCommentsData.length+1;
 
-        saveComment.seQ_NUM = 6;
+        saveComment.comment_text = this.commentsForm.get('comment_text').value;
+        saveComment.csa_id = this._QueryParams.csaId;
+        saveComment.entry_ts = new Date();
+        saveComment.entry_worker = 'CSM     ';
+        saveComment.update_ts = new Date();
+        saveComment.row_change_ts = new Date().toISOString();
+        saveComment.entry_user = this.commentsForm.get('entry_user').value;
+        saveComment.update_user = null;
+        saveComment.update_worker = 'CSM     ';
 
-        saveComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
-        saveComment.csA_ID = 17149;
-        saveComment.entrY_TS = new Date();
-        saveComment.entrY_WORKER = 'CSM     ';
-        saveComment.updatE_TS = new Date();
-        saveComment.roW_CHANGE_TS = new Date().toISOString();
-        saveComment.entrY_USER = this.commentsForm.get('entrY_USER').value;
-        saveComment.updatE_USER = null;
-        saveComment.updatE_WORKER = 'CSM     ';
-
-        this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe((comments: Array<Model.Comments>) => {
+        this.addCommentsSubscription = this.csaSalesInfoService.addComments(saveComment).subscribe((comments: Array<Model.comments>) => {
           this.gridCommentsData = comments;
+          this.csaSalesInfoService.comments=null;
+          this.csaSalesInfoService.comments = comments;
           this.opened = false;
         });
       } else {
-        const updateComment: Interfaces.Comments = new Model.Comments();
-        updateComment.seQ_NUM = this.commentsForm.get('seQ_NUM').value;
-        updateComment.commenT_TEXT = this.commentsForm.get('commenT_TEXT').value;
+        const updateComment: Interfaces.comments = new Model.comments();
+        updateComment.seq_num = this.commentsForm.get('seq_num').value;
+        updateComment.comment_text = this.commentsForm.get('comment_text').value;
 
         
 
-        updateComment.csA_ID = this.commentsForm.get('csA_ID').value;
-        updateComment.entrY_TS = new Date(this.commentsForm.get('entrY_TS').value);
-        updateComment.entrY_WORKER = (this.commentsForm.get('entrY_WORKER').value);
-        updateComment.updatE_TS = new Date();
-        updateComment.roW_CHANGE_TS = (this.commentsForm.get('roW_CHANGE_TS').value);
-        updateComment.entrY_USER = this.commentsForm.get('entrY_USER').value;
-        updateComment.updatE_USER = this.commentsForm.get('updatE_USER').value;
-        updateComment.updatE_WORKER = this.commentsForm.get('updatE_WORKER').value;
+        updateComment.csa_id = this.commentsForm.get('csa_id').value;
+        updateComment.entry_ts = new Date(this.commentsForm.get('entry_ts').value);
+        updateComment.entry_worker = (this.commentsForm.get('entry_worker').value);
+        updateComment.update_ts = new Date().toISOString();
+        updateComment.row_change_ts = (this.commentsForm.get('row_change_ts').value);
+        updateComment.entry_user = this.commentsForm.get('entry_user').value;
+        updateComment.update_user = null;
+        updateComment.update_worker = 'CSM     ';
 
 
-        this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe((comments: Array<Model.Comments>) => {
+
+        this.updateCommentsSubscription = this.csaSalesInfoService.updateComments(updateComment).subscribe((comments: Array<Model.comments>) => {
           this.gridCommentsData = comments;
-          this.opened = false;
-          console.log('get comments data'+this.commentsForm.value)
+          this.opened = false; 
       this.csaSalesInfoService.comments = comments;
-      console.log("gridCommentsData");
-      console.log(this.gridCommentsData);
+      
         });
       }
     } else {
@@ -129,7 +153,7 @@ export class CommentsBlockComponent {
     }
   };
 
-  onEdit(dataItem: Interfaces.Comments){
+  onEdit(dataItem: Interfaces.comments){
     this.btnLabel = "Update";
     for (const [key, value] of Object.entries(dataItem)) {
       this.commentsForm.get(key).setValue(value);

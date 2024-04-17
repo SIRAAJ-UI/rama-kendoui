@@ -3,6 +3,9 @@
 <div class="logo-container">
   <app-logo-bar />
 </div>
+<div class="nav-container">
+  <app-navigation-bar />
+</div>
 <div class="toolbar-container">
   <app-control-bar (onSaveCommand)="onSave($event)"></app-control-bar>
 </div>
@@ -10,42 +13,59 @@
   <app-prop-char-bar />
 </div>
 <div class="tab-container">
-  <kendo-tabstrip #tabStrip (tabSelect)="onTabSelect($event)" style="margin-left: -13px; width: 1200px; height: 428px;font-size: 11px;">
-    <kendo-tabstrip-tab [title]="'Sales Info'" [selected]="true" >
+  <kendo-tabstrip
+    #tabStrip
+    (tabSelect)="onTabSelect($event)"
+    style="margin-left: -13px; width: 1200px; height: 428px; font-size: 11px"
+  >
+    <kendo-tabstrip-tab [title]="'Sales Info'" [selected]="true">
       <ng-template kendoTabContent>
         <app-sales-info-tab #salesInfoTabComponent></app-sales-info-tab>
       </ng-template>
     </kendo-tabstrip-tab>
     <kendo-tabstrip-tab title="Prop Characteristics" height="5px">
       <ng-template kendoTabContent>
-        <p>Tab 2 Content</p>
+        <div class="content">
+          <app-prop-chars-tab></app-prop-chars-tab>
+        </div>
       </ng-template>
     </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="Income" height="5px">
+    <kendo-tabstrip-tab title="Income" [disabled]="isDisableTabs" height="5px">
       <ng-template kendoTabContent>
-        <p>Tab 3 Content</p>
+        <div class="content"></div>
       </ng-template>
     </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="Expenses" height="5px">
+    <kendo-tabstrip-tab
+      title="Expenses"
+      [disabled]="isDisableTabs"
+      height="5px"
+    >
       <ng-template kendoTabContent>
-        <p>Expenses</p>
+        <div class="content">
+          <p>Expenses</p>
+        </div>
       </ng-template>
     </kendo-tabstrip-tab>
     <kendo-tabstrip-tab title="Adjustments" height="5px">
       <ng-template kendoTabContent>
-        <p>Expenses</p>
+        <div class="content">
+          <p>Expenses</p>
+        </div>
       </ng-template>
     </kendo-tabstrip-tab>
     <kendo-tabstrip-tab title="Income Analysis & Value Ind" height="5px">
       <ng-template kendoTabContent>
-        <p>Income Analysis & Value Ind</p>
+        <div class="content">
+          <p>Income Analysis & Value Ind</p>
+        </div>
       </ng-template>
     </kendo-tabstrip-tab>
     <kendo-tabstrip-tab title="Sources" height="5px">
       <ng-template kendoTabContent>
-        <p>Sources</p>
+        <div class="content">
+          <p>Sources</p>
+        </div>
       </ng-template>
     </kendo-tabstrip-tab>
   </kendo-tabstrip>
 </div>
-

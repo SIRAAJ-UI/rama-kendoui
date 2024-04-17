@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../Services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+// TODO: Cleanup
 
 @Component({
   selector: 'app-pbpage',
   standalone: true,
-  imports: [FormsModule,
-            CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './pbpage.component.html',
-  styleUrl: './pbpage.component.css'
+  styleUrl: './pbpage.component.css',
 })
 export class PBPageComponent {
   csaType: string = '';
@@ -22,7 +25,11 @@ export class PBPageComponent {
   csaWksNum: string = '';
   mode: string = '';
   workerID: string = '';
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private http: HttpClient
+  ) {}
 
   // Add similar variables for other form items
   showCSAID: boolean = true;
@@ -77,7 +84,7 @@ export class PBPageComponent {
     }
   }
 
-  btnDefault_Click(): void {
+  async btnDefault_Click(): Promise<void> {
     let csaID: string = this.csaID.trim();
     let mode: string = this.mode.trim().toUpperCase();
     let worker: string = this.workerID.trim().toUpperCase();
@@ -88,17 +95,31 @@ export class PBPageComponent {
     let eventTs: string = this.eventTs.trim();
     let csaWksNum: string = this.csaWksNum.trim();
     let qstr: string | null = null;
+    let queryParams: NavigationExtras = {};
+
+    // Get token from backend api and store in local storage
+    let JWTtoken = await firstValueFrom(this.auth.getToken());
+    // After set, token will be removed after 1 hour by default
+    this.auth.setToken(JWTtoken);
+    // localStorage.setItem('token', JWTtoken);
 
     // This code is added because from PB Page can continue to use WKS but from PB its going to be 395
     let csaTypeStr: string = this.csaType.trim().toUpperCase();
-
     switch (csaTypeStr) {
       case '934':
       case '933':
-        qstr = `?CSAID=${csaID}&IEMode=${mode}&WorkerID=${worker}&CSAType=${csaTypeStr}&SessionID=1`;
-        if (mode === 'A') {
-          qstr += `&DocPrefix=${docPrefix}&DocSeries=${docSeries}`;
-        }
+        // TODO: make sure to apply this format of query string passing to 
+        // other CSATypes.
+        queryParams = {
+          queryParams: {
+            CSAType: csaTypeStr,
+            CSAID: csaID,
+            IEMode: mode,
+            WorkerID: worker,
+            Token: JWTtoken,
+          },
+        };
+        this.router.navigate(['/default'], queryParams);
         break;
 
       case 'WKS':
@@ -116,10 +137,10 @@ export class PBPageComponent {
         break;
     }
 
-    if (qstr) {
+    if (queryParams) {
       // TODO: rem to remove this
-      console.log(qstr);
-      this.router.navigate(['/default'], { queryParams: { qstr } });
+      //this.router.navigate(['/default'], { queryParams: { qstr } });
+      this.router.navigate(['/default'], queryParams);
     }
   }
 }

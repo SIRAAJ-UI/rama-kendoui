@@ -108,6 +108,12 @@ kendo-dialog-titlebar{
 .k-input-solid{
   border-color:#5e636b;
 }
+kendo-dialog-titlebar{
+  height: 2px;
+  color: #003c74;
+  font-size: 8px;
+  font-weight: bold;
+}
 
 /* input.ng-invalid.ng-touched {
   border: red 1px solid;

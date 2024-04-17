@@ -8,24 +8,24 @@
         </legend>
         <div class="row">
           <div class="row-item">
-            <label class="form-label">Document:</label>
-            <label class="text-label" >{{CsaDocument?.doc_prefix}}</label>
+            <label class="form-label" >Document:</label>
+            <label class="text-label"  >{{ProprtyInfo?.doc_prefix + '-'+ProprtyInfo?.doc_series}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Buyer:</label>
-            <label class="text-label">{{CsaDocument?.buyer_name}}</label
+            <label class="form-label"   >Buyer:</label>
+            <label class="text-label" >{{ProprtyInfo?.buyer_name}}</label
             >
           </div>
 
           <div class="row-item">
             <label class="form-label">Event Date:</label>
-            <label class="text-label">{{CsaDocument?.event_ts |  date:'shortDate' }}</label>
+            <label class="text-label">{{ProprtyInfo?.event_ts | date: 'mm/dd/yyyy' }}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Seller:</label>
-            <label class="text-label">{{CsaDocument?.seller_name}}</label>
+            <label class="form-label" >Seller:</label>
+            <label class="text-label" >{{ProprtyInfo?.seller_name}}</label>
           </div>
         </div>
       </fieldset>
@@ -37,21 +37,21 @@
         </legend>
         <div class="row">
           <div class="row-item">
-            <label class="form-label">APN:</label>
-            <label class="text-label" >{{CsaDocument?.apn}}</label>
+            <label class="form-label" >APN:</label>
+            <label class="text-label" >{{ProprtyInfo?.print_parcel}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Use Code:</label>
-            <label class="text-label">{{CsaDocument?.use_id}}</label> 
-            <label class="form-label" style="margin-left: 15px;">Use:</label>
-            <label class="text-label">{{CsaDocument?.use}}</label> 
+            <label class="form-label" >Use Cd:</label>
+            <label class="text-label" >{{ProprtyInfo?.use_id }}</label> 
+            <label class="form-label"  style="margin-left: 15px;">Use:</label>
+            <label class="text-label" >{{ProprtyInfo?.use_name}}</label> 
           </div>
         </div>
         <div class="row">
           <div class="row-item">
-            <label class="form-label">Address:</label>
-            <label class="text-label"> {{CsaDocument?.address}}</label>
+            <label class="form-label" >Address:</label>
+            <label class="text-label"  > {{ProprtyInfo?.address}}</label>
           </div>
         </div>
       </fieldset>
@@ -66,23 +66,23 @@
         </legend>
         <div class="row">
           <div class="row-item">
-            <label class="form-label">APN Count:</label>
-            <label class="text-label">{{CsaDocument?.apncount}}</label>
+            <label class="form-label" >APN Count:</label>
+            <label class="text-label"  >{{ProprtyInfo?.doc_parcel_cnt}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Ind Pur Price:</label>
-            <label class="text-label">{{CsaDocument?.indpurprice}}</label>
+            <label class="form-label" >Ind Pur Price:</label>
+            <label class="text-label" >{{ProprtyInfo.ind_pur_price}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Adj Sales Price:</label>
-            <label class="text-label">{{CsaDocument?.adjsalesprice}}</label>
+            <label class="form-label" >Adj Sales Price:</label>
+            <label class="text-label"  >{{ProprtyInfo?.adj_sales_price}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Trans Tax Price:</label>
-            <label class="text-label">{{CsaDocument?.transtaxprice}}</label>
+            <label class="form-label" >Trans Tax Price:</label>
+            <label class="text-label" >{{ProprtyInfo?.trans_tax_price}}</label>
           </div>
         </div>
       </fieldset>
@@ -95,18 +95,18 @@
         </legend>
         <div class="row">
           <div class="row-item">
-            <label class="form-label">Gross SF:</label>
-            <label class="text-label">{{CsaDocument.toT_BUILDING_AREA}}</label>
+            <label class="form-label" >Gross SF:</label>
+            <label class="text-label" >{{ ProprtyInfo.tot_building_area?.toLocaleString('en-us')}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">Land Area:</label>
-            <label class="text-label">{{CsaDocument.toT_LOT_SIZE}}</label>
+            <label class="form-label"  >Land Area:</label>
+            <label class="text-label" >{{ProprtyInfo.tot_lot_size?.toLocaleString('en-us')}}</label>
           </div>
 
           <div class="row-item">
-            <label class="form-label">PC NRA:</label>
-            <label class="text-label">{{CsaDocument.toT_NET_RENT_AREA}}</label>
+            <label class="form-label"  >PC NRA:</label>
+            <label class="text-label" >{{ProprtyInfo.tot_net_rent_area?.toLocaleString('en-us')}}</label>
           </div>
         </div>
       </fieldset>

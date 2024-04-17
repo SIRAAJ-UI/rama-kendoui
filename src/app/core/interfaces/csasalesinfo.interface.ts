@@ -1,125 +1,129 @@
-export interface AnticipatedUseCodes {
-    anticipateD_USE_CD: number;
-    usE_NAME: string;
+export interface anticipatedusecodes {
+    anticipated_use_cd: number;
+    use_name: string;
 };
 
-export interface ConditionAtsales {
-    cD_ID: string;
-    cD_LONG_NAME: string;
+export interface conditionatsales {
+    cd_id: string;
+    cd_long_name: string;
 }
 
-export interface Comments {
-    csA_ID: any;
-    seQ_NUM: any;
-    commenT_TEXT: string;
-    entrY_TS: Date;
-    entrY_WORKER: string;
-    updatE_TS: Date;
-    roW_CHANGE_TS: string;
-    entrY_USER: string;
-    updatE_USER: string;
-    updatE_WORKER: string;
+export interface comments {
+    csa_id: any;
+        seq_num: any;
+        comment_text: string;
+        entry_ts: any;
+        entry_worker: string;
+        update_ts: any;
+        row_change_ts: any;
+        entry_user: string;
+        update_user: string;
+        update_worker: string;    
 }
 
-export interface BrokerInvolved {
-    SUPRV_APPROVED_FL: string;
-    SUPRV_APPROVED_FL_TEXT: string;
+export interface brokerinvolved {
+    broker_involved_fl: string;
+    broker_involved_fl_text: string;
 }
 
 export interface BuyerSellerRelationship {
-    BUY_SELL_REL_FL: string;
-    BUY_SELL_REL_FL_TEXT: string;
+    buy_sell_rel_fl: string;
+    buy_sell_rel_fl_text: string;
 }
+ 
 
-export interface BenchMarkData {
-    id: number;
-    text: string;
-}
-
-export interface CsaDocument {
-    doc_prefix: any;
-    doc_series:any;
+export interface propertyinfo { 
+    use_id: number;
+    address: string;
+    ind_pur_price: number;
+    adj_sales_price: number;
+    trans_tax_price: number;
+    doc_prefix: string;
+    doc_series:number;
     buyer_name: string;
     seller_name: string;
     event_ts: Date;
     entry_ts:Date;
     entry_worker:string;
+    entry_user:string;
+    tot_building_area:number;
+    tot_lot_size:number;
+    tot_net_rent_area:number;
+    situs_city_name: string;
+    situs_state: string;
+    zip_cd: string;
     property_id:number;
-    ROW_CHANGE_TS:Date;
-    apn: string;
-    use_id: number;
-    use: string;
-    address: string;
-    apncount: string;
-    indpurprice: number;
-    adjsalesprice: number;
-    transtaxprice: number;
-    toT_BUILDING_AREA:number;
-    toT_LOT_SIZE:number;
-    toT_NET_RENT_AREA:number;
-    situS_CITY_NAME: string;
-    situS_STATE:string;
-    ziP_CD: string;
+    row_change_ts:string;
     csa_id:number;
     csa_type:number;
+    print_parcel: string;
+    use_name: string;
+    update_ts: Date;
+    update_user: string;
+    update_worker: string;
 
+    doc_parcel_cnt: number;
+      
 }
 
 
-export interface CISalesinfo {
-    anticipateD_USE_CD: number;
-    benchmarK_RATE_CD: number;
-    brokeR_INVOLVED_FL: string;
-    buY_SELL_REL_DESC: string;                        
-    buY_SELL_REL_FL: string;
-    conD_AT_SALE_CD: number;
-    csA_ID: number;
-    csA_PROP_USE_CD: number;
-    csA_PROP_USE_DETL: string;
-    csA_TYPE: number;
-    doC_PREFIX: number;
-    doC_SERIES: number;
-    entrY_TS: Date;
-    entrY_USER: string;
-    entrY_WORKER: string;
-    fulL_EXPENSES_FL: string;
-    oaR_FL: string;
-    pcT_OWNER_OCCUP: number;
-    predatE_CONT_DATE: Date;
-    propertY_ID: number;
-    puR_PREDATE_BY_OPT: string;
-    puR_PRED_CONT_SALE: string;
-    releasE_DT: Date;
-    roW_CHANGE_TS: Date;
-    shapE_CD: number;
-    situS_CITY_NAME: string;
-    suprV_APPROVED_FL: string;
-    suprV_APPR_UPD_TS: Date;
-    suprV_APPR_UPD_WKR: string;
-    toT_BUILDING_AREA: number;
-    toT_LOT_SIZE: number;
-    toT_NET_RENT_AREA: number;
-    updatE_TS: Date;
-    updatE_USER: string;
-    updatE_WORKER: string;
-    usE_CD: number;
-    zoninG_AGENCY_CD: number;
-    zoninG_CD: number;
-    prinT_PARCEL: string;
-    address: string;
-    situS_STATE: string;
-    ziP_CD: string;
-    doC_PARCEL_CNT: string;
-    evenT_TS: Date;
-    inD_PUR_PRICE: number;
-    adJ_SALES_PRICE: number;
-    traN_TAX_PRICE: number;
-    usE_NAME: string;
+export interface cisalesinfo {
+    anticipated_use_cd: number;
+    benchmark_rate_cd: number;
+    broker_involved_fl: string;
+    buy_sell_rel_desc: string;                        
+    buy_sell_rel_fl: string;
+    cond_at_sale_cd: number;
+    csa_prop_use_cd: number;
+    csa_prop_use_detl: string;
+    full_expenses_fl: string;
+    oar_fl: string;
+    pct_owner_occup: number;
+    predate_cont_date: Date;
+    pur_predate_by_opt: string;
+    pur_pred_cont_sale: string;
+    release_dt: Date;
+    shape_cd: number;
+   
+    suprv_approved_fl: string;
+    suprv_appr_upd_ts: Date;
+    suprv_appr_upd_wkr: string;
+    update_ts: Date;
+    update_user: string;
+    update_worker: string;
+    zoning_agency_cd: number;
+    zoning_cd: number; 
     addr_id: number;
-    stD_ADDR_CD: number;
-    mailinG_NAME: string;
-    carE_OF_NAME: string;
-    attentioN_NAME: string;
+    std_addr_cd: number;
+    mailing_name: string;
+    care_of_name: string;
+    attention_name: string;    
+    use_id: number;
+    situs_address: string;
+    ind_pur_price: number;
+    adj_sales_price: number;
+    trans_tax_price: number;
+    doc_prefix: string;
+    doc_series:number;
+    buyer_name: string;
+    seller_name: string;
+    event_ts: Date;
+    entry_ts:Date;
+    entry_worker:string;
+    entry_user:string;
+    tot_building_area:number;
+    tot_lot_size:number;
+    tot_net_rent_area:number;
+    situs_city_name: string;
+    situs_state: string;
+    zip_cd: string;
+    property_id:number;
     row_change_ts:string;
-    csa_document:CsaDocument;
+    csa_id:number;
+    csa_type:number;
+    print_parcel: string;
+    use_name: string;
+    tran_tax_price: number;   
+    doc_parcel_cnt: number;
+    property_info:propertyinfo;  
 }

@@ -1,6 +1,17 @@
-<ul>
-    <ng-container *ngFor="let message of ErrorMessages; index as i;">
-        <li class="error-box" >{{message}}</li>
-    </ng-container>
-</ul>
+
   
+<div style="display:flex;font-size: 10px;">
+  
+    <div>
+        <div class="icons-list-item-module--icon--d1e52">
+            <svg width="20" height="20" style="margin-top: 5px;" viewBox="0 0 512 512">
+                <path d="M256 32 0 480h512zm-32 160h64v160h-64zm0 256v-64h64v64z" fill="#ffc000">                 
+                </path></svg></div>
+    </div>
+    <div><ul style="margin: 0;">
+        <ng-container *ngFor="let message of ErrorMessages; index as i;">
+            <li class="error-box" >{{message}}</li>
+        </ng-container>
+        <button kendoButton class="btn" (click)="action('ok')">Ok</button>
+    </ul></div>
+</div>

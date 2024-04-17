@@ -18,11 +18,11 @@ import { SalesInfoTabComponent } from '@csa/@components/cisale-analysis/sales-in
     ButtonsModule,
     InputsModule,
     LabelModule,
-    SalesInfoTabComponent
   ],
   templateUrl: './control-bar.component.html',
   styleUrl: './control-bar.component.css',
 })
+
 export class ControlBarComponent {
   @ViewChild(SalesInfoTabComponent) salesInfoTabComponent!: SalesInfoTabComponent;
   @Output() onSaveCommand: EventEmitter<string> = new EventEmitter<string>();
@@ -38,15 +38,14 @@ export class ControlBarComponent {
     { text: 'Edit Primary APN', isSelected: false },
     { text: 'Refresh Characteristics', isSelected: false },
     { text: 'Sales Analysis Report', isSelected: false },
-    { text: 'Edit CSA', selected: false },
+    { text: 'Edit CSA', isSelected: false },
   ];
 
-  buttonClicked(selectedButton: any) {
+  public buttonClicked(selectedButton: any) {
     this.buttons.forEach((btn) => {
       btn.isSelected = false;
     });
     selectedButton.isSelected = true;
-    console.log('button name: ' + selectedButton.text);
     if (selectedButton.text == "Save") {
       this.onSaveCommand.emit('Save');
     }
